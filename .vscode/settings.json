@@ -1,0 +1,28 @@
+{
+  "files.autoSave": "onWindowChange",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptangular",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.enable": true, // 是否开启检测
+  "eslint.options": {
+    "extensions": [".js", ".vue"]
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "none",
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
