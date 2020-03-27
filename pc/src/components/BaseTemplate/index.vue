@@ -8,6 +8,6 @@ import CONFIG from './config'
 
 @Component
 export default class BaseTemplate extends Vue {
-    config = CONFIG;
+    config: object = CONFIG;
 }
 </script>

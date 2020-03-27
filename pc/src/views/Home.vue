@@ -31,7 +31,6 @@
         </div>
         <div class="template-pane"></div>
       </a-layout-content>
-      <a-layout-footer style="textAlign: center" >Ant Design ©2018 Created by Ant UED</a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -67,9 +66,11 @@ export default {
 }
 
 .content-pane{
+  @include vh-center;
   padding: 24px;
   background: #fff;
-  height: 50%
+  height: 50%;
+  box-shadow: $card-shadow;
 }
 
 .template-pane{
