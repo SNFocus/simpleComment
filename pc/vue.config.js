@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
 module.exports = {
   css: {
     loaderOptions: {
@@ -9,5 +12,10 @@ module.exports = {
         @import "~@/assets/style/BaseStyle.sass";`
       }
     }
+  },
+  chainWebpack: (config) => {
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('@assets', resolve('src/assets'))
   }
 }
