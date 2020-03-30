@@ -1,7 +1,24 @@
+// class
+.large-padding
+    padding: 24px
 
-// 基础样式
+.normal-padding
+    padding: 14px
+.icon-card__hover
+    color: $color-white
+    background: $hover-bg-color
+    cursor: pointer
+    .icon
+        font-size: $icon-size-large
+
+// Minix
 @mixin vh-center
     position: absolute
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
+    
+@mixin flex-center
+    display: flex
+    align-items: center
+    justify-content: center
