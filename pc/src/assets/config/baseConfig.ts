@@ -1,74 +1,84 @@
 
-export const navKeys = {
-  CUSTOM: 'CUSTOM',
-  TEMPLATES: 'TEMPLATES',
-  MATERIALS: 'MATERIALS',
-  BASETYPE: 'BASETYPE'
-}
-
-export const navConfig: object = {
-  [navKeys.CUSTOM]: {
-    icon: 'heart',
-    label: '常用'
-  },
-  [navKeys.TEMPLATES]: {
-    icon: 'shop',
-    label: '模板库'
-  },
-  [navKeys.MATERIALS]: {
-    icon: 'smile',
-    label: '素材商店'
-  },
-  [navKeys.BASETYPE]: {
-    icon: 'layout',
-    label: '基础类型'
-  }
-}
-
-export declare interface TypeItem {
+export declare interface TypeItemIF {
     key: string;
     icon: string;
     label: string;
 }
 
-export declare interface BaseTypes {
-    singleLine: TypeItem;
-    table: TypeItem;
-    list: TypeItem;
-    pictureText: TypeItem;
-    func: TypeItem;
-    file: TypeItem;
+export declare interface NavItemIF {
+    key: string;
+    icon: string;
+    label: string;
+    typeList: TypeItemIF[];
 }
 
-export const baseTypes = {
-  singleLine: {
-    key: 'singleLine',
-    icon: 'line',
-    label: '单行'
+export const navConfig: NavItemIF[] = [
+  {
+    key: 'baseType',
+    icon: 'layout',
+    label: '基础类型',
+    typeList: [
+      {
+        key: 'singleLine',
+        icon: 'line',
+        label: '单行'
+      },
+      {
+        key: 'table',
+        icon: 'table',
+        label: '表格'
+      },
+      {
+        key: 'list',
+        icon: 'ordered-list',
+        label: '列表'
+      },
+      {
+        key: 'pictureText',
+        icon: 'picture',
+        label: '图文'
+      },
+      {
+        key: 'func',
+        icon: 'calculator',
+        label: '函数'
+      },
+      {
+        key: 'file',
+        icon: 'file',
+        label: '文件头'
+      }
+    ]
   },
-  table: {
-    key: 'table',
-    icon: 'table',
-    label: '表格'
+  {
+    key: 'custom',
+    icon: 'heart',
+    label: '常用',
+    typeList: [{
+      key: 'singleLine',
+      icon: 'line',
+      label: '单行'
+    }]
   },
-  list: {
-    key: 'list',
-    icon: 'ordered-list',
-    label: '列表'
+  {
+    key: 'template',
+    icon: 'shop',
+    label: '模板库',
+    typeList: [{
+      key: 'singleLine',
+      icon: 'line',
+      label: '单行'
+    }]
   },
-  pictureText: {
-    key: 'pictureText',
-    icon: 'picture',
-    label: '图文'
-  },
-  func: {
-    key: 'func',
-    icon: 'calculator',
-    label: '函数'
-  },
-  file: {
-    key: 'file',
-    icon: 'file',
-    label: '文件头'
+  {
+    key: 'materials',
+    icon: 'smile',
+    label: '素材商店',
+    typeList: [{
+      key: 'singleLine',
+      icon: 'line',
+      label: '单行'
+    }]
   }
-}
+
+]

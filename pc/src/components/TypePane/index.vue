@@ -4,7 +4,7 @@
       v-for="type in myBaseTypes"
       :key="type.icon"
       class="type-card"
-      :class="{active: activeType==type.key}"
+      :class="{active: syncedTypeKey==type.key}"
       @click="changeType(type)"
     >
       <a-icon
@@ -17,28 +17,22 @@
 </template>
 <script lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { baseTypes, BaseTypes, TypeItem } from '@assets/config/baseConfig'
-import { State, Mutation } from 'vuex-class'
+import { Component, Prop, Vue, Watch, PropSync } from 'vue-property-decorator'
+import { navConfig, TypeItemIF, NavItemIF } from '@assets/config/baseConfig'
 
 @Component
 export default class TypePane extends Vue {
-  @State('activeNav') activeNav: string;
-  @State('activeType') activeType: string;
-  @Mutation('changeType') changeActiveType;
+    @Prop(String) readonly activeNavKey !: string;
+    @PropSync('activeTypeKey', { type: String }) syncedTypeKey !: string;
+    NAV_LIST: NavItemIF[] = navConfig
 
-  readonly name: string = 'type-pane';
-  myBaseTypes: BaseTypes = baseTypes;
-
-  private created (): void {
-    if (!this.activeType) {
-      this.changeActiveType(Object.keys(this.myBaseTypes)[0])
+    get myBaseTypes (): TypeItemIF[] {
+      return this.NAV_LIST.find((t: TypeItemIF) => t.key === this.activeNavKey).typeList
     }
-  }
 
-  changeType (type: TypeItem) {
-    this.changeActiveType(type.key)
-  }
+    changeType (type: TypeItemIF) {
+      this.syncedTypeKey = type.key
+    }
 }
 </script>
 

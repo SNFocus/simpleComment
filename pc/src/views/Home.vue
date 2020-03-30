@@ -15,7 +15,7 @@
         mode="inline"
         v-model="current"
       >
-        <a-menu-item v-for="(item, key) in navConfig" :key="key">
+        <a-menu-item v-for="(item) in navConfig" :key="item.key">
           <a-icon :type="item.icon" />
           <span class="nav-text">{{ item.label }}</span>
         </a-menu-item>
@@ -28,9 +28,9 @@
           <div class="content-pane">
             content
           </div>
-          <type-pane :navType="current[0]"></type-pane>
+          <type-pane :activeNavKey="activeNavKey" :activeTypeKey.sync="activeTypeKey"></type-pane>
         </div>
-        <ui-pane></ui-pane>
+        <ui-pane :activeNavKey="activeNavKey" :activeTypeKey="activeTypeKey"></ui-pane>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -38,11 +38,10 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { navConfig, navKeys } from '@assets/config/baseConfig'
+import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
 import UiPane from '@components/UiPane'
-import { State, Mutation } from 'vuex-class'
-console.log(UiPane)
+// import { State, Mutation } from 'vuex-class'
 @Component({
   components: {
     [TypePane.name]: TypePane,
@@ -50,22 +49,24 @@ console.log(UiPane)
   }
 })
 export default class Home extends Vue {
-    public readonly navConfig = navConfig
-    public isCollapsed = true
-    public current: string[] = [navKeys.CUSTOM]
+    readonly navConfig: NavItemIF[] = navConfig
+    isCollapsed = true;
+    current: string[] = ['baseType'];
+    activeNavKey = '';
+    activeTypeKey = '';
 
-    @State('activeNav') activeNavKey: string;
-    @Mutation('changeNav') onNavChange: (payload: string) => void;
+    created (): void {
+      this.reloadGlobalKeys()
+    }
 
-    private created (): void {
-      if (!this.activeNavKey) {
-        this.onNavChange(this.current[0])
-      }
+    reloadGlobalKeys () {
+      this.activeNavKey = this.current[0]
+      this.activeTypeKey = this.navConfig.find(t => t.key === this.activeNavKey).typeList[0].key
     }
 
     @Watch('current')
-    onCurrentChange (val: string[]): void {
-      this.onNavChange(val[0])
+    onCurrentChange (): void {
+      this.reloadGlobalKeys()
     }
 }
 </script>
