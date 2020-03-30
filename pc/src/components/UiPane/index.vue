@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Table2Comm from '@assets/utils/Table2Comm'
+// import Table2Comm from '@assets/utils/Table2Comm'
 import List2Comm from '@assets/utils/List2Comm'
 
 @Component
-export default class TableInput extends Vue {
+export default class UiPane extends Vue {
   created () {
     console.log(new List2Comm().genComment())
   }

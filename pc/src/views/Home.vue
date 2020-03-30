@@ -30,7 +30,7 @@
           </div>
           <type-pane :navType="current[0]"></type-pane>
         </div>
-        <table-input></table-input>
+        <ui-pane></ui-pane>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -40,13 +40,13 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, navKeys } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
-import TableInput from '@components/TableInput'
+import UiPane from '@components/UiPane'
 import { State, Mutation } from 'vuex-class'
-
+console.log(UiPane)
 @Component({
   components: {
     [TypePane.name]: TypePane,
-    [TableInput.name]: TableInput
+    [UiPane.name]: UiPane
   }
 })
 export default class Home extends Vue {
