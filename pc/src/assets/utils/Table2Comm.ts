@@ -81,22 +81,24 @@ export class Table2Comm implements Table2CommUtil {
   }
 
   getTableWH (): number[][] {
-    const ROW_LEN: number = this.tableData.length
-    const COL_LEN: number = this.tableData[0].length
-    const colWidthArr: number[] = new Array(COL_LEN).fill(0)
-    const rowHeightArr: number[] = new Array(ROW_LEN).fill(1)
+    const ROW_LEN: number = this.tableData.length // 总共的行数
+    const COL_LEN: number = this.tableData[0].length // 总共的列数
+    const colWidthArr: number[] = new Array(COL_LEN).fill(0) // 每个单元格的宽度 以字母数字宽度为1 汉字为2 为标准
+    const rowHeightArr: number[] = new Array(ROW_LEN).fill(1) // 每一行的高度 一行字为1 两行为2
 
+    // 遍历表格数据
     for (let i = 0; i < ROW_LEN; i++) {
       for (let j = 0; j < COL_LEN; j++) {
-        let strLength = getRealStrLenth(this.tableData[i][j])
-        if (strLength > this.maxCellWidth) {
-          const height = Math.ceil(strLength / this.maxCellWidth)
-          rowHeightArr[i] < height && (rowHeightArr[i] = height)
+        let strLength = getRealStrLenth(this.tableData[i][j]) // 获取该单元格内容的实际长度
+        if (strLength > this.maxCellWidth) { // 内容长于最大宽度时分行
+          const height = Math.ceil(strLength / this.maxCellWidth) // 计算该单元格的行高
+          rowHeightArr[i] < height && (rowHeightArr[i] = height) // 比较已经计算的最高单元格高度 取更大的作为整行的高度
           strLength = this.maxCellWidth
         }
-        strLength > colWidthArr[j] && (colWidthArr[j] = strLength)
+        strLength > colWidthArr[j] && (colWidthArr[j] = strLength) // 比较该列的单元格最大宽度
       }
     }
+    // 给每个单元格进行padding填充 保证美观  最后一列单元格填充宽度更少
     for (let i = 0; i < colWidthArr.length; i++) {
       colWidthArr[i] += i === colWidthArr.length - 1 ? 4 : 8
     }

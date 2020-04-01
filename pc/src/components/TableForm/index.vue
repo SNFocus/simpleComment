@@ -76,11 +76,18 @@ export default class TableForm extends Vue {
     this.dataChange()
   }
 
+  /**
+   * 配置或内容有变动，重新生成注释展示数据
+   */
   dataChange (): void {
     this.tableUtil.setData(this.genTableData())
     this.$emit('genComment', this.tableUtil.genComment())
   }
 
+  /**
+ * 生成TableUtil工具类所需表格数据
+ * @returns 包含表头表格数据——二维数组
+ */
   genTableData (): string[][] {
     const res: string[][] = [this.tableHeader.concat()]
     this.tableBody.forEach((row: string[]) => {
@@ -89,22 +96,28 @@ export default class TableForm extends Vue {
     return res
   }
 
-  onWrapperTypeChange (item: Options): void {
-    this.selectedWrapperType = item
-    this.$forceUpdate()
-  }
-
+  /**
+ * 配置被修改的回调
+ * @param {Number|String} val 配置的值
+ * @param {String} key 配置的属性
+ */
   onConfigChange (val: number | string, key: string): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any).tableUtil[key] = val
     this.dataChange()
   }
 
+  /**
+ * 添加一行表格数据
+ */
   addRow (): void{
     this.tableBody.push(new Array(this.tableHeader.length).fill('comment'))
     this.dataChange()
   }
 
+  /**
+ * 添加一列表格数据
+ */
   addCol (): void{
     const index: number = this.tableHeader.length
     this.tableHeader.push('header' + index)
@@ -112,6 +125,11 @@ export default class TableForm extends Vue {
     this.dataChange()
   }
 
+  /**
+ * 删除表格数据， 按行或列
+ * @param {String} type 指明删除行还是列
+ * @param {number} index 删除的行或列的索引
+ */
   delData (type: string, index: number) {
     const isCol: boolean = type === 'col'
     if (isCol) {
