@@ -41,7 +41,7 @@ export default class TypePane extends Vue {
   height: 38%;
   padding: 24px;
   border-radius: $radius;
-  background: $bg-color;
+  background: $bg-light;
   border-top-right-radius: 0;
 }
 
@@ -51,7 +51,7 @@ export default class TypePane extends Vue {
   padding: 10px;
   height: 50%;
   float: left;
-  border: 4px solid $bg-color;
+  border: 4px solid $bg-light;
   display: flex;
   flex-direction: column;
   align-items: center;

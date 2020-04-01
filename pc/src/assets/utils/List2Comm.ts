@@ -11,7 +11,7 @@ export default class List2Comm implements List2CommUtil {
     commentType: string;
     data: string[];
     rowDivider: string;
-    constructor (commentType = 'multi', rowDivider = '——') {
+    constructor (commentType = 'multiline', rowDivider = '——') {
       this.commentType = commentType
       this.rowDivider = rowDivider
       this.data = ['最是人间留不住', '朱颜辞镜花辞树', 'dfsffdsfdsf最是人间留不住']

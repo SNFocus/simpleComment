@@ -1,0 +1,98 @@
+<template>
+    <div class="sc-input-box">
+        <div class="label" >
+            {{label}}
+        </div>
+        <div class="input-wrapper">
+            <span class="dot"></span>
+            <span style="padding:4px;"></span>
+            <slot ></slot>
+            <div class="underline" ></div>
+            <div class="sideline" ></div>
+        </div>
+    </div>
+</template>
+<script lang="ts">
+import { Vue, Prop, Component } from 'vue-property-decorator'
+
+@Component
+export default class ScFormItem extends Vue {
+    @Prop(String) readonly label !: string ;
+}
+</script>
+
+<style lang="scss">
+.sc-input-box > .input-wrapper > input:focus{
+     ~ .sideline{
+         height: 100%;
+     }
+     + .underline{
+        right: 100%;
+     }
+
+}
+</style>
+
+<style lang="scss" scoped>
+$input-bg: #ECECEC;
+.sc-input-box {
+    padding: 10px 16px;
+    position: relative;
+
+    .label{
+        @include ellipsis;
+        max-width: 5rem;
+    }
+
+    .input-wrapper{
+        display: flex;
+        align-items: center;
+        .dot{
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            background: #FF5722;
+            transition: border-radius 1s;
+        }
+
+        .underline{
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            left: 66%;
+            right: 34%;
+            background: #8BC34A;
+            transition: left .3s, right .5s;
+        }
+
+        .sideline{
+            width: 3px;
+            height: 0;
+            position: absolute;
+            left:0;
+            bottom: 0;
+            background: #8BC34A;
+            transition: height .5s;
+        }
+        .sc-input {
+            all: unset;
+            background-color: $bg-light;
+            border-radius: 2px;
+            width: 100%;
+            padding-left: 10px;
+            transition: width 1s;
+        }
+    }
+
+    &:hover{
+        .dot{
+            border-radius: 50%;
+        }
+        .underline{
+            left: 0;
+            right: 33%;
+        }
+    }
+
+}
+</style>

@@ -2,45 +2,47 @@ import { getRealStrLenth, replaceStr, splitStringByLength, getDoubleByteLen } fr
 
 export declare interface Table2CommUtil {
   maxCellWidth: number;
-  customHoriTemp: string;
-  verticleTemplate: string;
-  tableHeader: string[];
+  horiTemplate: string;
+  verticalTemplate: string;
   tableData: string[][];
   genComment: () => string;
+  setData: (data: string[][]) => void;
   getTableWH: () => number[][];
 }
 
-export default class Table2Comm implements Table2CommUtil {
-  maxCellWidth: number // 每个单元格最大宽度（字节数 汉字占两个字节）
-  customHoriTemp: string // 用户自定义水平线的绘图符号
-  verticleTemplate: string
-  tableHeader: string[] = ['header1', 'header2', 'header3', 'header4'];
-  tableData: string[][] = [
-    ['header1', 'header2', 'header3', 'header4'],
-    ['comment1', 'comment2', 'comment3', 'comment4'],
-    ['comment1', 'comment3', 'comment3', 'comment4'],
-    ['comment1', 'comment2', 'comment3', 'comment4'],
-    ['comment1', 'comment2', 'comment3', 'comment4']
-  ];
+export class Table2Comm implements Table2CommUtil {
+  public maxCellWidth: number // 每个单元格最大宽度（字节数 汉字占两个字节）
+  public horiTemplate: string // 用户自定义水平线的绘图符号
+  public verticalTemplate: string
+  public tableData: string[][] ;
 
-  constructor (maxCellWidth = 24, customHoriTemp = '———', verticleTemplate = '·') {
+  constructor (maxCellWidth = 24, horiTemplate = '———', verticalTemplate = '·') {
     this.maxCellWidth = maxCellWidth
-    this.customHoriTemp = customHoriTemp
-    this.verticleTemplate = verticleTemplate
+    this.horiTemplate = horiTemplate
+    this.verticalTemplate = verticalTemplate
+  }
+
+  setData (tableData: string[][]): void{
+    this.tableData = tableData
+  }
+
+  setConfigData (key: string, val: string | number): void{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (this as any)[key] = val
   }
 
   genComment (): string {
     let horiDividerLine = '' // 分隔线
     const [colWidths, rowHeights] = this.getTableWH() // 获取表格每列的宽度， 每行的高度
     const TABLE_WIDTH = colWidths.reduce((pre, cur) => pre + cur, 0) // 将每列宽度相加 得到所有列（整个表格）的总宽度
-    const templateLen = getRealStrLenth(this.customHoriTemp) // 获取字符串物理长度 字母数字为1 汉字为1.82
+    const templateLen = getRealStrLenth(this.horiTemplate) // 获取字符串物理长度 字母数字为1 汉字为1.82
     // 绘制行分隔线
     for (let i = 0; i < TABLE_WIDTH; i++) {
-      (i + 1) % templateLen === 0 && (horiDividerLine += this.customHoriTemp)
+      (i + 1) % templateLen === 0 && (horiDividerLine += this.horiTemplate)
     }
     horiDividerLine += '\n' // 换行
     // 绘制指定宽度的行的内容模板  在此模板上填充用户输入的内容
-    const contentLine = this.verticleTemplate + (Array(TABLE_WIDTH - 1).join(' ')) + this.verticleTemplate + '\n'
+    const contentLine = this.verticalTemplate + (Array(TABLE_WIDTH - 1).join(' ')) + this.verticalTemplate + '\n'
 
     let res = horiDividerLine
     // 根据计算出的每个单元格的长宽  将内容填充进每个单元格
@@ -65,7 +67,7 @@ export default class Table2Comm implements Table2CommUtil {
 
         // 对单元格中的分行后的每一行进行文本填充
         rows.forEach((t, index) => {
-          const text = this.verticleTemplate + ' ' + t // t => 用户输入文本 每个单元格文本前需要加分隔符和空白padding保证美观性
+          const text = this.verticalTemplate + ' ' + t // t => 用户输入文本 每个单元格文本前需要加分隔符和空白padding保证美观性
           const byteLen = getRealStrLenth(text) // 获取占用的物理宽度 字母为1 汉字为1.82
           // 获取所在单元格在这一行中的起始位置
           const startIndex = writedLenth - getDoubleByteLen(contentArr[index]) * 0.822222

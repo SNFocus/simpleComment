@@ -5,7 +5,7 @@
 .normal-padding
     padding: 14px
 .icon-card__hover
-    color: $color-white
+    color: $color-light
     background: $hover-bg-color
     cursor: pointer
     .icon
@@ -22,3 +22,20 @@
     display: flex
     align-items: center
     justify-content: center
+
+@mixin ellipsis($rows: 1)
+    @if $rows == 1
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+    @else 
+        display: -webkit-box
+        -webkit-box-orient: vertical
+        -webkit-line-clamp: $rows
+        overflow: hidden
+
+
+input
+    border: 1px solid #e5e5e5
+    padding-left: 4px
+
