@@ -42,7 +42,7 @@ export class Table2Comm implements Table2CommUtil {
     }
     horiDividerLine += '\n' // 换行
     // 绘制指定宽度的行的内容模板  在此模板上填充用户输入的内容
-    const contentLine = this.verticalTemplate + (Array(TABLE_WIDTH - 1).join(' ')) + this.verticalTemplate + '\n'
+    const contentLine = this.verticalTemplate + (Array(TABLE_WIDTH).join(' ')) + '\n'
 
     let res = horiDividerLine
     // 根据计算出的每个单元格的长宽  将内容填充进每个单元格

@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 // import Table2Comm from '@assets/utils/Table2Comm'
-import List2Comm from '@assets/utils/List2Comm'
+// import List2Comm from '@assets/utils/List2Comm'
 // import TableForm from '@components/TableForm'
 
 @Component({
@@ -17,16 +17,19 @@ import List2Comm from '@assets/utils/List2Comm'
     // 自动将你的构建代码切割成多个包，这些包
     // 会通过 Ajax 请求加载
       require(['@components/TableForm'], resolve)
+    },
+    'list-form': function (resolve) {
+      require(['@components/ListForm'], resolve)
     }
   }
 })
 export default class UiPane extends Vue {
     @Prop(String) readonly activeNavKey !: string;
     @Prop(String) activeTypeKey !: string;
-    currentCmp = 'table-form'
+    currentCmp = 'list-form'
 
     created () {
-      console.log(new List2Comm().genComment())
+    //   console.log(new List2Comm().genComment())
     }
 }
 </script>

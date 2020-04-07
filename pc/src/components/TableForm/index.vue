@@ -98,8 +98,8 @@ export default class TableForm extends Vue {
 
   /**
  * 配置被修改的回调
- * @param {Number|String} val 配置的值
- * @param {String} key 配置的属性
+ * @param { Number | String } val 配置的值
+ * @param { String } key 配置的属性
  */
   onConfigChange (val: number | string, key: string): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

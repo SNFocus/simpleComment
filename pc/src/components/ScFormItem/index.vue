@@ -1,5 +1,5 @@
 <template>
-    <div class="sc-input-box">
+    <div class="sc-input-box" :class="{showLine: showUnderLine}">
         <div class="label" >
             {{label}}
         </div>
@@ -18,22 +18,32 @@ import { Vue, Prop, Component } from 'vue-property-decorator'
 @Component
 export default class ScFormItem extends Vue {
     @Prop(String) readonly label !: string ;
+    @Prop({ default: true }) readonly showUnderLine !: string ;
 }
 </script>
 
 <style lang="scss">
-.sc-input-box > .input-wrapper > input:focus{
-     ~ .sideline{
+.showLine > .input-wrapper > input:focus {
+     ~ .sideline {
          height: 100%;
-     }
-     + .underline{
-        right: 100%;
-     }
+         box-shadow: $shadow;
 
+     }
+     + .underline {
+        right: 100% !important;
+     }
+}
+
+.sc-input-box:hover {
+    .sideline {
+         height: 100%;
+         box-shadow: $shadow;
+    }
 }
 </style>
 
 <style lang="scss" scoped>
+//
 $input-bg: #ECECEC;
 .sc-input-box {
     padding: 10px 16px;
@@ -47,6 +57,8 @@ $input-bg: #ECECEC;
     .input-wrapper{
         display: flex;
         align-items: center;
+        line-height: 26px;
+        min-height: 30px;
         .dot{
             width: 12px;
             height: 12px;
@@ -61,7 +73,7 @@ $input-bg: #ECECEC;
             bottom: 0;
             left: 66%;
             right: 34%;
-            background: #8BC34A;
+            background: #4caf50;
             transition: left .3s, right .5s;
         }
 
@@ -71,7 +83,7 @@ $input-bg: #ECECEC;
             position: absolute;
             left:0;
             bottom: 0;
-            background: #8BC34A;
+            background: #4caf50;
             transition: height .5s;
         }
         .sc-input {
@@ -88,9 +100,13 @@ $input-bg: #ECECEC;
         .dot{
             border-radius: 50%;
         }
+    }
+
+    &.showLine:hover{
         .underline{
             left: 0;
-            right: 33%;
+            right: 40%;
+            box-shadow: $shadow;
         }
     }
 
