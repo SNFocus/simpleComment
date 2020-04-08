@@ -33,7 +33,7 @@
                         <template slot="title">
                             复制到剪贴板
                         </template>
-                        <a-icon type="copy" />
+                        <a-icon type="copy" @click="copyData" />
                     </a-tooltip>
 
                 </div>
@@ -54,6 +54,11 @@ import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
 import UiPane from '@components/UiPane'
 // import { State, Mutation } from 'vuex-class'
+
+declare interface Point {
+  x: number;
+  y: number;
+}
 @Component({
   components: {
     [TypePane.name]: TypePane,
@@ -62,23 +67,87 @@ import UiPane from '@components/UiPane'
 })
 export default class Home extends Vue {
     readonly navConfig: NavItemIF[] = navConfig
+    // 控制侧边栏折叠
     isCollapsed = true;
+    // 侧边栏当前Tab标识数组
     current: string[] = ['baseType'];
+    // 侧边栏当前Tab标识
     activeNavKey = '';
+    // 当前选中的展示类型
     activeTypeKey = '';
+    // 当前展示的注释文本
     comment = ''
 
     created (): void {
       this.reloadGlobalKeys()
     }
 
+    /**
+ * 初始化默认侧边栏选项和类型面板选项
+ */
     reloadGlobalKeys () {
       this.activeNavKey = this.current[0]
       this.activeTypeKey = this.navConfig.find(t => t.key === this.activeNavKey).typeList[0].key
     }
 
+    /**
+ * 监听UiPane数据变动，获取最新注释文本
+ * @param {String} data - 注释文本
+ */
     getComment (data: string): void{
       this.comment = data
+    }
+
+    /**
+ * 监听复制按钮点击事件，执行复制注释文本
+ * @param {MouseEvent} ev - 鼠标事件对象
+ */
+    copyData (ev: Event): void {
+      const textarea = document.createElement('textarea')
+      textarea.value = this.comment
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('Copy')
+      document.body.removeChild(textarea)
+      this.showMouseMsg(this.getMousePoint(ev), '已复制')
+    }
+
+    /**
+ * 响应用户操作，再鼠标旁显示消息
+ * @param {Point} point - 鼠标坐标
+ * @example {x: 0, y: 0}
+ * @param {String} text - 消息文本
+ */
+    showMouseMsg (point: Point, text: string): void {
+      const div = document.createElement('div')
+      div.innerHTML = text
+      div.style.position = 'fixed'
+      div.style.left = point.x + 'px'
+      div.style.top = (point.y - 12) + 'px'
+      div.style.transition = 'top .6s'
+      div.style.color = '#4caf50'
+      div.style.fontSize = '12px'
+      document.body.appendChild(div)
+      setTimeout(() => {
+        div.style.top = (point.y - 32) + 'px'
+      }, 0)
+      setTimeout(() => {
+        document.body.removeChild(div)
+      }, 600)
+    }
+
+    /**
+ * 根据MouseEvent获取相对文档的鼠标坐标
+ * @param {MouseEvent} event - 鼠标事件对象
+ * @returns {Point} 相对于文档的坐标
+ */
+    getMousePoint (event: Event): Point {
+      const ev = event || window.event
+      const scrollX = document.documentElement.scrollLeft || document.body.scrollLeft
+      const scrollY = document.documentElement.scrollTop || document.body.scrollTop
+      const x = ev.pageX || ev.clientX + scrollX
+      const y = ev.pageY || ev.clientY + scrollY
+      return { x, y }
     }
 
     @Watch('current')
