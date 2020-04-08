@@ -1,25 +1,20 @@
 import { getRealStrLenth } from '@assets/utils'
 export declare interface ListItem{
-    key: number;
     content: string;
     childs?: ListItem[];
 }
 
 export declare interface List2CommUtil {
-    data: ListItem[];
     tabSize: number|string;
     rowDivider: string;
     showDivider: boolean;
     dividerWidth: number;
     maxWidth: number;
     isOrdered: boolean;
-    baseId: number;
     genComment: () => string;
 }
 
 export class List2Comm implements List2CommUtil {
-    data: ListItem[];
-
     tabSize: number|string;
     rowDivider: string;
     isOrdered !: boolean;
@@ -27,46 +22,26 @@ export class List2Comm implements List2CommUtil {
 
     dividerWidth !: number;
     maxWidth !: number;
-    baseId = 5;
 
     constructor (tabSize = 1, rowDivider = '——', showDivider = false, isOrdered = false, data?: ListItem[]) {
       this.isOrdered = isOrdered
       this.rowDivider = rowDivider
       this.tabSize = tabSize
       this.showDivider = showDivider
-      this.data = data || [{
-        key: 1,
-        content: '1最是人间留不住',
-        childs: [{
-          key: 4,
-          content: '2朱颜辞镜花辞树2'
-        }]
-      },
-      {
-        key: 2,
-        content: '3朱颜辞镜花辞树'
-      },
-      {
-        key: 3,
-        content: '4最是人间留不住'
-      }]
     }
 
     isListItem (data: ListItem | ListItem[]): data is ListItem {
       return 'content' in data
     }
 
-    setData (data: ListItem[]): void {
-      this.data = data
-    }
-
-    genComment (): string {
+    genComment (listData: ListItem[]): string {
+      console.log(listData)
       this.dividerWidth = getRealStrLenth(this.rowDivider)
-      this.maxWidth = this.data.reduce((pre, cur) => {
+      this.maxWidth = listData.reduce((pre, cur) => {
         const textLen = +getRealStrLenth(cur.content)
         return pre <= textLen ? textLen : pre
       }, 0) + 4
-      return this.flatList(0, -1, this.data)
+      return this.flatList(0, -1, listData)
     }
 
     flatList (level: number, index: number, data: ListItem[] | ListItem): string {

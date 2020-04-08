@@ -1,22 +1,41 @@
 <template>
-    <a-tree draggable :showLine="true" :treeData="treeData" @drop="onDrop" :replaceFields="options" >
-      <template slot="custom">
-        <a-button type="primary" class="but_type" style="right:200px;" >新增</a-button>
-        <a-button type="primary" class="but_type" >删除</a-button>
+    <a-tree draggable :showLine="true" :treeData="treeData" @drop="onDrop" :replaceFields="options" :key="updateId">
+      <template slot="custom" slot-scope="item">
+        <div class="node-item">
+            <a-popover title="编辑" trigger="click" v-model="item.popVisible">
+              <template slot="content">
+                <input v-model="item.content"  />
+              </template>
+              <span class="node-title" @click="item.popVisible = !item.popVisible;updateId++">{{ item.content }}</span>
+            </a-popover>
+
+            <a-tooltip title="新增同级节点">
+                <a-icon type="plus" class="node-action" @click="addData(item, false)" />
+            </a-tooltip>
+            <a-tooltip title="新增子级节点">
+                <a-icon type="plus-circle" class="node-action" @click="addData(item, true)" />
+            </a-tooltip>
+            <a-tooltip title="删除">
+                <a-icon type="delete" class="node-action" @click="delData(item)" />
+            </a-tooltip>
+        </div>
       </template>
     </a-tree>
 </template>
 <script lang="ts">
-import { Vue, Component, Model, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class ScTree extends Vue {
     @Prop({ default: () => [] }) data !: Array<T>;
     options = { children: 'childs', title: 'content', key: 'key' }
     treeData: Array<T> ;
+    baseId = 100;
+    updateId = 0;
+
     created () {
       this.treeData = JSON.parse(JSON.stringify(this.data))
-      this.appendSlot(this.treData)
+      this.appendSlot(this.treeData)
     }
 
     appendSlot (data) {
@@ -26,6 +45,8 @@ export default class ScTree extends Vue {
         return
       }
       data.scopedSlots = { title: 'custom' }
+      data.key = this.baseId++
+      data.popVisible = false
       if (Array.isArray(data.childs)) {
         data.childs.forEach(t => this.appendSlot(t))
       }
@@ -84,11 +105,93 @@ export default class ScTree extends Vue {
           ar.splice(i + 1, 0, dragObj)
         }
       }
-      this.$emit('change', data)
+      this.treeData = data
+      this.updateData()
+    }
+
+    delScopeProp () {
+      return JSON.parse(JSON.stringify(
+        this.treeData,
+        function (k, v) {
+          if (k === 'scopedSlots' || k === 'key' || k === 'popVisible') return undefined
+          else return v
+        }
+      ))
+    }
+
+    addData (item, addChild): void{
+      const node = {
+        key: this.baseId++,
+        scopedSlots: { title: 'custom' },
+        popVisible: false,
+        content: '注释列表内容'
+      }
+      if (addChild) {
+        if (!item.childs) {
+          item.childs = []
+        }
+        item.childs.push(node)
+      } else {
+        this.findNodeByKey(item.key, (item, index, arr) => {
+          console.log(item.key)
+          arr.splice(index + 1, 0, node)
+        })
+      }
+      this.updateData()
+    }
+
+    delData (item): void{
+      this.findNodeByKey(item.key, (item, index, arr) => {
+        arr.splice(index, 1)
+      })
+      this.updateData()
+      // 强制刷新
+      this.baseId++
+    }
+
+    findNodeByKey (key, func) {
+      const loop = (data, key, callback) => {
+        data.forEach((item, index, arr) => {
+          if (item.key === key) {
+            return callback(item, index, arr)
+          }
+          if (item.childs) {
+            return loop(item.childs, key, callback)
+          }
+        })
+      }
+      loop(this.treeData, key, func)
+    }
+
+    updateData () {
+      this.updateId++
+      this.$emit('change', this.delScopeProp())
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.node-item {
+    .node-title {
+        margin-right: 1rem;
+    }
 
+    .node-action {
+        opacity: 0;
+        font-size: 12px;
+        padding-left: 4px;
+        padding-right: 4px;
+        color: $color-tip;
+        transition: opacity 0.3s;
+
+        &:hover{
+            color: $color-primary;
+        }
+    }
+    &:hover{
+        .node-action {
+            opacity: 1;
+        }
+    }
+}
 </style>

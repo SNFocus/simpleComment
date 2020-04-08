@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
-import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree } from 'ant-design-vue'
+import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover } from 'ant-design-vue'
 import ScFormItem from '@components/ScFormItem'
 import ScSwitch from '@components/ScSwitch'
 
@@ -18,6 +18,7 @@ Vue.use(Dropdown)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Tree)
+Vue.use(Popover)
 Vue.config.productionTip = false
 
 new Vue({

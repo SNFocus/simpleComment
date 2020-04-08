@@ -18,7 +18,18 @@ export default class ListForm extends Vue {
       this.tabSize = this.listUtil.tabSize
       this.rowDivider = this.listUtil.rowDivider
       this.isOrdered = this.listUtil.isOrdered
-      this.treeData = this.listUtil.data
+      this.treeData = [{
+        content: '1最是人间留不住',
+        childs: [{
+          content: '2朱颜辞镜花辞树2'
+        }]
+      },
+      {
+        content: '3朱颜辞镜花辞树'
+      },
+      {
+        content: '4最是人间留不住'
+      }]
       this.dataChange()
     }
 
@@ -63,24 +74,6 @@ export default class ListForm extends Vue {
       )
     }
 
-    drawListTree (data: ListItem[]): JSX.Element | undefined {
-      if (!data) return
-      return (
-        <div class="list-wrapper">
-          { data.map((d) => {
-            return (
-              <div class="list-item">
-                {d.content}
-                {
-                  d.childs && d.childs.length && this.drawListTree(d.childs)
-                }
-              </div>
-            )
-          })}
-        </div>
-      )
-    }
-
     genListTreeLayout (): JSX.Element {
       return (
         <div class="list-form-wrapper">
@@ -91,7 +84,7 @@ export default class ListForm extends Vue {
 
     onTreeDataChange (data): void {
       this.treeData = data
-      this.$forceUpdate()
+      this.dataChange()
     }
 
     getRenderContent () {
@@ -119,7 +112,7 @@ export default class ListForm extends Vue {
      * 配置或内容有变动，重新生成注释展示数据
      */
     dataChange (): void {
-      this.$emit('genComment', this.listUtil.genComment())
+      this.$emit('genComment', this.listUtil.genComment(this.treeData))
     }
 
     /**
@@ -144,8 +137,7 @@ export default class ListForm extends Vue {
     border: 1px solid #e5e5e5;
     height: 50vh;
     width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
     padding: 12px;
 
     .list-wrapper{
