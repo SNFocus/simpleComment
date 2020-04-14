@@ -133,7 +133,6 @@ export default class ScTree extends Vue {
         item.childs.push(node)
       } else {
         this.findNodeByKey(item.key, (item, index, arr) => {
-          console.log(item.key)
           arr.splice(index + 1, 0, node)
         })
       }

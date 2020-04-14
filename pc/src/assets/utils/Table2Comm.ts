@@ -31,7 +31,7 @@ export class Table2Comm implements Table2CommUtil {
     (this as any)[key] = val
   }
 
-  genComment (): string {
+  genComment (): CommData {
     let horiDividerLine = '' // 分隔线
     const [colWidths, rowHeights] = this.getTableWH() // 获取表格每列的宽度， 每行的高度
     const TABLE_WIDTH = colWidths.reduce((pre, cur) => pre + cur, 0) // 将每列宽度相加 得到所有列（整个表格）的总宽度
@@ -77,7 +77,10 @@ export class Table2Comm implements Table2CommUtil {
       }
       res += contentArr.join('') + horiDividerLine
     }
-    return res
+    return {
+      comment: res,
+      payload: TABLE_WIDTH
+    }
   }
 
   getTableWH (): number[][] {

@@ -35,7 +35,6 @@
                         </template>
                         <a-icon type="copy" @click="copyData" />
                     </a-tooltip>
-
                 </div>
             </div>
             <pre>{{comment}}</pre>
@@ -53,6 +52,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
 import UiPane from '@components/UiPane'
+import { wrapComment, genCommByCmd, multilineWrapper } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
 
 declare interface Point {
@@ -92,17 +92,21 @@ export default class Home extends Vue {
 
     /**
  * 监听UiPane数据变动，获取最新注释文本
- * @param {String} data - 注释文本
+ * @param {String} comment - 注释文本
+ * @param {Number} payload - 最大宽度
  */
-    getComment (data: string): void{
-      this.comment = data
+    getComment ({ comment, payload }: CommData): void{
+      this.comment = comment
+      console.log(wrapComment(comment), payload)
+      const funcComm = genCommByCmd('@func  -d.发发的犯得上发射点发大夫士大夫..  -p.string.number. ID - 学生编号 .. -r.f犯得上反对法..   -p.string.number. Ifd - 学生fsdf编号 .. ')
+      console.log(multilineWrapper(funcComm))
     }
 
     /**
  * 监听复制按钮点击事件，执行复制注释文本
  * @param {MouseEvent} ev - 鼠标事件对象
  */
-    copyData (ev: Event): void {
+    copyData (ev: MouseEvent): void {
       const textarea = document.createElement('textarea')
       textarea.value = this.comment
       document.body.appendChild(textarea)
@@ -141,7 +145,7 @@ export default class Home extends Vue {
  * @param {MouseEvent} event - 鼠标事件对象
  * @returns {Point} 相对于文档的坐标
  */
-    getMousePoint (event: Event): Point {
+    getMousePoint (event: MouseEvent): Point {
       const ev = event || window.event
       const scrollX = document.documentElement.scrollLeft || document.body.scrollLeft
       const scrollY = document.documentElement.scrollTop || document.body.scrollTop
@@ -176,7 +180,7 @@ export default class Home extends Vue {
   height: 60%;
   margin-right: 2%;
   margin-bottom: 2%;
-  padding: 24px;
+  padding: 12px 24px;
   background: $bg-dark;
   box-shadow: $card-shadow;
   border-radius: $radius;

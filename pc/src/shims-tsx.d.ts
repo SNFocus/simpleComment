@@ -12,7 +12,12 @@ declare global {
   }
 
   interface Options {
-      key: string;
-      label: string;
+    key: string;
+    label: string;
+  }
+
+  interface CommData {
+    comment: string;
+    payload?: any;
   }
 }

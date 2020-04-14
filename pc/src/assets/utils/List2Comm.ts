@@ -1,4 +1,4 @@
-import { getRealStrLenth } from '@assets/utils'
+import { getRealStrLenth, genSpace } from '@assets/utils'
 export declare interface ListItem{
     content: string;
     childs?: ListItem[];
@@ -9,9 +9,8 @@ export declare interface List2CommUtil {
     rowDivider: string;
     showDivider: boolean;
     dividerWidth: number;
-    maxWidth: number;
     isOrdered: boolean;
-    genComment: () => string;
+    genComment: (x: ListItem[]) => CommData;
 }
 
 export class List2Comm implements List2CommUtil {
@@ -21,9 +20,8 @@ export class List2Comm implements List2CommUtil {
     showDivider: boolean;
 
     dividerWidth !: number;
-    maxWidth !: number;
 
-    constructor (tabSize = 1, rowDivider = '——', showDivider = false, isOrdered = false, data?: ListItem[]) {
+    constructor (tabSize = 1, rowDivider = '——', showDivider = false, isOrdered = false) {
       this.isOrdered = isOrdered
       this.rowDivider = rowDivider
       this.tabSize = tabSize
@@ -34,14 +32,11 @@ export class List2Comm implements List2CommUtil {
       return 'content' in data
     }
 
-    genComment (listData: ListItem[]): string {
-      console.log(listData)
+    genComment (listData: ListItem[]): CommData {
       this.dividerWidth = getRealStrLenth(this.rowDivider)
-      this.maxWidth = listData.reduce((pre, cur) => {
-        const textLen = +getRealStrLenth(cur.content)
-        return pre <= textLen ? textLen : pre
-      }, 0) + 4
-      return this.flatList(0, -1, listData)
+      return {
+        comment: this.flatList(0, -1, listData)
+      }
     }
 
     flatList (level: number, index: number, data: ListItem[] | ListItem): string {
@@ -58,11 +53,10 @@ export class List2Comm implements List2CommUtil {
 
     listItem2Text (level: number, index: number, text: string): string {
       const levelStyle = this.isOrdered ? `${level}.${index + 1}.` : '·'
-      const paddingText = level === 1 ? '' : ' '.repeat(+this.tabSize * level)
+      const paddingText = level === 1 ? '' : genSpace(+this.tabSize * level)
       let lineContent = `${paddingText}${levelStyle}  ${text}` + '\n'
       if (this.showDivider) {
-        const orderWidth = 2
-        lineContent += paddingText + ' '.repeat(orderWidth) + this.rowDivider.repeat(this.maxWidth / this.dividerWidth) + '\n'
+        lineContent += paddingText + genSpace(getRealStrLenth(levelStyle)) + this.rowDivider.repeat(getRealStrLenth(text) / this.dividerWidth) + '\n'
       }
       return lineContent
     }
