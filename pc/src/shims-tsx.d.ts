@@ -20,4 +20,12 @@ declare global {
     comment: string;
     payload?: any;
   }
+
+  interface TreeItem{
+    key: number;
+    scopedSlots: { title: string };
+    popVisible: boolean;
+    content: string;
+    childs?: TreeItem[];
+  }
 }

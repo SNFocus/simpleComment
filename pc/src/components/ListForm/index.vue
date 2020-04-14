@@ -56,7 +56,8 @@ export default class ListForm extends Vue {
                 <input
                   type="text"
                   v-model={this.rowDivider}
-                  onChange={event => this.onConfigChange(event.currentTarget.value, 'rowDivider')}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onChange={(event: any) => this.onConfigChange(event.currentTarget.value, 'rowDivider')}
                 />
               </sc-form-item>
             </a-col>
@@ -65,7 +66,8 @@ export default class ListForm extends Vue {
                 <input
                   type="text"
                   v-model={this.tabSize}
-                  onChange={event => this.onConfigChange(event.currentTarget.value, 'tabSize')}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onChange={(event: any) => this.onConfigChange(event.currentTarget.value, 'tabSize')}
                 />
               </sc-form-item>
             </a-col>
@@ -82,12 +84,12 @@ export default class ListForm extends Vue {
       )
     }
 
-    onTreeDataChange (data): void {
+    onTreeDataChange (data: TreeItem[]): void {
       this.treeData = data
       this.dataChange()
     }
 
-    getRenderContent () {
+    getRenderContent (): JSX.Element {
       return (
         <div>
           {this.genListTreeLayout()}
@@ -126,7 +128,7 @@ export default class ListForm extends Vue {
       this.dataChange()
     }
 
-    render () {
+    render (): JSX.Element {
       return this.getRenderContent()
     }
 }

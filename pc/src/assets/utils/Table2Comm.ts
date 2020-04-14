@@ -5,7 +5,7 @@ export declare interface Table2CommUtil {
   horiTemplate: string;
   verticalTemplate: string;
   tableData: string[][];
-  genComment: () => string;
+  genComment: () => CommData;
   setData: (data: string[][]) => void;
   getTableWH: () => number[][];
 }

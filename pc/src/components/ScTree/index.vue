@@ -24,24 +24,25 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { ListItem } from '../../assets/utils/List2Comm'
 
 @Component
 export default class ScTree extends Vue {
-    @Prop({ default: () => [] }) data !: Array<T>;
+    @Prop({ default: () => [] }) data !: Array<ListItem>;
     options = { children: 'childs', title: 'content', key: 'key' }
-    treeData: Array<T> ;
+    treeData: Array<TreeItem> ;
     baseId = 100;
     updateId = 0;
 
-    created () {
+    created (): void {
       this.treeData = JSON.parse(JSON.stringify(this.data))
       this.appendSlot(this.treeData)
     }
 
-    appendSlot (data) {
+    appendSlot (data: TreeItem | TreeItem[]): void {
       if (!data) return
       if (Array.isArray(data)) {
-        data.forEach(t => this.appendSlot(t))
+        (data as TreeItem[]).forEach(t => this.appendSlot(t))
         return
       }
       data.scopedSlots = { title: 'custom' }
@@ -52,13 +53,14 @@ export default class ScTree extends Vue {
       }
     }
 
-    onDrop (info): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onDrop (info: any): void {
       const dropKey: number = info.node.eventKey
       const dragKey: number = info.dragNode.eventKey
-      const dropPos = info.node.pos.split('-')
+      const dropPos: string[] = info.node.pos.split('-')
       const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1])
-      const loop = (data, key, callback) => {
-        data.forEach((item, index, arr) => {
+      const loop = (data: TreeItem[], key: number, callback: Function) => {
+        data.forEach((item: TreeItem, index: number, arr: TreeItem[]) => {
           if (item.key === key) {
             return callback(item, index, arr)
           }
@@ -70,14 +72,14 @@ export default class ScTree extends Vue {
       const data = [...this.treeData]
 
       // Find dragObject
-      let dragObj
-      loop(data, dragKey, (item, index, arr) => {
+      let dragObj !: TreeItem
+      loop(data, dragKey, (item: TreeItem, index: number, arr: TreeItem[]) => {
         arr.splice(index, 1)
         dragObj = item
       })
       if (!info.dropToGap) {
         // Drop on the content
-        loop(data, dropKey, item => {
+        loop(data, dropKey, (item: TreeItem) => {
           item.childs = item.childs || []
           // where to insert 示例添加到尾部，可以是随意位置
           item.childs.push(dragObj)
@@ -87,15 +89,15 @@ export default class ScTree extends Vue {
         info.node.expanded && // Is expanded
         dropPosition === 1 // On the bottom gap
       ) {
-        loop(data, dropKey, item => {
+        loop(data, dropKey, (item: TreeItem) => {
           item.childs = item.childs || []
           // where to insert 示例添加到尾部，可以是随意位置
           item.childs.unshift(dragObj)
         })
       } else {
-        let ar
-        let i
-        loop(data, dropKey, (item, index, arr) => {
+        let ar!: TreeItem[]
+        let i !: number
+        loop(data, dropKey, (item: TreeItem, index: number, arr: TreeItem[]) => {
           ar = arr
           i = index
         })
@@ -112,15 +114,15 @@ export default class ScTree extends Vue {
     delScopeProp () {
       return JSON.parse(JSON.stringify(
         this.treeData,
-        function (k, v) {
+        (k, v) => {
           if (k === 'scopedSlots' || k === 'key' || k === 'popVisible') return undefined
           else return v
         }
       ))
     }
 
-    addData (item, addChild): void{
-      const node = {
+    addData (item: TreeItem, addChild: boolean): void{
+      const node: TreeItem = {
         key: this.baseId++,
         scopedSlots: { title: 'custom' },
         popVisible: false,
@@ -132,15 +134,15 @@ export default class ScTree extends Vue {
         }
         item.childs.push(node)
       } else {
-        this.findNodeByKey(item.key, (item, index, arr) => {
+        this.findNodeByKey(item.key, (item: TreeItem, index: number, arr: TreeItem[]) => {
           arr.splice(index + 1, 0, node)
         })
       }
       this.updateData()
     }
 
-    delData (item): void{
-      this.findNodeByKey(item.key, (item, index, arr) => {
+    delData (item: TreeItem): void{
+      this.findNodeByKey(item.key, (item: TreeItem, index: number, arr: TreeItem[]) => {
         arr.splice(index, 1)
       })
       this.updateData()
@@ -148,9 +150,9 @@ export default class ScTree extends Vue {
       this.baseId++
     }
 
-    findNodeByKey (key, func) {
-      const loop = (data, key, callback) => {
-        data.forEach((item, index, arr) => {
+    findNodeByKey (key: number, func: Function): void {
+      const loop: (data: TreeItem[], key: number, callback: Function) => void = (data, key, callback) => {
+        data.forEach((item: TreeItem, index: number, arr: TreeItem[]) => {
           if (item.key === key) {
             return callback(item, index, arr)
           }
