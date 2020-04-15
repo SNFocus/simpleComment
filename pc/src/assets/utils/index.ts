@@ -45,7 +45,7 @@ export const getRealStrLenth: (str: string) => number = (str): number => {
 
 /**
  * 生成指定数量的空格
- * @param {number} num - 被包裹的注释文本
+ * @param {number} num - 生成的空格数量
  * @returns {String} 指定数量的空格字符串
  */
 export function genSpace (num: number): string {
@@ -149,8 +149,7 @@ export function wrapComment (comment: string, char = '//'): string {
  * 获取方法元信息（参数和返回值）
  * @param {String} cmd - 命令行输入得命令字符
  * @example
- * 开始前置 @func -d.desciption.. -p.type.type.desc.. -r.type.type.desc..
- * @func  -d.xxx..  -p.string.number. ID - 学生编号 .. p.string.number. name - 学生姓名 ..  -r.Student.学生信息..
+ * @  func  -d.xxx..  -p.string.number. ID - 学生编号 .. p.string.number. name - 学生姓名 ..  -r.Student.学生信息..
  * @param {Boolean} isParam - 元信息类型 true=>参数 false=>返回值
  * @returns {String} 提取的元信息描述字符串
  */
@@ -158,7 +157,16 @@ function getMetaInfo (cmd: string, isParam: boolean): string {
   const regexp = isParam ? /-p.+?\.\./g : /-r.+?\.\./g
   const prefix = isParam ? '@param' : '@returns'
   const textList = [...cmd.matchAll(regexp)]
-  if (isEmptyArray(textList)) return ''
+  if (isEmptyArray(textList)) {
+    // 当只输入-p -p 填充为默认占位 @param {*} prop - desc
+    // 填充空格是为了保证-p在末尾时也能被匹配
+    if ((cmd + genSpace(1)).includes('-p ')) {
+      return [...cmd.matchAll(/-p\s?/g)].reduce((p: string, c: string[]) => {
+        return c[0] ? '@param {*} prop - desc\n' : ''
+      }, '')
+    }
+    return ''
+  }
 
   return textList.map(t => {
     if (t[0]) {
@@ -180,20 +188,53 @@ function getMetaInfo (cmd: string, isParam: boolean): string {
  * @param {String} cmd - 命令行输入得命令字符
  * @returns {String} 提取的方法描述字符串
  */
-function getMethodDesc (cmd: string): string {
+function getMethodDesc (cmd: string, appendLF = true): string {
+  const suffix = appendLF ? '\n' : ''
   const res = cmd.match(/-d.+?\.\./g)
-  if (isEmptyArray(res)) return ''
-  return (res as Array<string>)[0].slice(3, -2) + '\n'
+  // 未传值也保留函数描述空行
+  if (isEmptyArray(res)) return suffix
+  return (res as Array<string>)[0].slice(3, -2) + suffix
 }
 /**
- * 按命令行参数生成函数参数及返回值注释
+ * 获取函数相关的注释信息
+ * @param {String} cmd - 命令行输入得命令字符
+ * @example
+ * $root  @func  -d.发发的犯得上发射点发大夫士大夫..  -p.string.number. ID - 学生编号 .. -r.f犯得上反对法..   -p.string.number. Ifd - 学生fsdf编号 ..
+ * @returns {String} 提取的方法描述字符串
  */
-export function genCommByCmd (cmd: string): string {
+function getFuncComment (cmd: string): string {
   const desc = getMethodDesc(cmd)
   const params = getMetaInfo(cmd, true)
   const returns = getMetaInfo(cmd, false)
   return desc + params + returns
 }
+function getVersion (cmd: string): string {
+  const res = cmd.match(/-v.+?\.\./g)
+  // 未传值也保留函数描述空行
+  if (isEmptyArray(res)) return '\n'
+  return (res as Array<string>)[0].slice(3, -2)
+}
+/**
+ * 获取文件相关的注释信息
+ * @param {String} cmd - 命令行输入得命令字符
+ * @returns {String} 提取的方法描述字符串
+ */
+function getFileComment (cmd: string): string {
+  const res = cmd.match(/-u.+?\.\./g)
+  let userStr = ''
+  if (res) {
+    userStr = res[0].slice(3, -2)
+  }
+  return `@File  
+@Desription ${getMethodDesc(cmd, false)}
+@Date
+@Version ${getVersion(cmd)}
+@Author ${userStr} 
+@LastEditors ${userStr} 
+@LastEditTime ${new Date().toLocaleString().replace(/\//g, '-')}
+  `
+}
+
 /**
  * 给注释文本包装一般多行注释语法包裹
  * @param {String} comment - 待转换得注释文本
@@ -208,4 +249,21 @@ export function multilineWrapper (comment: string): string {
   const firstLine = '/**\n' + linePrefix
   const endLine = '/'
   return firstLine + comment.replace(/\n/g, '\n' + linePrefix) + endLine
+}
+
+/**
+ * 按命令行参数生成函数参数及返回值注释
+ */
+export function genCommByCmd (cmd: string): string {
+  let res = ''
+  switch (getCmdType(cmd).trim()) {
+    case '@func':
+      res = getFuncComment(cmd)
+      break
+    case '@file':
+      // @file
+      res = multilineWrapper(getFileComment(cmd))
+      break
+  }
+  return res
 }

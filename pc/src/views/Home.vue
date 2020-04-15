@@ -98,8 +98,8 @@ export default class Home extends Vue {
     getComment ({ comment, payload }: CommData): void{
       this.comment = comment
       console.log(wrapComment(comment), payload)
-      const funcComm = genCommByCmd('@func  -d.发发的犯得上发射点发大夫士大夫..  -p.string.number. ID - 学生编号 .. -r.f犯得上反对法..   -p.string.number. Ifd - 学生fsdf编号 .. ')
-      console.log(multilineWrapper(funcComm))
+      const funcComm = genCommByCmd('@file  -v1.021..  -d.fsfsf.. -u.deng..')
+      console.log(funcComm)
     }
 
     /**
