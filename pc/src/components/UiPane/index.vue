@@ -23,6 +23,9 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
     },
     scList: function (resolve) {
       require(['@components/ListForm'], resolve)
+    },
+    scCmd: function (resolve) {
+      require(['@/components/CmdForm'], resolve)
     }
   }
 })

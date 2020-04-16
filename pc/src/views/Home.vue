@@ -24,7 +24,7 @@
     <a-layout>
       <!-- <a-layout-header :style="{ background: '#fff', padding: 0 }" /> -->
       <a-layout-content :style="{ margin: '24px 16px 16px', display: 'flex' }">
-        <div style="flex: 1;">
+        <div style="flex: 1;max-width: 52%;">
           <div class="content-pane">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
@@ -38,8 +38,20 @@
                 </div>
             </div>
             <pre>{{comment}}</pre>
+            <div class="cmd-box" :class="{show: activeTypeKey === 'cmd'}">
+              <a-icon type="right" style="margin-right:16px;" />
+              <textarea
+                type="textarea"
+                placeholder="命令行在这儿(＾Ｕ＾)ノ~ＹＯ"
+                v-model="cmdText"
+                class="cmd-input"
+                @keydown.enter="getCmdComment"
+                @focus="getCmdComment"
+                @blur="getCmdComment" >
+              </textarea>
+            </div>
           </div>
-          <type-pane :activeNavKey="activeNavKey" :activeTypeKey.sync="activeTypeKey"></type-pane>
+          <type-pane :activeNavKey="activeNavKey" :activeTypeKey.sync="activeTypeKey" @change="onTypeChange"></type-pane>
         </div>
         <ui-pane :activeNavKey="activeNavKey" :activeTypeKey="activeTypeKey" @genComment="getComment"></ui-pane>
       </a-layout-content>
@@ -52,7 +64,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
 import UiPane from '@components/UiPane'
-import { wrapComment, genCommByCmd, multilineWrapper } from '@assets/utils'
+import { genCommByCmd, getRandomColor } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
 
 declare interface Point {
@@ -77,15 +89,24 @@ export default class Home extends Vue {
     activeTypeKey = '';
     // 当前展示的注释文本
     comment = ''
+    // 命令行输入内容
+    cmdText = '@func -d.O(∩_∩)O .. -p.emoje./(ㄒoㄒ)/~~.. -r.string...'
 
     created (): void {
       this.reloadGlobalKeys()
     }
 
     /**
+ * cmdInput失去焦点时更新面板注释
+ */
+    getCmdComment (): void {
+      this.cmdText && this.getComment({ comment: genCommByCmd(this.cmdText) })
+    }
+
+    /**
  * 初始化默认侧边栏选项和类型面板选项
  */
-    reloadGlobalKeys () {
+    reloadGlobalKeys (): void {
       this.activeNavKey = this.current[0]
       this.activeTypeKey = this.navConfig.find(t => t.key === this.activeNavKey).typeList[0].key
     }
@@ -97,9 +118,6 @@ export default class Home extends Vue {
  */
     getComment ({ comment, payload }: CommData): void{
       this.comment = comment
-      console.log(wrapComment(comment), payload)
-      const funcComm = genCommByCmd('@file  -v1.021..  -d.fsfsf.. -u.deng..')
-      console.log(funcComm)
     }
 
     /**
@@ -129,7 +147,7 @@ export default class Home extends Vue {
       div.style.left = point.x + 'px'
       div.style.top = (point.y - 12) + 'px'
       div.style.transition = 'top .6s'
-      div.style.color = '#4caf50'
+      div.style.color = getRandomColor()
       div.style.fontSize = '12px'
       document.body.appendChild(div)
       setTimeout(() => {
@@ -152,6 +170,21 @@ export default class Home extends Vue {
       const x = ev.pageX || ev.clientX + scrollX
       const y = ev.pageY || ev.clientY + scrollY
       return { x, y }
+    }
+
+    /**
+ * 清除注释展示文本
+ */
+    clearComment (): void{
+      this.comment = ''
+    }
+
+    onTypeChange () {
+      switch (this.activeTypeKey) {
+        case 'cmd':
+          this.clearComment()
+          this.getCmdComment()
+      }
     }
 
     @Watch('current')
@@ -185,6 +218,7 @@ export default class Home extends Vue {
   box-shadow: $card-shadow;
   border-radius: $radius;
   overflow: auto;
+  position: relative;
 
   .actions{
       float: right;
@@ -194,5 +228,44 @@ export default class Home extends Vue {
       }
   }
 }
+.cmd-box{
+  width: 88%;
+  height: 0;
+  line-height: 24px;
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  bottom: 10px;
+  color: $color-light;
+  padding-left: 20px;
+  transition: height 1s;
+  &.show{
+    height: 24px;
+  }
+  .cmd-input{
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    border: none;
+    padding-left: 20px;
+    width: 100%;
+    letter-spacing: 1px;
 
+    &:focus{
+      outline: none;
+    }
+
+  }
+  .type-char{
+    animation: blink 1s linear infinite;
+  }
+}
+
+@keyframes blink {
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
 </style>

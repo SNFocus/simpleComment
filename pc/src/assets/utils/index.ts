@@ -1,4 +1,11 @@
 /**
+ * 随机获取16进制颜色值
+ * @returns {String}
+ */
+export function getRandomColor () {
+  return '#' + Math.random().toString(16).slice(2, 8)
+}
+/**
  * 判断传入得变量是否不是有值数组
  * @param {any} arr - 待判断得值
  * @returns {Boolean}
@@ -156,18 +163,18 @@ export function wrapComment (comment: string, char = '//'): string {
 function getMetaInfo (cmd: string, isParam: boolean): string {
   const regexp = isParam ? /-p.+?\.\./g : /-r.+?\.\./g
   const prefix = isParam ? '@param' : '@returns'
-  const textList = [...cmd.matchAll(regexp)]
+  const textList = [...cmd.replace(/\.\.\./g, '. ...').matchAll(regexp)]
   if (isEmptyArray(textList)) {
     // 当只输入-p -p 填充为默认占位 @param {*} prop - desc
     // 填充空格是为了保证-p在末尾时也能被匹配
-    if ((cmd + genSpace(1)).includes('-p ')) {
-      return [...cmd.matchAll(/-p\s?/g)].reduce((p: string, c: string[]) => {
-        return c[0] ? '@param {*} prop - desc\n' : ''
-      }, '')
+    if (isParam && (cmd + genSpace(1)).includes('-p ')) {
+      return [...cmd.matchAll(/-p\s?/g)].map((c: string[]) => c[0] ? '@param {*} prop - desc\n' : '').join('')
+    }
+    if (!isParam && (cmd + genSpace(1)).includes('-r')) {
+      return '@returns {*} \n'
     }
     return ''
   }
-
   return textList.map(t => {
     if (t[0]) {
       // 去除-p. -r. 前置定位字符 和 .. 结束定位符
@@ -217,10 +224,11 @@ function getVersion (cmd: string): string {
 /**
  * 获取文件相关的注释信息
  * @param {String} cmd - 命令行输入得命令字符
+ * @example @file -v1.0.0.. -u.诸葛亮.. -d.文件描述..
  * @returns {String} 提取的方法描述字符串
  */
 function getFileComment (cmd: string): string {
-  const res = cmd.match(/-u.+?\.\./g)
+  const res = cmd.match(/-a.+?\.\./g)
   let userStr = ''
   if (res) {
     userStr = res[0].slice(3, -2)
@@ -258,10 +266,9 @@ export function genCommByCmd (cmd: string): string {
   let res = ''
   switch (getCmdType(cmd).trim()) {
     case '@func':
-      res = getFuncComment(cmd)
+      res = multilineWrapper(getFuncComment(cmd))
       break
     case '@file':
-      // @file
       res = multilineWrapper(getFileComment(cmd))
       break
   }

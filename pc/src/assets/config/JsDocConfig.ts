@@ -48,12 +48,12 @@
  * @returns {Type} description
  *
  * File
- * @File  description
+ * @File
  * @desription
  * @version 1.2.3
  * @author AuthorName <name@example.com>
- * @license <identifier>
- * @copyright Michael Mathews 2011
- * @since <versionDescription>
+ * @lastEditors
+ * @lastEditTime
+ * @date
  *
  */

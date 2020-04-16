@@ -32,6 +32,7 @@ export default class TypePane extends Vue {
 
     changeType (type: TypeItemIF) {
       this.syncedTypeKey = type.key
+      this.$emit('change')
     }
 }
 </script>

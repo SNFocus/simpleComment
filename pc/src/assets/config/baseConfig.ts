@@ -39,14 +39,9 @@ export const navConfig: NavItemIF[] = [
         label: '图文'
       },
       {
-        key: 'func',
-        icon: 'calculator',
-        label: '函数'
-      },
-      {
-        key: 'file',
-        icon: 'file',
-        label: '文件头'
+        key: 'cmd',
+        icon: 'build',
+        label: '命令行'
       }
     ]
   },
