@@ -1,3 +1,4 @@
+
 /**
  * 随机获取16进制颜色值
  * @returns {String}
@@ -32,6 +33,18 @@ export function genSpace (num: number): string {
   return ' '.repeat(num)
 }
 
+/** *********                                ************** */
+/** *********        注释生成相关函数        ************** */
+/** *********                                ************** */
+/**
+ * 校验是否是长字符（物理宽度更长的字符，例如汉字比数字长）
+ * @param char
+ */
+export function isLongerChar (char: string): boolean {
+  const chinesPattern = new RegExp('[\u4E00-\u9FA5]+')
+  const longerCharList = ['　']
+  return longerCharList.includes(char) || chinesPattern.test(char)
+}
 /**
  * 判断是否为单行字符串
  * @param {String} text - 待判断得字符串
@@ -49,9 +62,9 @@ export function isSingleLine (text: string): boolean {
  */
 export const getRealStrLenth: (str: string) => number = (str): number => {
   let len = 0
-
   for (let i = 0; i < str.length; i++) {
-    if (!['—', '┃'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
+    // if (!['—', '┃'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
+    if (isLongerChar(str.charAt(i))) {
       len += 0.8333333333333334 // 每个汉字是数字的物理长度的11/6倍  也就是1.8xxx倍 （11- 6 == 5）
     }
     len++
@@ -60,15 +73,16 @@ export const getRealStrLenth: (str: string) => number = (str): number => {
 }
 
 /**
- * 计算字符串中的占两个字节（汉字）的字符数量
+ * 计算字符串中的汉字的字符数量
  * 数字，字母长度为1 汉字为1.8
  * @param {string} str - 待计算的字符串
- * @returns {Number} 双字节字符数
+ * @returns {Number}
  */
-export const getDoubleByteLen: (str: string) => number = (str): number => {
+export const getNumberOfChines: (str: string) => number = (str): number => {
   let len = 0
   for (let i = 0; i < str.length; i++) {
-    if (!['—'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
+    // if (!['—'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
+    if (isLongerChar(str.charAt(i))) {
       len++
     }
   }
@@ -95,7 +109,8 @@ export function splitStringByLength (text: string, length: number): string[] {
   let count = 0; let lastIndex = 0
   const res = []
   for (let i = 0; i < text.length; i++) {
-    if ((text.charCodeAt(i) & 0xff00) !== 0) {
+    // if ((text.charCodeAt(i) & 0xff00) !== 0) {
+    if (isLongerChar(text.charAt(i))) {
       count++
     }
     count++
@@ -123,6 +138,7 @@ export function padEndByRealLen (text: string, length: number, char?: string): s
     return text
   }
   const paddingLen: number = length - getRealStrLenth(text)
+  console.log(length, getRealStrLenth(text), text)
   return text + (char ? char.repeat(paddingLen) : genSpace(paddingLen))
 }
 
