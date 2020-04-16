@@ -26,7 +26,7 @@
       <a-layout-content :style="{ margin: '24px 16px 16px', display: 'flex' }">
         <div style="flex: 1;max-width: 52%;">
           <div class="content-pane">
-            <div>
+            <div style="padding-right: 24px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
                 <div class="actions">
                      <a-tooltip>
@@ -37,7 +37,7 @@
                     </a-tooltip>
                 </div>
             </div>
-            <pre>{{comment}}</pre>
+            <div class="comment-box"><pre>{{comment}}</pre></div>
             <div class="cmd-box" :class="{show: activeTypeKey === 'cmd'}">
               <a-icon type="right" style="margin-right:16px;" />
               <textarea
@@ -64,9 +64,9 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
 import UiPane from '@components/UiPane'
-import { genCommByCmd, getRandomColor } from '@assets/utils'
+import { genCommByCmd, getRandomColor, wrapComment } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
-
+import { picStore } from '../assets/commentStore/picture'
 declare interface Point {
   x: number;
   y: number;
@@ -101,6 +101,7 @@ export default class Home extends Vue {
  */
     getCmdComment (): void {
       this.cmdText && this.getComment({ comment: genCommByCmd(this.cmdText) })
+      this.comment = wrapComment(picStore.Alpaca)
     }
 
     /**
@@ -116,7 +117,7 @@ export default class Home extends Vue {
  * @param {String} comment - 注释文本
  * @param {Number} payload - 最大宽度
  */
-    getComment ({ comment, payload }: CommData): void{
+    getComment ({ comment }: CommData): void{
       this.comment = comment
     }
 
@@ -214,15 +215,23 @@ export default class Home extends Vue {
   margin-right: 2%;
   margin-bottom: 2%;
   padding: 12px 24px;
+  padding-right: 0;
   background: $bg-dark;
   box-shadow: $card-shadow;
   border-radius: $radius;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
+
+  .comment-box {
+    overflow: auto;
+    height: calc(100% - 50px);
+    width: calc(100% + 12px);
+  }
 
   .actions{
       float: right;
       cursor: pointer;
+
       &:hover{
           color: $hover-bg-color;
       }

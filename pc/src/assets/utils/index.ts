@@ -24,6 +24,15 @@ export function titleCase (word: string): string {
 }
 
 /**
+ * 生成指定数量的空格
+ * @param {number} num - 生成的空格数量
+ * @returns {String} 指定数量的空格字符串
+ */
+export function genSpace (num: number): string {
+  return ' '.repeat(num)
+}
+
+/**
  * 判断是否为单行字符串
  * @param {String} text - 待判断得字符串
  * @returns {Boolean}
@@ -42,21 +51,12 @@ export const getRealStrLenth: (str: string) => number = (str): number => {
   let len = 0
 
   for (let i = 0; i < str.length; i++) {
-    if (!['—'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
+    if (!['—', '┃'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
       len += 0.8333333333333334 // 每个汉字是数字的物理长度的11/6倍  也就是1.8xxx倍 （11- 6 == 5）
     }
     len++
   }
   return Math.ceil(len)
-}
-
-/**
- * 生成指定数量的空格
- * @param {number} num - 生成的空格数量
- * @returns {String} 指定数量的空格字符串
- */
-export function genSpace (num: number): string {
-  return ' '.repeat(num)
 }
 
 /**
@@ -137,7 +137,7 @@ export function getCmdType (cmd: string): string {
  * @param {String} char - 边框字符
  * @returns {String} 包裹后的文本
  */
-export function wrapComment (comment: string, char = '//'): string {
+export function wrapComment (comment: string, char = '/'): string {
   const charLen: number = getRealStrLenth(char)
   const arr: string[] = comment.split('\n').filter(t => t)
   const maxLen: number = arr.reduce((p: number, c: string) => {

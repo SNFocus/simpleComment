@@ -30,7 +30,11 @@ export default class TypePane extends Vue {
       return this.NAV_LIST.find((t: TypeItemIF) => t.key === this.activeNavKey).typeList
     }
 
-    changeType (type: TypeItemIF) {
+    /**
+ * 改变全局注释类型
+ * @param {TypeItemIF} type - 注释类型
+ */
+    changeType (type: TypeItemIF): void {
       this.syncedTypeKey = type.key
       this.$emit('change')
     }
