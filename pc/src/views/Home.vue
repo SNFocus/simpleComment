@@ -26,10 +26,10 @@
       <a-layout-content style="overflow: hidden;margin: 24px 16px 16px; display: flex;">
         <div style="width: 56%;">
           <div class="content-pane" :class="{big: detailMode}">
-            <div style="padding-right: 24px;">
+            <div style="padding: 0 24px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
                 <div class="actions">
-                  <a-tooltip>
+                  <a-tooltip  placement="bottom">
                         <template slot="title">
                             {{detailMode ? '还原' : '最大化'}}
                         </template>
@@ -37,7 +37,7 @@
                         <a-icon v-else class="action-btn" type="border" @click="detailMode = true" />
                     </a-tooltip>
 
-                     <a-tooltip>
+                     <a-tooltip  placement="bottom">
                         <template slot="title">
                             复制到剪贴板
                         </template>
@@ -45,7 +45,9 @@
                     </a-tooltip>
                 </div>
             </div>
-            <div class="comment-box"><pre>{{comment}}</pre></div>
+            <div class="comment-box" :style="{height: activeTypeKey === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
+              <pre style="margin: 0;">{{comment}}</pre>
+            </div>
             <div class="cmd-box" :class="{show: activeTypeKey === 'cmd'}">
               <a-icon type="right" style="margin-right:16px;" />
               <textarea
@@ -61,7 +63,10 @@
           </div>
           <type-pane :activeNavKey="activeNavKey" :activeTypeKey.sync="activeTypeKey" @change="onTypeChange"></type-pane>
         </div>
-        <ui-pane :activeNavKey="activeNavKey" :activeTypeKey="activeTypeKey" @genComment="getComment"></ui-pane>
+        <div class="template-pane normal-padding ">
+            <router-view />
+        </div>
+        <!-- <ui-pane :activeNavKey="activeNavKey" :activeTypeKey="activeTypeKey" @genComment="getComment"></ui-pane> -->
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -71,8 +76,9 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import TypePane from '@components/TypePane'
-import UiPane from '@components/UiPane'
+// import UiPane from '@components/UiPane'
 import { genCommByCmd, getRandomColor, wrapComment } from '@assets/utils'
+import Bus from '@assets/utils/bus'
 // import { State, Mutation } from 'vuex-class'
 import { picStore } from '../assets/commentStore/picture'
 declare interface Point {
@@ -81,8 +87,8 @@ declare interface Point {
 }
 @Component({
   components: {
-    [TypePane.name]: TypePane,
-    [UiPane.name]: UiPane
+    [TypePane.name]: TypePane
+    // [UiPane.name]: UiPane
   }
 })
 export default class Home extends Vue {
@@ -90,7 +96,7 @@ export default class Home extends Vue {
     // 控制侧边栏折叠
     isCollapsed = true;
     // 侧边栏当前Tab标识数组
-    current: string[] = ['baseType'];
+    current: string[] = ['base'];
     // 侧边栏当前Tab标识
     activeNavKey = '';
     // 当前选中的展示类型
@@ -110,6 +116,8 @@ export default class Home extends Vue {
       document.addEventListener('keydown', function (event: MouseEvent) {
         vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
       })
+      console.log(Bus.$on)
+      Bus.$on('genComment', this.getComment)
     }
 
     /**
@@ -202,6 +210,7 @@ export default class Home extends Vue {
           this.clearComment()
           this.getCmdComment()
       }
+      this.$router.push(`/${this.activeNavKey}/${this.activeTypeKey}`)
     }
 
     @Watch('current')
@@ -229,14 +238,14 @@ export default class Home extends Vue {
   color: $color-light;
   width: 98%;
   height: 60%;
+  z-index: 999;
   margin-right: 2%;
   margin-bottom: 2%;
-  padding: 12px 24px;
-  padding-right: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
   background: $bg-dark;
   box-shadow: $card-shadow;
   border-radius: $radius;
-  z-index: 999;
   overflow: hidden;
   position: relative;
   transition: width 1s, height 1s;
@@ -249,8 +258,10 @@ export default class Home extends Vue {
   }
 
   .comment-box {
+    padding-left: 16px;
+    padding-right: 16px;
     overflow: auto;
-    height: calc(100% - 50px);
+    height: 100%;
     width: calc(100% + 12px);
   }
 
@@ -301,6 +312,12 @@ export default class Home extends Vue {
   .type-char{
     animation: blink 1s linear infinite;
   }
+}
+
+.template-pane {
+  width: 44%;
+  border-radius: $radius;
+  background: $bg-light;
 }
 
 @keyframes blink {

@@ -53,6 +53,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Table2Comm, Table2CommUtil } from '@assets/utils/Table2Comm.ts'
+import Bus from '@assets/utils/bus'
 
 @Component
 export default class TableForm extends Vue {
@@ -81,7 +82,7 @@ export default class TableForm extends Vue {
    */
   dataChange (): void {
     this.tableUtil.setData(this.genTableData())
-    this.$emit('genComment', this.tableUtil.genComment())
+    Bus.$emit('genComment', this.tableUtil.genComment())
   }
 
   /**

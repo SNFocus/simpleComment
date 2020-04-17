@@ -14,7 +14,6 @@
 </template>
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator'
-
 @Component
 export default class ScFormItem extends Vue {
     @Prop(String) readonly label !: string ;

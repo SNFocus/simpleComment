@@ -3,6 +3,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { List2Comm, List2CommUtil, ListItem } from '@assets/utils/List2Comm'
 import ScTree from '@components/ScTree'
+import Bus from '@assets/utils/bus'
 
 @Component
 export default class ListForm extends Vue {
@@ -114,7 +115,7 @@ export default class ListForm extends Vue {
      * 配置或内容有变动，重新生成注释展示数据
      */
     dataChange (): void {
-      this.$emit('genComment', this.listUtil.genComment(this.treeData))
+      Bus.$emit('genComment', this.listUtil.genComment(this.treeData))
     }
 
     /**

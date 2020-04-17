@@ -7,17 +7,36 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/base'
+  },
+  {
+    path: '/base',
+    component: Home,
+    children: [
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+      },
+      {
+        path: 'singleline',
+        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+      },
+      {
+        path: 'table',
+        component: () => import(/* webpackChunkName: "uipane" */ '@components/TableForm')
+      },
+      {
+        path: 'cmd',
+        component: () => import(/* webpackChunkName: "uipane" */ '@components/CmdForm')
+      },
+      {
+        path: 'list',
+        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+      }
+    ]
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({

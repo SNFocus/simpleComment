@@ -14,7 +14,7 @@ export declare interface NavItemIF {
 
 export const navConfig: NavItemIF[] = [
   {
-    key: 'baseType',
+    key: 'base',
     icon: 'layout',
     label: '基础类型',
     typeList: [
