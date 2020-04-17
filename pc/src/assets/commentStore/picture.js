@@ -19,6 +19,35 @@ const Alpaca = `
           ┗━┻━┛   ┗━┻━┛     
           
 `
+
+const Alpaca2 = `
+ 
+      ┌─┐       ┌─┐ + +
+   ┌──┘ ┴───────┘ ┴──┐++
+   │                 │
+   │       ───       │++ + + +
+   ███████───███████ │+
+   │                 │+
+   │       ─┴─       │
+   │                 │
+   └───┐         ┌───┘
+       │         │
+       │         │   + +
+       │         │
+       │         └──────────────┐
+       │                        │
+       │                        ├─┐
+       │                        ┌─┘
+       │                        │
+       └─┐  ┐  ┌───────┬──┐  ┌──┘  + + + +
+         │ ─┤ ─┤       │ ─┤ ─┤
+         └──┴──┘       └──┴──┘  + + + +
+                神兽保佑
+               代码无BUG!
+ 
+
+
+`
 const Sakyamuni = `
 
                             _ooOoo_
@@ -124,11 +153,569 @@ const dragon2 = `
                                          //.-~~~--\\
 `
 
+const pentacle = `
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMds+:--------:+sdNMMMMMMMMMMM
+MMMMMMMMms:-+sdNMMMMMMMMNdy+--omMMMMMMMM
+MMMMMMh:\` /mMMMMMMMMMMMMMMMMm+ \`-yMMMMMM
+MMMMd--hN\`\`--sNMMMMMMMMMMNy:..\`md:.hMMMM
+MMM+\`yMMMy hd+./hMMMMMMh/.+dd sMMMh\`/MMM
+MM:.mMMMMM:.NMMh/.+dd+./hMMM--MMMMMm--NM
+M+\`mMMMMMMN\`+MMMMm-  .dMMMMo mMMMMMMN.:M
+d yMMMMMMMMy dNy:.omNs--sNm oMMMMMMMMh h
+/\`MMMMMMMMMM.\`.+dMMMMMMm+.\`\`NMMMMMMMMM-:
+.:MMMMMMMd+./\`oMMMMMMMMMMs /.+dMMMMMMM/\`
+.:MMMMmo.:yNMs dMMMMMMMMm\`oMNy:.omMMMM/\`
+/\`MNy:.omMMMMM--MMMMMMMM:.MMMMMNs--sNM.:
+d -\` :++++++++: /++++++/ :++++++++:  : h
+M+ yddddddddddd+ yddddy /dddddddddddy\`/M
+MM/.mMMMMMMMMMMM.-MMMM/.NMMMMMMMMMMm.:NM
+MMMo\`sMMMMMMMMMMd sMMy hMMMMMMMMMMy\`+MMM
+MMMMd--hMMMMMMMMM+\`mN\`/MMMMMMMMMh--hMMMM
+MMMMMMh:.omMMMMMMN.:/\`NMMMMMMms.:hMMMMMM
+MMMMMMMMNs:./shmMMh  yMMNds/.:smMMMMMMMM
+MMMMMMMMMMMMdy+/---\`\`---:+sdMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+`
+const mobius = `
+
+_______________________________
+/\\                              \\
+/++\\    __________________________\\
+\\+++\\   \\ ************************/
+\\+++\\   \\___________________ ***/
+ \\+++\\   \\             /+++/***/
+  \\+++\\   \\           /+++/***/
+   \\+++\\   \\         /+++/***/
+    \\+++\\   \\       /+++/***/
+     \\+++\\   \\     /+++/***/
+      \\+++\\   \\   /+++/***/
+       \\+++\\   \\ /+++/***/
+        \\+++\\   /+++/***/
+         \\+++\\ /+++/***/
+          \\+++++++/***/
+           \\+++++/***/
+            \\+++/***/
+             \\+/___/
+
+             `
+
+const gypsum = `
+    .------.
+    (        )
+    |~------~|
+    |        | .----.
+    |         (      )
+    |        ||~----~|
+    |        ||      |
+    |        ||  .-----.
+    |        || |._____.'
+    |        || |       |
+    |   .------.|       |
+    |  (        |       |
+    |  |~------~|       |
+    |  |        |       |
+    _..----------..|  |  _.-----._     |
+    .-~                ~-..-         -.   |
+    |.                  .||-_       _-|   | axiac
+    |"-..____________..-"||  ~-----~  |   |
+    |                   .\`|           |--"
+    "-..____________..-" \`._       _.'
+          "-----"
+`
+const file1 = `
+      
+    \\|/
+    -o------.
+    /|\\     |\\
+    |      '-|
+    |        |
+    |        |
+    |     mga|
+    '--------'
+`
+
+const file2 = `
+.----.______
+|mga        |
+|    ___________
+|   /          /
+|  /          /
+| /          /
+|/__________/
+`
+
+const file3 = `
+               _
+                   /_'. _
+                 _   \\ / '-.
+                < \`\`-.;),--'\`
+                 '--.</()\`--.
+                   / |/-/\`'._\\
+                   |/ |=|
+                      |_|
+                 ~\`   |-| ~~      ~
+             ~~  ~~ __|=|__   ~~
+           ~~   .-'\`  |_|  \`\`""-._   ~~
+            ~~.'      |=|    O    '-.  ~
+              |      \`"""\`  <|\\      \\   ~
+          ~   \\              |\\      | ~~
+           jgs '-.__.--._    |/   .-'
+                    ~~   \`--...-'\`    ~~
+            ~~         ~          ~
+                   ~~         ~~     ~
+`
+
+const love1 = `
+hugs&kisses&hugskises&hugs&kisses&hugs&sses&hugs&kisses&w
+&            hug&ksses&hugs&kisses&hu       &hugs&kissese
+s&h        es&hus&isses&hugs&kiss               gs&kissew
+es&h      sses&hgskisses&hugs&k                   s&kissd
+ses&      isses&ug&kisses&hugs          &kiss      s&kisf
+sses      kisseshus&kisses&hu          gs&kiss      s&kig
+kiss      s&kisss&ugs&kisses&         ehugs&kis     ugs&y
+gs&k      hugs&ksss&hugs&kiss         sises&sf      s&hut
+hugs      s&hugskises&hugs& i          gs&kis       ses&c
+&hug      es&hug&ksses&hug  k          s&iuy        ssesd
+s&hu      ses&hus&isses&h   &          u&u         issegh
+es&h      sses&hgskisse     s&                     &kissd
+s                           gs&ki               hugs&kisg
+s                            ugs&kisse       sses&hugs&ki
+i             se&h                                     
+&kis      gs&kises&hug   ies&hugs     &hugs&kisse     ssf
+s&kis      gs&kises&h   &kses&hug     s&hugs&kisses   gsd
+gs&ki      ugs&ksses&   s&sses&hu     es&hugs&kisses  udf
+&hugs&k      hug&ki   s&hu&kisses     isses  ugs&kisses#f
+s&hugs&      &hus&k   es&hs&kisse            hugs&kissesd
+ses&hugs      s&ug   issesugs&kis     s&kiss s&hugs&kisgd
+isses&hug      e&   s&kiss&hugs&k     ugs&kisses&hug  kds
+kisses&hug         ugs&kiss&hugs&     hugs&kisses&h   &fd
+s&kisses&hu       s&hugs&kses                         gsd
+gs&kisses&h       es&hugs&sse                         uds
+ugs&kisses&hugs&isses&hugsisses&hugs&kses&hugs&kisses&hsd
+
+`
+
+const cat1 = `
+               _____
+              /     \\
+              vvvvvvv  /|__/|
+                 I   /O,O   |
+                 I /_____   |      /|/|
+                J|/^ ^ ^ \\  |    /00  |    _//|
+                 |^ ^ ^ ^ |W|   |/^^\\ |   /oo |
+                  \\m___m__|_|    \\m_m_|   \\mm_|
+
+                                        "Totoros" (from "My Neighbor Totoro")
+                                            --- Duke Lee
+`
+
+const death = `
+                            .xm*f""??T?@hc.
+                          z@"\` '~((!!!!!!!?*m.
+                        z$$$K   ~~(/!!!!!!!!!Mh
+                      .f\` "#$k'\`~~\\!!!!!!!!!!!MMc
+                     :"     f*! ~:~(!!!!!!!!!!XHMk
+                     f      " %n:~(!!!!!!!!!!!HMMM.
+                    d          X~!~(!!!!!!!X!X!SMMR
+                    M :   x::  :~~!>!!!!!!MNWXMMM@R
+ n                  E ' *  ueeeeiu(!!XUWWWWWXMRHMMM>                :.
+ E%                 E  8 .$$$$$$$$K!!$$$$$$$$&M$RMM>               :"5
+z  %                3  $ 4$$$$$$$$!~!*$$$$$$$$!$MM$               :" \`
+K   ":              ?> # '#$$$$$#~!!!!TR$$$$$R?@MME              z   R
+?     %.             5     ^"""~~~:XW!!!!T?T!XSMMM~            :^    J
+ ".    ^s             ?.       ~~d$X$NX!!!!!!M!MM             f     :~
+  '+.    #L            *c:.    .~"?!??!!!!!XX@M@~           z"    .*
+    '+     %L           #c\`"!+~~~!/!!!!!!@*TM8M           z"    .~
+      ":    '%.         'C*X  .!~!~!!!!!X!!!@RF         .#     +
+        ":    ^%.        9-MX!X!!X~H!!M!N!X$MM        .#\`    +"
+          #:    "n       'L'!~M~)H!M!XX!$!XMXF      .+\`   .z"
+            #:    ":      R *H$@@$H$*@$@$@$%M~     z\`    +"
+              %:   \`*L    'k' M!~M~X!!$!@H!tF    z"    z"
+                *:   ^*L   "k ~~~!~!!!!!M!X*   z*   .+"
+                  "s   ^*L  '%:.~~~:!!!!XH"  z#   .*"
+                    #s   ^%L  ^"#4@UU@##"  z#   .*"
+                      #s   ^%L           z#   .r"
+                        #s   ^%.       u#   .r"
+                          #i   '%.   u#   .@"
+                            #s   ^%u#   .@"
+                              #s x#   .*"
+                               x#\`  .@%.
+                             x#\`  .d"  "%.
+                           xf~  .r" #s   "%.
+                     u   x*\`  .r"     #s   "%.  x.
+                     %Mu*\`  x*"         #m.  "%zX"
+                     :R(h x*              "h..*dN.
+                   u@NM5e#>                 7?dMRMh.
+                 z$@M@$#"#"                 *""*@MM$hL
+               u@@MM8*                          "*$M@Mh.
+             z$RRM8F"                             "N8@M$bL
+            5\`RM$#                                  'R88f)R
+            'h.$"                                     #$x*
+
+`
+
+const death2 = `
+                    .ed"""" """$$$$be.
+                   -"           ^""**$$$e.
+                 ."                   '$$$c
+                /                      "4$$b
+               d  3                      $$$$
+               $  *                   .$$$$$$
+              .$  ^c           $$$$$e$$$$$$$$.
+              d$L  4.         4$$$$$$$$$$$$$$b
+              $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$
+  e$""=.      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$
+ z$$b. ^c     3$$$F "$$$$b   $"$$$$$$$  $$$$*"      .=""$c
+4$$$$L        $$P"  "$$b   .$ $$$$$...e$$        .=  e$$$.
+^*$$$$$c  %..   *c    ..    $$ 3$$$$$$$$$$eF     zP  d$$$$$
+  "**$$$ec   "   %ce""    $$$  $$$$$$$$$$*    .r" =$$$$P""
+        "*$b.  "c  *$e.    *** d$$$$$"L$$    .d"  e$$***"
+          ^*$$c ^$c $$$      4J$$$$$% $$$ .e*".eeP"
+             "$$$$$$"'$=e....$*$$**$cz$$" "..d$*"
+               "*$$$  *=%4.$ L L$ P3$$$F $$$P"
+                  "$   "%*ebJLzb$e$$$$$b $P"
+                    %..      4$$$$$$$$$$ "
+                     $$$e   z$$$$$$$$$$%
+                      "*$c  "$$$$$$$P"
+                       ."""*$$$$$$$$bc
+                    .-"    .$***$$$"""*e.
+                 .-"    .e$"     "*$c  ^*b.
+          .=*""""    .e$*"          "*bc  "*$e..
+        .$"        .z*"               ^*$e.   "*****e.
+        $$ee$c   .d"                     "*$.        3.
+        ^*$E")$..$"                         *   .ee==d%
+           $.d$$$*                           *  J$$$e*
+            """""                              "$$$"
+
+`
+
+const death3 = `
+                                ...----....
+                         ..-:"''         ''"-..
+                      .-'                      '-.
+                    .'              .     .       '.
+                  .'   .          .    .      .    .''.
+                .'  .    .       .   .   .     .   . ..:.
+              .' .   . .  .       .   .   ..  .   . ....::.
+             ..   .   .      .  .    .     .  ..  . ....:IA.
+            .:  .   .    .    .  .  .    .. .  .. .. ....:IA.
+           .: .   .   ..   .    .     . . .. . ... ....:.:VHA.
+           '..  .  .. .   .       .  . .. . .. . .....:.::IHHB.
+          .:. .  . .  . .   .  .  . . . ...:.:... .......:HIHMM.
+         .:.... .   . ."::"'.. .   .  . .:.:.:II;,. .. ..:IHIMMA
+         ':.:..  ..::IHHHHHI::. . .  ...:.::::.,,,. . ....VIMMHM
+        .:::I. .AHHHHHHHHHHAI::. .:...,:IIHHHHHHMMMHHL:. . VMMMM
+       .:.:V.:IVHHHHHHHMHMHHH::..:" .:HIHHHHHHHHHHHHHMHHA. .VMMM.
+       :..V.:IVHHHHHMMHHHHHHHB... . .:VPHHMHHHMMHHHHHHHHHAI.:VMMI
+       ::V..:VIHHHHHHMMMHHHHHH. .   .I":IIMHHMMHHHHHHHHHHHAPI:WMM
+       ::". .:.HHHHHHHHMMHHHHHI.  . .:..I:MHMMHHHHHHHHHMHV:':H:WM
+       :: . :.::IIHHHHHHMMHHHHV  .ABA.:.:IMHMHMMMHMHHHHV:'. .IHWW
+       '.  ..:..:.:IHHHHHMMHV" .AVMHMA.:.'VHMMMMHHHHHV:' .  :IHWV
+        :.  .:...:".:.:TPP"   .AVMMHMMA.:. "VMMHHHP.:... .. :IVAI
+       .:.   '... .:"'   .   ..HMMMHMMMA::. ."VHHI:::....  .:IHW'
+       ...  .  . ..:IIPPIH: ..HMMMI.MMMV:I:.  .:ILLH:.. ...:I:IM
+     : .   .'"' .:.V". .. .  :HMMM:IMMMI::I. ..:HHIIPPHI::'.P:HM.
+     :.  .  .  .. ..:.. .    :AMMM IMMMM..:...:IV":T::I::.".:IHIMA
+     'V:.. .. . .. .  .  .   'VMMV..VMMV :....:V:.:..:....::IHHHMH
+       "IHH:.II:.. .:. .  . . . " :HB"" . . ..PI:.::.:::..:IHHMMV"
+        :IP""HHII:.  .  .    . . .'V:. . . ..:IH:.:.::IHIHHMMMMM"
+        :V:. VIMA:I..  .     .  . .. . .  .:.I:I:..:IHHHHMMHHMMM
+        :"VI:.VWMA::. .:      .   .. .:. ..:.I::.:IVHHHMMMHMMMMI
+        :."VIIHHMMA:.  .   .   .:  .:.. . .:.II:I:AMMMMMMHMMMMMI
+        :..VIHIHMMMI...::.,:.,:!"I:!"I!"I!"V:AI:VAMMMMMMHMMMMMM'
+        ':.:HIHIMHHA:"!!"I.:AXXXVVXXXXXXXA:."HPHIMMMMHHMHMMMMMV
+          V:H:I:MA:W'I :AXXXIXII:IIIISSSSSSXXA.I.VMMMHMHMMMMMM
+            'I::IVA ASSSSXSSSSBBSBMBSSSSSSBBMMMBS.VVMMHIMM'"'
+             I:: VPAIMSSSSSSSSSBSSSMMBSSSBBMMMMXXI:MMHIMMI
+            .I::. "H:XIIXBBMMMMMMMMMMMMMMMMMBXIXXMMPHIIMM'
+            :::I.  ':XSSXXIIIIXSSBMBSSXXXIIIXXSMMAMI:.IMM
+            :::I:.  .VSSSSSISISISSSBII:ISSSSBMMB:MI:..:MM
+            ::.I:.  ':"SSSSSSSISISSXIIXSSSSBMMB:AHI:..MMM.
+            ::.I:. . ..:"BBSSSSSSSSSSSSBBBMMMB:AHHI::.HMMI
+            :..::.  . ..::":BBBBBSSBBBMMMB:MMMMHHII::IHHMI
+            ':.I:... ....:IHHHHHMMMMMMMMMMMMMMMHHIIIIHMMV"
+              "V:. ..:...:.IHHHMMMMMMMMMMMMMMMMHHHMHHMHP'
+               ':. .:::.:.::III::IHHHHMMMMMHMHMMHHHHM"
+                 "::....::.:::..:..::IIIIIHHHHMMMHHMV"
+                   "::.::.. .. .  ...:::IIHHMMMMHMV"
+                     "V::... . .I::IHHMMV"'
+                       '"VHVHHHAHHHHMMV:"'
+`
+
+const death4 = `
+                  _________-----_____
+       _____------           __      ----_
+___----             ___------              \\
+   ----________        ----                 \\
+               -----__    |             _____)
+                    __-                /     \\
+        _______-----    ___--          \\    /)\\
+  ------_______      ---____            \\__/  /
+               -----__    \\ --    _          /\\
+                      --__--__     \\_____/   \\_/\\
+                              ----|   /          |
+                                  |  |___________|
+                                  |  | ((_(_)| )_)
+                                  |  \\_((_(_)|/(_)
+                                  \\             (
+                                   \\_____________)
+
+`
+
+const lanch = `
+                                            ,:
+                                          ,' |
+                                         /   :
+                                      --'   /
+                                      \\/ /:/
+                                      / ://_\\
+                                   __/   /
+                                   )'-. /
+                                   ./  :\\
+                                    /.' '
+                                  '/'
+                                  +
+                                 '
+                               \`.
+                           .-"-
+                          (    |
+                       . .-'  '.
+                      ( (.   )8:
+                  .'    / (_  )
+                   _. :(.   )8P  \`
+               .  (  \`-' (  \`.   .
+                .  :  (   .a8a)
+               /_\`( "a \`a. )"'
+           (  (/  .  ' )=='
+          (   (    )  .8"   +
+            (\`'8a.( _(   (
+         ..-. \`8P    ) \`  )  +
+       -'   (      -ab:  )
+     '    _  \`    (8P"Ya
+   _(    (    )b  -\`.  ) +
+  ( 8)  ( _.aP" _a   \\( \\   *
++  )/    (8P   (88    )  )
+   (a:f   "     \`"\`
+`
+
+const gun1 = `
+  _=__________________________-
+  /  ////  (____)  R K B A____ |
+ _|_////_________________(____|
+    )/  o  /) /  )/ 
+   (/     /)__\\_))
+  (/     /)
+ (/     /)
+(/_ o _/)
+--------
+`
+
+const gun2 = `
+                          )
+                         (
+    |\\_________________,_ )
+    |     ==== _______)__)
+  __/___  ====_/
+ (O____)\\\\_(_/
+(O_ ____)
+ (O____)
+`
+const gun3 = `
+                        +-+         ###                               |   |
+                    \\--+ +-________) (_______________________________|  o|
+                _____/===%====/======------------------------------------!\\
+ ______________/ / //! ||||||||||||| (%) ================    ======      ! X
+'______________! ! !!! ||||||||||||||| ._================_.. ======   -- ! X
+               \\\\\\\\\\\\\\ o||XX|||XX||o||_!  o   { o    }     |===----------!M|
+                """"""\\_!_!_|_!_!_!!!/ !________!-------___X____________ !-.
+                                       |    "X  ||__|  |.            ^\\\\ o |
+                                       | |    / |!     ||              \\\\  |
+                                       |     /""|!!!   |"               || |
+                                       "----"   |!!!!! ".               || |
+                                                |!!+-+!!|                | |
+                                                |!!|:|!!|                | |
+                                                \`--+-+--"                \`-"
+                                                 |%%#|
+                                                 |%%#|
+                                                 |%%#|
+                                                 |%%#|
+                                                 |#%#|
+                                                 |###|
+                                                 |###|
+                                                 +---+
+`
+
+const gun4 = `
+           _________
+         /'        /|
+        /         / |_
+       /         /  //|
+      /_________/  ////|
+     |   _ _    | 8o////|
+     | /'// )_  |   8///|
+     |/ // // ) |   8o///|
+     / // // //,|  /  8//|
+    / // // /// | /   8//|
+   / // // ///__|/    8//|
+  /.(_)// /// |       8///|
+ (_)' \`(_)//| |       8////|___________
+(_) /_\\ (_)'| |        8///////////////
+(_) \\"/ (_)'|_|         8/////////////
+ (_)._.(_) d' Hb         8oooooooopb'
+   \`(_)'  d'  H\`b
+         d'   \`b\`b
+        d'     H \`b
+       d'      \`b \`b
+      d'           \`b
+     d'             \`b
+`
+
+const no = `
+      _mmmMMMMMmmm_
+    _mMMMMMMPPPMMMMMMm_
+   mMMMMb:       \`\`YMMMm
+ ,MMMP\`MMMb_         YMMM.
+,MMM'   YMMMm         \`MMM.
+dMMP      YMMML        YMMb
+MMM        \`YMMM.       MMM
+MMM.         \`MMMb.    ,MMM
+YMMb           YMMMm   dMMP
+ YMML            YMMMLdMMP
+  YMMb.           \`YMMMMP
+   \`MMMMm.__   __,mMMMM'
+     \`YMMMMMMMMMMMMMP'
+        '""PPPPP""'
+
+Darknessslayer121
+`
+
+const bug = `
+
+
+   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
+ ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
+ ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
+ ░▓█▒  ░▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄        ██╔══██╗██║   ██║██║   ██║
+ ░▒█░   ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄       ██████╔╝╚██████╔╝╚██████╔╝
+  ▒ ░   ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒       ╚═════╝  ╚═════╝  ╚═════╝
+  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
+  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
+           ░     ░ ░      ░  ░
+
+`
+const chuying = `
+ _______________#########_______________________
+ ______________############_____________________
+ ______________#############____________________
+ _____________##__###########___________________
+ ____________###__######_#####__________________
+ ____________###_#######___####_________________
+ ___________###__##########_####________________
+ __________####__###########_####_______________
+ ________#####___###########__#####_____________
+ _______######___###_########___#####___________
+ _______#####___###___########___######_________
+ ______######___###__###########___######_______
+ _____######___####_##############__######______
+ ____#######__#####################_#######_____
+ ____#######__##############################____
+ ___#######__######_#################_#######___
+ ___#######__######_######_#########___######___
+ ___#######____##__######___######_____######___
+ ___#######________######____#####_____#####____
+ ____######________#####_____#####_____####_____
+ _____#####________####______#####_____###______
+ ______#####______;###________###______#________
+ ________##_______####________####______________
+`
+const hit = `
+                                       :9H####@@@@@Xi                        
+                                      1@@@@@@@@@@@@@@8                       
+                                    ,8@@@@@@@@@B@@@@@@8                      
+                                   :B@@@@X3hi8Bs;B@@@@@Ah,                   
+              ,8i                  r@@@B:     1S ,M@@@@@@#8;                 
+             1AB35.i:               X@@8 .   SGhr ,A@@@@@@@@S                
+             1@h31MX8                18Hhh3i .i3r ,A@@@@@@@@@5               
+             ;@&i,58r5                 rGSS:     :B@@@@@@@@@@A               
+              1#i  . 9i                 hX.  .: .5@@@@@@@@@@@1               
+               sG1,  ,G53s.              9#Xi;hS5 3B@@@@@@@B1                
+                .h8h.,A@@@MXSs,           #@H1:    3ssSSX@1                  
+                s ,@@@@@@@@@@@@Xhi,       r#@@X1s9M8    .GA981               
+                ,. rS8H#@@@@@@@@@@#HG51;.  .h31i;9@r    .8@@@@BS;i;          
+                 .19AXXXAB@@@@@@@@@@@@@@#MHXG893hrX#XGGXM@@@@@@@@@@MS        
+                 s@@MM@@@hsX#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&,      
+               :GB@#3G@@Brs ,1GM@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B,     
+             .hM@@@#@@#MX 51  r;iSGAM@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@8     
+           :3B@@@@@@@@@@@&9@h :Gs   .;sSXH@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:    
+       s&HA#@@@@@@@@@@@@@@M89A;.8S.       ,r3@@@@@@@@@@@@@@@@@@@@@@@@@@@r    
+    ,13B@@@@@@@@@@@@@@@@@@@5 5B3 ;.         ;@@@@@@@@@@@@@@@@@@@@@@@@@@@i    
+   5#@@#&@@@@@@@@@@@@@@@@@@9  .39:          ;@@@@@@@@@@@@@@@@@@@@@@@@@@@;    
+   9@@@X:MM@@@@@@@@@@@@@@@#;    ;31.         H@@@@@@@@@@@@@@@@@@@@@@@@@@:    
+    SH#@B9.rM@@@@@@@@@@@@@B       :.         3@@@@@@@@@@@@@@@@@@@@@@@@@@5    
+      ,:.   9@@@@@@@@@@@#HB5                 .M@@@@@@@@@@@@@@@@@@@@@@@@@B    
+            ,ssirhSM@&1;i19911i,.             s@@@@@@@@@@@@@@@@@@@@@@@@@@S   
+               ,,,rHAri1h1rh&@#353Sh:          8@@@@@@@@@@@@@@@@@@@@@@@@@#:  
+             .A3hH@#5S553&@@#h   i:i9S          #@@@@@@@@@@@@@@@@@@@@@@@@@A.
+ 
+     又看源码，看你妹妹呀！
+`
+const lion = `
+              ,%%%%%%%%,
+            ,%%/\\%%%%/\\%%
+           ,%%%\\c "" J/%%%
+  %.       %%%%/ o  o \\%%%
+  \\%%.     %%%%    _  |%%%
+   \\%%     \`%%%%(__Y__)%%'
+   //       ;%%%%\\\\-/%%%'
+  ((       /  \\%%%%%%%'
+   \\\\    .'          |
+    \\\\  /       \\  | |
+     \\\\/         ) | |
+      \\         /_ | |__
+      (___________))))))) 攻城湿
+`
+
+const mouse = `
+
+  http://www.flvcd.com/
+   .--,       .--,
+  ( (  \\.---./  ) )
+   '.__/o   o\\__.'
+      {=  ^  =}
+       >  -  <
+      /       \\
+     //       \\\\
+    //|   .   |\\\\
+    "'\\       /'"_.-~^\`'-.
+       \\  _  /--'         \`
+      ___)( )(___
+     (((__) (__)))    高山仰止,景行行止.虽不能至,心向往之。
+ 
+`
+const dog = `
+ 
+  ░░░░░░░░░░░░░░░░░░░░░░░░▄░░
+  ░░░░░░░░░▐█░░░░░░░░░░░▄▀▒▌░
+  ░░░░░░░░▐▀▒█░░░░░░░░▄▀▒▒▒▐
+  ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
+  ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
+  ░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌
+  ░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒
+  ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
+  ░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄
+  ░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒
+  ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒
+  单身狗就这样默默地看着你，一句话也不说。
+`
 export const picStore = {
   Alpaca,
   Sakyamuni,
   Beeke,
   book,
   dragon,
-  dragon2
+  dragon2,
+  pentacle,
+  mobius,
+  gypsum
 }

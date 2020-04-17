@@ -101,7 +101,7 @@ export default class Home extends Vue {
  */
     getCmdComment (): void {
       this.cmdText && this.getComment({ comment: genCommByCmd(this.cmdText) })
-      this.comment = wrapComment(picStore.dragon)
+      this.comment = wrapComment(picStore.alien4)
     }
 
     /**

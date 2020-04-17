@@ -32,16 +32,15 @@ export const navConfig: NavItemIF[] = [
         key: 'list',
         icon: 'ordered-list',
         label: '列表'
+      }, {
+        key: 'cmd',
+        icon: 'build',
+        label: '命令行'
       },
       {
         key: 'pictureText',
         icon: 'picture',
-        label: '图文'
-      },
-      {
-        key: 'cmd',
-        icon: 'build',
-        label: '命令行'
+        label: '自制图文'
       }
     ]
   },
