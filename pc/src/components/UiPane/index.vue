@@ -47,7 +47,7 @@ export default class UiPane extends Vue {
 
 <style lang="scss" scoped>
 .template-pane {
-  width: 48%;
+  width: 44%;
   border-radius: $radius;
   background: $bg-light;
 }

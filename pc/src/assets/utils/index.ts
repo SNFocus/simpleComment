@@ -154,6 +154,7 @@ export function getCmdType (cmd: string): string {
  * @returns {String} 包裹后的文本
  */
 export function wrapComment (comment: string, char = '/'): string {
+  console.log(comment)
   const charLen: number = getRealStrLenth(char)
   const arr: string[] = comment.split('\n').filter(t => t)
   const maxLen: number = arr.reduce((p: number, c: string) => {

@@ -23,17 +23,25 @@
     </a-layout-sider>
     <a-layout>
       <!-- <a-layout-header :style="{ background: '#fff', padding: 0 }" /> -->
-      <a-layout-content :style="{ margin: '24px 16px 16px', display: 'flex' }">
-        <div style="flex: 1;max-width: 52%;">
-          <div class="content-pane">
+      <a-layout-content style="overflow: hidden;margin: 24px 16px 16px; display: flex;">
+        <div style="width: 56%;">
+          <div class="content-pane" :class="{big: detailMode}">
             <div style="padding-right: 24px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
                 <div class="actions">
+                  <a-tooltip>
+                        <template slot="title">
+                            {{detailMode ? '还原' : '最大化'}}
+                        </template>
+                        <a-icon v-if="detailMode" class="action-btn" type="close-square" @click="detailMode = false" />
+                        <a-icon v-else class="action-btn" type="border" @click="detailMode = true" />
+                    </a-tooltip>
+
                      <a-tooltip>
                         <template slot="title">
                             复制到剪贴板
                         </template>
-                        <a-icon type="copy" @click="copyData" />
+                        <a-icon class="action-btn" type="copy" @click="copyData" />
                     </a-tooltip>
                 </div>
             </div>
@@ -91,9 +99,17 @@ export default class Home extends Vue {
     comment = ''
     // 命令行输入内容
     cmdText = '@func -d.O(∩_∩)O .. -p.emoje./(ㄒoㄒ)/~~.. -r.string...'
+    // 查看模式  会把注释面板最大化
+    detailMode = false
 
     created (): void {
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      const vm = this
       this.reloadGlobalKeys()
+      /** **********    按下Esc时退出放大模式(detailMode)    ************/
+      document.addEventListener('keydown', function (event: MouseEvent) {
+        vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
+      })
     }
 
     /**
@@ -101,7 +117,7 @@ export default class Home extends Vue {
  */
     getCmdComment (): void {
       this.cmdText && this.getComment({ comment: genCommByCmd(this.cmdText) })
-      this.comment = wrapComment(picStore.alien4)
+      this.comment = picStore.gypsum
     }
 
     /**
@@ -211,6 +227,7 @@ export default class Home extends Vue {
 
 .content-pane {
   color: $color-light;
+  width: 98%;
   height: 60%;
   margin-right: 2%;
   margin-bottom: 2%;
@@ -219,8 +236,17 @@ export default class Home extends Vue {
   background: $bg-dark;
   box-shadow: $card-shadow;
   border-radius: $radius;
+  z-index: 999;
   overflow: hidden;
   position: relative;
+  transition: width 1s, height 1s;
+
+  &.big {
+    top: 0;
+    left: 0;
+    width: 179%;
+    height: 100%;
+  }
 
   .comment-box {
     overflow: auto;
@@ -232,8 +258,12 @@ export default class Home extends Vue {
       float: right;
       cursor: pointer;
 
-      &:hover{
+      .action-btn{
+        margin-left: 4px;
+        margin-right: 4px;
+        &:hover{
           color: $hover-bg-color;
+        }
       }
   }
 }
