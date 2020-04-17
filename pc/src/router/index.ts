@@ -17,23 +17,23 @@ const routes = [
       // which is lazy-loaded when the route is visited.
       {
         path: '',
-        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm')
       },
       {
         path: 'singleline',
-        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm')
       },
       {
         path: 'table',
-        component: () => import(/* webpackChunkName: "uipane" */ '@components/TableForm')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/TableForm')
       },
       {
         path: 'cmd',
-        component: () => import(/* webpackChunkName: "uipane" */ '@components/CmdForm')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/CmdForm')
       },
       {
         path: 'list',
-        component: () => import(/* webpackChunkName: "uipane" */ '@components/ListForm')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm')
       }
     ]
   }

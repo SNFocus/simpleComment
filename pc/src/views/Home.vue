@@ -113,10 +113,9 @@ export default class Home extends Vue {
       const vm = this
       this.reloadGlobalKeys()
       /** **********    按下Esc时退出放大模式(detailMode)    ************/
-      document.addEventListener('keydown', function (event: MouseEvent) {
+      document.addEventListener('keydown', (event: MouseEvent) => {
         vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
       })
-      console.log(Bus.$on)
       Bus.$on('genComment', this.getComment)
     }
 
