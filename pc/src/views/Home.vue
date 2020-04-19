@@ -113,7 +113,7 @@ export default class Home extends Vue {
       const vm = this
       this.reloadGlobalKeys()
       /** **********    按下Esc时退出放大模式(detailMode)    ************/
-      document.addEventListener('keydown', (event: MouseEvent) => {
+      document.addEventListener('keydown', (event: KeyboardEvent) => {
         vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
       })
       Bus.$on('genComment', this.getComment)
@@ -132,7 +132,10 @@ export default class Home extends Vue {
  */
     reloadGlobalKeys (): void {
       this.activeNavKey = this.current[0]
-      this.activeTypeKey = this.navConfig.find(t => t.key === this.activeNavKey).typeList[0].key
+      const activeType = this.navConfig.find((t: NavItemIF) => t.key === this.activeNavKey)
+      if (activeType) {
+        this.activeTypeKey = activeType.typeList[0].key
+      }
     }
 
     /**
@@ -141,6 +144,7 @@ export default class Home extends Vue {
  * @param {Number} payload - 最大宽度
  */
     getComment ({ comment }: CommData): void{
+      console.log(comment)
       this.comment = comment
     }
 

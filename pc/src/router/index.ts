@@ -34,6 +34,10 @@ const routes = [
       {
         path: 'list',
         component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm')
+      },
+      {
+        path: 'pictureText',
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/PictureText')
       }
     ]
   }
