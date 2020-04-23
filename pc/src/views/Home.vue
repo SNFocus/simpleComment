@@ -6,18 +6,18 @@
     >
       <div
         class="logo"
-        @click="isCollapsed = !isCollapsed"
-      >
+        @click="isCollapsed = !isCollapsed" >
         {{ isCollapsed ? "SC" : "SComment" }}
       </div>
       <a-menu
         theme="dark"
         mode="inline"
-        v-model="current"
-      >
+        :defaultSelectedKeys="['base']" >
         <a-menu-item v-for="(item) in navConfig" :key="item.key">
-          <a-icon :type="item.icon" />
-          <span class="nav-text">{{ item.label }}</span>
+          <router-link :to="'/' + item.key">
+            <a-icon :type="item.icon" />
+            <span class="nav-text">{{ item.label }}</span>
+          </router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -45,10 +45,10 @@
                     </a-tooltip>
                 </div>
             </div>
-            <div class="comment-box" :style="{height: activeTypeKey === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
-              <pre style="margin: 0;">{{comment}}</pre>
+            <div class="comment-box" :style="{height: getBaseType() === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
+              <pre style="margin: 0;overflow: unset;">{{comment}}</pre>
             </div>
-            <div class="cmd-box" :class="{show: activeTypeKey === 'cmd'}">
+            <div class="cmd-box" :class="{show: getBaseType() === 'cmd'}">
               <a-icon type="right" style="margin-right:16px;" />
               <textarea
                 type="textarea"
@@ -61,7 +61,7 @@
               </textarea>
             </div>
           </div>
-          <type-pane :activeNavKey="activeNavKey" :activeTypeKey.sync="activeTypeKey" @change="onTypeChange"></type-pane>
+          <type-pane />
         </div>
         <div class="template-pane normal-padding ">
             <router-view />
@@ -73,14 +73,13 @@
 </template>
 
 <script lang="ts">
+import Bus from '@assets/utils/bus'
+import TypePane from '@components/TypePane'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
-import TypePane from '@components/TypePane'
-// import UiPane from '@components/UiPane'
-import { genCommByCmd, getRandomColor, wrapComment } from '@assets/utils'
-import Bus from '@assets/utils/bus'
+import { genCommByCmd, getRandomColor } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
-import { picStore } from '../assets/commentStore/picture'
+// import { picStore } from '../assets/commentStore/picture'
 declare interface Point {
   x: number;
   y: number;
@@ -96,11 +95,6 @@ export default class Home extends Vue {
     // 控制侧边栏折叠
     isCollapsed = true;
     // 侧边栏当前Tab标识数组
-    current: string[] = ['base'];
-    // 侧边栏当前Tab标识
-    activeNavKey = '';
-    // 当前选中的展示类型
-    activeTypeKey = '';
     // 当前展示的注释文本
     comment = ''
     // 命令行输入内容
@@ -111,7 +105,6 @@ export default class Home extends Vue {
     created (): void {
       // eslint-disable-next-line @typescript-eslint/no-this-alias
       const vm = this
-      this.reloadGlobalKeys()
       /** **********    按下Esc时退出放大模式(detailMode)    ************/
       document.addEventListener('keydown', (event: KeyboardEvent) => {
         vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
@@ -127,23 +120,11 @@ export default class Home extends Vue {
     }
 
     /**
- * 初始化默认侧边栏选项和类型面板选项
- */
-    reloadGlobalKeys (): void {
-      this.activeNavKey = this.current[0]
-      const activeType = this.navConfig.find((t: NavItemIF) => t.key === this.activeNavKey)
-      if (activeType) {
-        this.activeTypeKey = activeType.typeList[0].key
-      }
-    }
-
-    /**
  * 监听UiPane数据变动，获取最新注释文本
  * @param {String} comment - 注释文本
  * @param {Number} payload - 最大宽度
  */
     getComment ({ comment }: CommData): void{
-      console.log(comment)
       this.comment = comment
     }
 
@@ -200,24 +181,27 @@ export default class Home extends Vue {
     }
 
     /**
- * 清除注释展示文本
+ * @callback
+ * 路由变化时的回调 用于清空注释面板
+ * @param {String} type - 基础类型菜单下的注释类型
  */
-    clearComment (): void{
+    refreshPropPane (type: string): void {
       this.comment = ''
-    }
-
-    onTypeChange () {
-      switch (this.activeTypeKey) {
+      switch (type) {
         case 'cmd':
-          this.clearComment()
           this.getCmdComment()
       }
-      this.$router.push(`/${this.activeNavKey}/${this.activeTypeKey}`)
     }
 
-    @Watch('current')
-    onCurrentChange (): void {
-      this.reloadGlobalKeys()
+    getBaseType (): string {
+      const paths = this.$route.path.split('/').slice(1)
+      return paths[0] === 'base' ? paths[1] : ''
+    }
+
+    @Watch('$route.path', { immediate: true })
+    onPathChange (path: string): void{
+      const paths = path.split('/').slice(1)
+      this.getBaseType() && this.refreshPropPane(paths[1])
     }
 }
 </script>

@@ -4,7 +4,7 @@
       v-for="type in myBaseTypes"
       :key="type.icon"
       class="type-card"
-      :class="{active: syncedTypeKey==type.key}"
+      :class="{active: typeKey==type.key}"
       @click="changeType(type)"
     >
       <a-icon
@@ -17,26 +17,29 @@
 </template>
 <script lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, Vue, Watch, PropSync } from 'vue-property-decorator'
+import { Component, Vue, Watch, PropSync } from 'vue-property-decorator'
 import { navConfig, TypeItemIF, NavItemIF } from '@assets/config/baseConfig'
 
 @Component
 export default class TypePane extends Vue {
-    @Prop(String) readonly activeNavKey !: string;
-    @PropSync('activeTypeKey', { type: String }) syncedTypeKey !: string;
-    NAV_LIST: NavItemIF[] = navConfig
-
-    get myBaseTypes (): TypeItemIF[] {
-      return this.NAV_LIST.find((t: TypeItemIF) => t.key === this.activeNavKey).typeList
-    }
+    typeKey !: string;
+    myBaseTypes: NavItemIF[] = navConfig.find((t: TypeItemIF) => t.key === 'base').typeList
 
     /**
  * 改变全局注释类型
  * @param {TypeItemIF} type - 注释类型
  */
     changeType (type: TypeItemIF): void {
-      this.syncedTypeKey = type.key
-      this.$emit('change')
+      this.$router.push(`/base/${type.key}`)
+    }
+
+    @Watch('$route.path', { immediate: true })
+    onPathChange (path: string): void{
+      const paths = path.split('/').slice(1)
+      if (paths.length > 1 && paths[0] === 'base') {
+        this.typeKey = paths[1]
+        this.$forceUpdate()
+      }
     }
 }
 </script>

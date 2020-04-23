@@ -17,7 +17,7 @@ const routes = [
       // which is lazy-loaded when the route is visited.
       {
         path: '',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm')
+        redirect: 'singleline'
       },
       {
         path: 'singleline',
