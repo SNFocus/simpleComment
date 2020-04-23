@@ -1,4 +1,7 @@
-
+export const DEFAULT_CHAR_RATIO = 1.833
+export const getCharRatio = () => window.charRatio || localStorage.charRatio || DEFAULT_CHAR_RATIO
+export const LONGER_CHARS = ['　']
+export const getLongerChars = () => window.longerChars || localStorage.longerChars || LONGER_CHARS
 /**
  * 随机获取16进制颜色值
  * @returns {String}
@@ -33,17 +36,16 @@ export function genSpace (num: number): string {
   return ' '.repeat(num)
 }
 
-/** *********                                ************** */
-/** *********        注释生成相关函数        ************** */
-/** *********                                ************** */
+/** *********                                ***************/
+/** *********        注释生成相关函数         ***************/
+/** *********                                ***************/
 /**
  * 校验是否是长字符（物理宽度更长的字符，例如汉字比数字长）
  * @param char
  */
 export function isLongerChar (char: string): boolean {
   const chinesPattern = new RegExp('[\u4E00-\u9FA5]+')
-  const longerCharList = ['　']
-  return longerCharList.includes(char) || chinesPattern.test(char)
+  return getLongerChars().includes(char) || chinesPattern.test(char)
 }
 /**
  * 判断是否为单行字符串
@@ -65,7 +67,7 @@ export const getRealStrLenth: (str: string) => number = (str): number => {
   for (let i = 0; i < str.length; i++) {
     // if (!['—', '┃'].includes(str[i]) && (str.charCodeAt(i) & 0xff00) !== 0) {
     if (isLongerChar(str.charAt(i))) {
-      len += 0.8333333333333334 // 每个汉字是数字的物理长度的11/6倍  也就是1.8xxx倍 （11- 6 == 5）
+      len += getCharRatio() - 1 // 每个汉字是数字的物理长度的11/6倍  也就是1.8xxx倍 （11- 6 == 5）
     }
     len++
   }

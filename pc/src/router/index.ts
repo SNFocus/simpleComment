@@ -38,6 +38,10 @@ const routes = [
       {
         path: 'pictureText',
         component: () => import(/* webpackChunkName: "uipane" */ '@views/PictureText')
+      },
+      {
+        path: 'setting',
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/SettingForm')
       }
     ]
   }

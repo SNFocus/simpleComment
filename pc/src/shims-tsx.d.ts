@@ -11,6 +11,11 @@ declare global {
     }
   }
 
+  interface Window {
+    charRatio: number;
+    longerChars: string[];
+  }
+
   interface Options {
     key: string;
     label: string;

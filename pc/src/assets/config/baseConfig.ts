@@ -41,6 +41,11 @@ export const navConfig: NavItemIF[] = [
         key: 'pictureText',
         icon: 'picture',
         label: '自制图文'
+      },
+      {
+        key: 'setting',
+        icon: 'setting',
+        label: '基础设置'
       }
     ]
   },

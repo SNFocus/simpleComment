@@ -49,7 +49,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Table2Comm, Table2CommUtil } from '@assets/utils/Table2Comm.ts'
@@ -61,7 +60,7 @@ export default class TableForm extends Vue {
   tableHeader: string[] = ['header1', 'header2', 'header3'];
   tableBody: string[][] =[
     ['comment1', 'comment2', 'comment3'],
-    ['comment1', 'comment3', 'comment3'],
+    ['comment1水水水水水水水水水水水水水水水发', 'comment3', 'comment3'],
     ['comment1', 'comment2', 'comment3'],
     ['comment1', 'comment2', 'comment3']
   ];

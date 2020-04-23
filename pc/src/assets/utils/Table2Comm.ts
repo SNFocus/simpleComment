@@ -1,4 +1,4 @@
-import { getRealStrLenth, replaceStr, splitStringByLength, getNumberOfChines } from '@assets/utils'
+import { getRealStrLenth, replaceStr, splitStringByLength, getNumberOfChines, getCharRatio } from '@assets/utils'
 
 export declare interface Table2CommUtil {
   maxCellWidth: number;
@@ -59,18 +59,17 @@ export class Table2Comm implements Table2CommUtil {
         // contentArr.length 代表这一整行的高度（其他单元格撑大导致的）
         // 自己的单元格不够的时候 会导致 每个单元格的竖线分割线丢失  所以填充空白数据冒充分行
         // 暂时没什么用就注释了
-        /**
-         * while (rows.length < contentArr.length) {
-         *  rows.push('')
-         * }
-         * */
+
+        while (rows.length < contentArr.length) {
+          rows.push(' ')
+        }
 
         // 对单元格中的分行后的每一行进行文本填充
         rows.forEach((t, index) => {
           const text = this.verticalTemplate + ' ' + t // t => 用户输入文本 每个单元格文本前需要加分隔符和空白padding保证美观性
-          const byteLen = getRealStrLenth(text) // 获取占用的物理宽度 字母为1 汉字为1.82
+          const byteLen = getRealStrLenth(text) // 获取占用的物理宽度 字母为1 汉字为1.84
           // 获取所在单元格在这一行中的起始位置
-          const startIndex = writedLenth - getNumberOfChines(contentArr[index]) * 0.822222
+          const startIndex = writedLenth - getNumberOfChines(contentArr[index]) * (getCharRatio() - 1)
           contentArr[index] = replaceStr(contentArr[index], text, startIndex, byteLen + startIndex) // 填充替换文本到模板中
         })
         writedLenth = colWidths[j] + writedLenth // 记录已经写入的单元格的合计长度 方便计算下一次写入的起始位置
