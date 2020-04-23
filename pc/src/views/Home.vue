@@ -124,7 +124,6 @@ export default class Home extends Vue {
  */
     getCmdComment (): void {
       this.cmdText && this.getComment({ comment: genCommByCmd(this.cmdText) })
-      this.comment = picStore.gypsum
     }
 
     /**

@@ -1,18 +1,14 @@
 <template>
   <div style="height: 100%;">
-    <div style="height: 60%;display: flex;">
-      <img :src="imgSource" style="margin: auto;" @load="onImageLoad" />
+    <div style="height: 60%;display: flex;overflow: auto;">
+      <img :src="imgSource" style="margin: auto;width:100%;" @load="onImageLoad" />
     </div>
     <a-divider orientation="left"><a-icon  type="setting" /> &nbsp;设置</a-divider>
     <a-row>
-      <a-col :span="24">
-        <sc-form-item label="上传图片" :showUnderLine="false">
-              <input type="file" accept="image/png, image/jpeg" @change="onImageUpload" />
-        </sc-form-item>
-      </a-col>
       <a-col :span="12">
-        <sc-form-item label="转换文字">
-          <input type="text" v-model="customTransferText" style="width: 220px;" @change="onConfigChange">
+        <sc-form-item label="上传图片">
+          <span>{{fileName}}</span>
+          <input class="upload-btn" type="file" accept="image/png, image/jpeg" @change="onImageUpload" />
         </sc-form-item>
       </a-col>
       <a-col :span="12">
@@ -20,6 +16,12 @@
           <input type="text" v-model="scale" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>
+      <a-col :span="12">
+        <sc-form-item label="转换文字">
+          <input type="text" v-model="customTransferText" style="width: 220px;" @change="onConfigChange">
+        </sc-form-item>
+      </a-col>
+
     </a-row>
     <canvas id="pictureCanvas" style="display:none;"></canvas>
     <!-- 压缩  自定义文字  自定义容差   上传-->
@@ -35,6 +37,7 @@ export default class PictureText extends Vue {
   imageObj: HTMLImageElement;
   // 上传图片的链接
   imgSource = ''
+  fileName = '未上传'
   // 照片缩放程度
   scale = 0.2
   // 自定义转换文字
@@ -47,7 +50,8 @@ export default class PictureText extends Vue {
    */
   onImageUpload (event: Event): void {
     const files = (event.currentTarget as HTMLInputElement).files
-    if (files) {
+    if (files.length) {
+      this.fileName = files[0].name
       this.imgSource = URL.createObjectURL(files[0])
     }
   }
@@ -94,3 +98,10 @@ export default class PictureText extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+.upload-btn{
+  opacity: 0;
+  z-index: 99;
+  position: absolute;
+}
+</style>
