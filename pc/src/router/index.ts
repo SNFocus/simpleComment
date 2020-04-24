@@ -21,29 +21,40 @@ const routes = [
       },
       {
         path: 'singleline',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue')
       },
       {
         path: 'table',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/TableForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/TableForm/index.vue')
       },
       {
         path: 'cmd',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/CmdForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/CmdForm/index.vue')
       },
       {
         path: 'list',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/ListForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue')
       },
       {
         path: 'pictureText',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/PictureText/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/PictureText/index.vue')
       },
       {
         path: 'setting',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/SettingForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/SettingForm/index.vue')
       }
     ]
+  },
+  {
+    path: '/custom',
+    component: () => import('@views/Custom/index.vue')
+  },
+  {
+    path: '/materials',
+    component: () => import('@views/Materials/index.vue')
+  }, {
+    path: '/template',
+    component: () => import('@views/Template/index.vue')
   }
 ]
 

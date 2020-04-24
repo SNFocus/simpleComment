@@ -24,12 +24,11 @@
 
     </a-row>
     <canvas id="pictureCanvas" style="display:none;"></canvas>
-    <!-- 压缩  自定义文字  自定义容差   上传-->
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import Bus from '../../assets/utils/bus'
+import Bus from '@assets/utils/bus.ts'
 let ctx!: CanvasRenderingContext2D
 @Component
 export default class PictureText extends Vue {

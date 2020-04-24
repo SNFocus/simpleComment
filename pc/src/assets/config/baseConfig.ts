@@ -9,7 +9,7 @@ export declare interface NavItemIF {
     key: string;
     icon: string;
     label: string;
-    typeList: TypeItemIF[];
+    typeList?: TypeItemIF[];
 }
 
 export const navConfig: NavItemIF[] = [
@@ -52,32 +52,16 @@ export const navConfig: NavItemIF[] = [
   {
     key: 'custom',
     icon: 'heart',
-    label: '常用',
-    typeList: [{
-      key: 'singleLine',
-      icon: 'line',
-      label: '单行'
-    }]
+    label: '常用'
   },
   {
     key: 'template',
     icon: 'shop',
-    label: '模板库',
-    typeList: [{
-      key: 'singleLine',
-      icon: 'line',
-      label: '单行'
-    }]
+    label: '模板库'
   },
   {
     key: 'materials',
     icon: 'smile',
-    label: '素材商店',
-    typeList: [{
-      key: 'singleLine',
-      icon: 'line',
-      label: '单行'
-    }]
+    label: '素材商店'
   }
-
 ]
