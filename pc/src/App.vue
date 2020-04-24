@@ -24,7 +24,7 @@
     </a-layout-sider>
     <a-layout>
       <!-- <a-layout-header :style="{ background: '#fff', padding: 0 }" /> -->
-      <a-layout-content style="overflow: hidden;margin: 24px 16px 16px; display: flex;">
+      <a-layout-content style="overflow: hidden; display: flex;">
         <router-view />
       </a-layout-content>
     </a-layout>
@@ -35,7 +35,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 // import { State, Mutation } from 'vuex-class'
-// import { picStore } from '../assets/commentStore/picture'
 declare interface Point {
   x: number;
   y: number;

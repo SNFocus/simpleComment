@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%;height: 100%;display:flex;">
+    <div style="width: 100%;height: 100%;padding: 24px 16px 16px;display:flex;">
       <div style="width: 56%;">
       <div class="content-pane" :class="{big: detailMode}">
         <div style="padding: 0 24px;">
@@ -52,7 +52,6 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import { genCommByCmd, getRandomColor } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
-// import { picStore } from '../assets/commentStore/picture'
 declare interface Point {
   x: number;
   y: number;
