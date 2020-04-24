@@ -1,75 +1,48 @@
 <template>
-  <a-layout id="components-layout-demo-responsive">
-    <a-layout-sider
-      v-model="isCollapsed"
-      collapsible
-    >
-      <div
-        class="logo"
-        @click="isCollapsed = !isCollapsed" >
-        {{ isCollapsed ? "SC" : "SComment" }}
-      </div>
-      <a-menu
-        theme="dark"
-        mode="inline"
-        :defaultSelectedKeys="['base']" >
-        <a-menu-item v-for="(item) in navConfig" :key="item.key">
-          <router-link :to="'/' + item.key">
-            <a-icon :type="item.icon" />
-            <span class="nav-text">{{ item.label }}</span>
-          </router-link>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
-    <a-layout>
-      <!-- <a-layout-header :style="{ background: '#fff', padding: 0 }" /> -->
-      <a-layout-content style="overflow: hidden;margin: 24px 16px 16px; display: flex;">
-        <div style="width: 56%;">
-          <div class="content-pane" :class="{big: detailMode}">
-            <div style="padding: 0 24px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
-                <div class="actions">
-                  <a-tooltip  placement="bottom">
-                        <template slot="title">
-                            {{detailMode ? '还原' : '最大化'}}
-                        </template>
-                        <a-icon v-if="detailMode" class="action-btn" type="close-square" @click="detailMode = false" />
-                        <a-icon v-else class="action-btn" type="border" @click="detailMode = true" />
-                    </a-tooltip>
+    <div style="width: 100%;height: 100%;display:flex;">
+      <div style="width: 56%;">
+      <div class="content-pane" :class="{big: detailMode}">
+        <div style="padding: 0 24px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>
+            <div class="actions">
+              <a-tooltip  placement="bottom">
+                    <template slot="title">
+                        {{detailMode ? '还原' : '最大化'}}
+                    </template>
+                    <a-icon v-if="detailMode" class="action-btn" type="close-square" @click="detailMode = false" />
+                    <a-icon v-else class="action-btn" type="border" @click="detailMode = true" />
+                </a-tooltip>
 
-                     <a-tooltip  placement="bottom">
-                        <template slot="title">
-                            复制到剪贴板
-                        </template>
-                        <a-icon class="action-btn" type="copy" @click="copyData" />
-                    </a-tooltip>
-                </div>
+                 <a-tooltip  placement="bottom">
+                    <template slot="title">
+                        复制到剪贴板
+                    </template>
+                    <a-icon class="action-btn" type="copy" @click="copyData" />
+                </a-tooltip>
             </div>
-            <div class="comment-box" :style="{height: getBaseType() === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
-              <pre style="margin: 0;overflow: unset;">{{comment}}</pre>
-            </div>
-            <div class="cmd-box" :class="{show: getBaseType() === 'cmd'}">
-              <a-icon type="right" style="margin-right:16px;" />
-              <textarea
-                type="textarea"
-                placeholder="命令行在这儿(＾Ｕ＾)ノ~ＹＯ"
-                v-model="cmdText"
-                class="cmd-input"
-                @keydown.enter="getCmdComment"
-                @focus="getCmdComment"
-                @blur="getCmdComment" >
-              </textarea>
-            </div>
-          </div>
-          <type-pane />
         </div>
-        <div class="template-pane normal-padding ">
-            <router-view />
+        <div class="comment-box" :style="{height: getBaseType() === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
+          <pre style="margin: 0;overflow: unset;">{{comment}}</pre>
         </div>
-        <!-- <ui-pane :activeNavKey="activeNavKey" :activeTypeKey="activeTypeKey" @genComment="getComment"></ui-pane> -->
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+        <div class="cmd-box" :class="{show: getBaseType() === 'cmd'}">
+          <a-icon type="right" style="margin-right:16px;" />
+          <textarea
+            type="textarea"
+            placeholder="命令行在这儿(＾Ｕ＾)ノ~ＹＯ"
+            v-model="cmdText"
+            class="cmd-input"
+            @keydown.enter="getCmdComment"
+            @focus="getCmdComment"
+            @blur="getCmdComment" >
+          </textarea>
+        </div>
+      </div>
+      <type-pane />
+    </div>
+    <div class="template-pane normal-padding ">
+        <router-view />
+    </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -87,14 +60,12 @@ declare interface Point {
 @Component({
   components: {
     [TypePane.name]: TypePane
-    // [UiPane.name]: UiPane
   }
 })
 export default class Home extends Vue {
     readonly navConfig: NavItemIF[] = navConfig
     // 控制侧边栏折叠
     isCollapsed = true;
-    // 侧边栏当前Tab标识数组
     // 当前展示的注释文本
     comment = ''
     // 命令行输入内容
@@ -181,8 +152,8 @@ export default class Home extends Vue {
     }
 
     /**
- * @callback
  * 路由变化时的回调 用于清空注释面板
+ * @callback
  * @param {String} type - 基础类型菜单下的注释类型
  */
     refreshPropPane (type: string): void {
@@ -193,6 +164,10 @@ export default class Home extends Vue {
       }
     }
 
+    /**
+ * 获取基础类型菜单下的子类型
+ * @returns {String}
+ */
     getBaseType (): string {
       const paths = this.$route.path.split('/').slice(1)
       return paths[0] === 'base' ? paths[1] : ''
@@ -207,19 +182,6 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
-#components-layout-demo-responsive {
-  height: 100%;
-  .logo {
-    height: 32px;
-    cursor: pointer;
-    margin: 16px;
-    color: white;
-    line-height: 32px;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.2);
-  }
-}
-
 .content-pane {
   color: $color-light;
   width: 98%;
@@ -293,7 +255,6 @@ export default class Home extends Vue {
     &:focus{
       outline: none;
     }
-
   }
   .type-char{
     animation: blink 1s linear infinite;

@@ -19,7 +19,7 @@ export const navConfig: NavItemIF[] = [
     label: '基础类型',
     typeList: [
       {
-        key: 'singleLine',
+        key: 'singleline',
         icon: 'line',
         label: '单行'
       },

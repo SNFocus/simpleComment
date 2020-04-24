@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store/store'
 import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover } from 'ant-design-vue'
-import ScFormItem from '@components/ScFormItem'
-import ScSwitch from '@components/ScSwitch'
+import ScFormItem from '@components/ScFormItem/index.vue'
+import ScSwitch from '@components/ScSwitch/index.vue'
 
 Vue.component(ScFormItem.name, ScFormItem)
 Vue.component(ScSwitch.name, ScSwitch)
