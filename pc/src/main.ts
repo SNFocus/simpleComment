@@ -5,7 +5,8 @@ import store from './store/store'
 import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover, Modal, message } from 'ant-design-vue'
 import ScFormItem from '@components/ScFormItem/index.vue'
 import ScSwitch from '@components/ScSwitch/index.vue'
-
+import vcolorpicker from 'vcolorpicker'
+Vue.use(vcolorpicker)
 Vue.component(ScFormItem.name, ScFormItem)
 Vue.component(ScSwitch.name, ScSwitch)
 Vue.use(Button)

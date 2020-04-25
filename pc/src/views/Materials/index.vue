@@ -2,6 +2,16 @@
 <template>
   <div class="materials-wrapper">
     <canvas class="canvas"></canvas>
+    <div class="tool-pane">
+      <div class="form-item">
+        <span class="label">前景色</span>
+        <colorPicker v-model="config.fontColor" />
+      </div>
+      <div class="form-item">
+        <span class="label">背景色</span>
+        <colorPicker v-model="config.bgColor" />
+      </div>
+    </div>
     <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
       <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
     </a-modal>
@@ -22,13 +32,26 @@ declare interface CommentItem {
 declare interface Comment {
   [key: string]: string;
 }
+declare interface ToolForm {
+  letterWidth: number;
+  fontSize: number;
+  lineHeight: number;
+  fontColor: string;
+  bgColor: string;
+}
 @Component
 export default class Materials extends Vue {
   commentList: any
   maxWidth !: number
   maxHeight !: number
-  letterWidth = 5
-  lineHeight = 12
+  config: ToolForm = {
+    letterWidth: 5,
+    fontSize: 5,
+    lineHeight: 12,
+    fontColor: 'white',
+    bgColor: 'rgba(0, 0, 0, .7)'
+  }
+
   ctx !: CanvasRenderingContext2D
   commBoxs: CommentBox[] = []
   activeData: CommentBox | null = null
@@ -66,15 +89,15 @@ export default class Materials extends Vue {
     canvas.width = this.maxWidth = wrapper.clientWidth
 
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    this.ctx.font = `${this.letterWidth}px Georgia`
-    this.ctx.fillStyle = 'white'
+    this.ctx.font = `${this.config.fontSize}px Georgia`
+    this.ctx.fillStyle = this.config.fontColor
     this.startDraw()
     this.initCanvasEvent(canvas)
   }
 
   startDraw (): void {
-    let width = this.letterWidth
-    let height = this.lineHeight
+    let width = this.config.letterWidth
+    let height = this.config.lineHeight
     let lastRowMaxHeight = 0 // 记录上一行注释块的最大高度
     const startPoint = { x: 0, y: 0 }
     const endPoint = { x: 0, y: 0 }
@@ -85,8 +108,8 @@ export default class Materials extends Vue {
         currentRowMaxHeight = commHeight
       }
       if (width + commWidth > this.maxWidth) { // 换行
-        width = this.letterWidth
-        lastRowMaxHeight += this.lineHeight * 2 + currentRowMaxHeight
+        width = this.config.letterWidth
+        lastRowMaxHeight += this.config.lineHeight * 2 + currentRowMaxHeight
         height = lastRowMaxHeight
         currentRowMaxHeight = 0
       }
@@ -110,9 +133,9 @@ export default class Materials extends Vue {
     for (let i = 0, len = comment.length; i < len; i++) {
       const char = comment.charAt(i)
       this.ctx.fillText(char, width, height)
-      width += this.letterWidth
+      width += this.config.letterWidth
       if (char === '\n') {
-        height += this.lineHeight
+        height += this.config.lineHeight
         width = startWidth
       }
     }
@@ -132,7 +155,7 @@ export default class Materials extends Vue {
       lastIndex = from
       heightCounter++
     }
-    return [maxWidth * this.letterWidth, heightCounter * this.lineHeight]
+    return [maxWidth * this.config.letterWidth, heightCounter * this.config.lineHeight]
   }
 
   initCanvasEvent (canvas: HTMLCanvasElement) {
@@ -177,6 +200,30 @@ export default class Materials extends Vue {
 
 .canvas{
   background: rgba($color: #000000, $alpha: 0.7);
+}
+
+.tool-pane{
+  position: fixed;
+  right: 15px;
+  top: 0;
+  padding: .5rem 1rem;
+  background: $bg-light;
+  z-index: 999;
+
+  .form-item{
+    .label{
+      margin-right: 1rem;
+      vertical-align: middle;
+      line-height: 32px;
+    }
+  }
+
+  ::v-deep .m-colorPicker{
+    vertical-align: middle;
+     .box{
+      right: 0;
+    }
+  }
 }
 
 </style>
