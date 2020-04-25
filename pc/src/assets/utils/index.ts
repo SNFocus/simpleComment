@@ -2,6 +2,16 @@ export const DEFAULT_CHAR_RATIO = 1.833
 export const getCharRatio = () => window.charRatio || localStorage.charRatio || DEFAULT_CHAR_RATIO
 export const LONGER_CHARS = ['　']
 export const getLongerChars = () => window.longerChars || localStorage.longerChars || LONGER_CHARS
+
+export function debounce (func: Function, gap: number): Function {
+  let timer: number
+  return function (...args: any) {
+    timer && clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...args)
+    }, gap)
+  }
+}
 /**
  * 随机获取16进制颜色值
  * @returns {String}

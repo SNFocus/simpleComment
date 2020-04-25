@@ -1,36 +1,146 @@
+
 <template>
   <div class="materials-wrapper">
-    <div class="materials">
-      <a :href="'#' + key" v-for="(value, key) in commentList" :key="key" class="box">
-        <pre :data-key="key">{{value}}</pre>
-      </a>
-    </div>
-    <div class="minimap" v-if="mapData.length">
-      <pre
-      v-for="item in mapData"
-      :key="'map'+item.key"
-      :style="{transform: 'scale(' + item.scaleRatio + ')'}">{{item.value}}</pre>
-    </div>
+    <canvas class="canvas"></canvas>
+    <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
+      <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
+    </a-modal>
   </div>
 </template>
 <script lang="ts">
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Vue, Component } from 'vue-property-decorator'
 import comments from '@assets/commentStore/recommend.js'
+import { CommentBox } from './CommentBox'
 // import html2canvas from 'html2canvas'
+declare interface CommentItem {
+  key: string;
+  value: string;
+}
+
+declare interface Comment {
+  [key: string]: string;
+}
 @Component
 export default class Materials extends Vue {
-  commentList = comments
-  mapData = []
-  MAP_WIDTH = 150
+  commentList: any
+  maxWidth !: number
+  maxHeight !: number
+  letterWidth = 5
+  lineHeight = 8
+  ctx !: CanvasRenderingContext2D
+  commBoxs: CommentBox[] = []
+  activeData: CommentBox
+  visible = false
 
-  mounted () {
-    document.querySelectorAll('.materials pre').forEach((t: HTMLPreElement) => {
-      this.mapData.push({
-        key: t.dataset.key,
-        scaleRatio: parseInt(t.clientWidth / this.MAP_WIDTH),
-        value: this.commentList[t.dataset.key]
-      })
+  created () {
+    const temp = comments as Comment
+    this.commentList = Object.keys(temp).map((key: string) => ({
+      key: key,
+      value: temp[key]
+    }))
+  }
+
+  mounted (): void {
+    this.initCanvas()
+  }
+
+  handleOk () {
+    this.$message.success('复制到你的剪贴板了！')
+    this.visible = false
+  }
+
+  showToolBar (data: CommentBox): void {
+    this.activeData = data
+    this.visible = true
+  }
+
+  initCanvas () {
+    const wrapper = document.querySelector('.materials-wrapper') as HTMLCanvasElement
+    const canvas = document.querySelector('.canvas') as HTMLCanvasElement
+    canvas.height = 7000 || wrapper.clientHeight
+    canvas.width = this.maxWidth = wrapper.clientWidth
+
+    this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    this.ctx.font = `${this.letterWidth}px Georgia`
+    this.ctx.fillStyle = 'white'
+    this.startDraw()
+    this.initCanvasEvent(canvas)
+  }
+
+  startDraw (): void {
+    let width = this.letterWidth
+    let height = this.lineHeight
+    let lastRowMaxHeight = 0 // 记录上一行注释块的最大高度
+    const startPoint = { x: 0, y: 0 }
+    const endPoint = { x: 0, y: 0 }
+    let currentRowMaxHeight = 0
+    this.commentList.forEach((t: CommentItem) => {
+      const [commWidth, commHeight] = this.getCommentProp(t.value)
+      if (commHeight > currentRowMaxHeight) {
+        currentRowMaxHeight = commHeight
+      }
+      if (width + commWidth > this.maxWidth) { // 换行
+        width = this.letterWidth
+        lastRowMaxHeight += this.lineHeight * 2 + currentRowMaxHeight
+        height = lastRowMaxHeight
+        currentRowMaxHeight = 0
+      }
+      this.drawComment(t.value, width, height)
+      startPoint.x = width
+      startPoint.y = height
+      endPoint.x = width + commWidth
+      endPoint.y = height + commHeight
+      width = endPoint.x + 30
+      this.commBoxs.push(new CommentBox(t.key, startPoint, endPoint, t.value))
     })
+    const imgData = this.ctx.getImageData(0, 0, this.maxWidth, lastRowMaxHeight + currentRowMaxHeight)
+    const canvas = document.querySelector('.canvas') as HTMLCanvasElement
+    canvas.height = lastRowMaxHeight + currentRowMaxHeight
+    this.ctx.putImageData(imgData, 0, 0)
+  }
+
+  drawComment (comment: string, startWidth: number, startHeight: number) {
+    let width = startWidth
+    let height = startHeight
+    for (let i = 0, len = comment.length; i < len; i++) {
+      const char = comment.charAt(i)
+      this.ctx.fillText(char, width, height)
+      width += this.letterWidth
+      if (char === '\n') {
+        height += this.lineHeight
+        width = startWidth
+      }
+    }
+  }
+
+  getCommentProp (comment: string): number[] {
+    let heightCounter = 1
+    let lastIndex = 0
+    let from = lastIndex
+    let maxWidth = 0
+    while (true) {
+      from = comment.indexOf('\n', lastIndex + 1) // 下一个换行符的索引
+      if (from < 0) break
+      if (maxWidth < from - lastIndex) {
+        maxWidth = from - lastIndex
+      }
+      lastIndex = from
+      heightCounter++
+    }
+    return [maxWidth * this.letterWidth, heightCounter * this.lineHeight]
+  }
+
+  initCanvasEvent (canvas: HTMLCanvasElement) {
+    canvas.addEventListener('click', (event: MouseEvent) => {
+      const target = this.commBoxs.find(t => t.inBox({ x: event.offsetX, y: event.offsetY }))
+      target && this.showToolBar(target)
+    })
+  }
+
+  drawBorder () {
+    if (this.activeData) {
+    }
   }
 }
 </script>
@@ -39,7 +149,7 @@ export default class Materials extends Vue {
 .materials-wrapper{
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 }
 .materials{
@@ -66,12 +176,8 @@ export default class Materials extends Vue {
   }
 }
 
-.minimap{
-  width: 150px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  overflow: scroll;
+.canvas{
+  background: rgba($color: #000000, $alpha: 0.7);
 }
+
 </style>
