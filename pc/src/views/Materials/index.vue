@@ -12,7 +12,8 @@
 import { Vue, Component } from 'vue-property-decorator'
 import comments from '@assets/commentStore/recommend.js'
 import { CommentBox } from './CommentBox'
-// import html2canvas from 'html2canvas'
+import { copyData } from '@assets/utils/index'
+
 declare interface CommentItem {
   key: string;
   value: string;
@@ -27,10 +28,10 @@ export default class Materials extends Vue {
   maxWidth !: number
   maxHeight !: number
   letterWidth = 5
-  lineHeight = 8
+  lineHeight = 12
   ctx !: CanvasRenderingContext2D
   commBoxs: CommentBox[] = []
-  activeData: CommentBox
+  activeData: CommentBox | null = null
   visible = false
 
   created () {
@@ -46,8 +47,11 @@ export default class Materials extends Vue {
   }
 
   handleOk () {
-    this.$message.success('复制到你的剪贴板了！')
-    this.visible = false
+    if (this.activeData) {
+      copyData(this.activeData.value)
+      this.$message.success('复制到你的剪贴板了！')
+      this.visible = false
+    }
   }
 
   showToolBar (data: CommentBox): void {
@@ -136,11 +140,6 @@ export default class Materials extends Vue {
       const target = this.commBoxs.find(t => t.inBox({ x: event.offsetX, y: event.offsetY }))
       target && this.showToolBar(target)
     })
-  }
-
-  drawBorder () {
-    if (this.activeData) {
-    }
   }
 }
 </script>

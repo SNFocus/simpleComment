@@ -1,4 +1,6 @@
 /* eslint-disable no-irregular-whitespace */
+// 目前有83个文本
+// 2020-04-25
 const comments = {}
 comments.c1 = `
 
@@ -170,21 +172,6 @@ comments.c11 = `
      (((__) (__)))    高山仰止,景行行止.虽不能至,心向往之。
  
 `
-comments.c12 = `
- 
-  ░░░░░░░░░░░░░░░░░░░░░░░░▄░░
-  ░░░░░░░░░▐█░░░░░░░░░░░▄▀▒▌░
-  ░░░░░░░░▐▀▒█░░░░░░░░▄▀▒▒▒▐
-  ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
-  ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
-  ░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌
-  ░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒
-  ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
-  ░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄
-  ░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒
-  ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒
-  单身狗就这样默默地看着你，一句话也不说。
-`
 
 comments.c13 = `
 ...................... / ^^^ /
@@ -226,6 +213,22 @@ comments.c14 = `
  _____#####________####______#####_____###______
  ______#####______;###________###______#________
  ________##_______####________####______________
+`
+
+comments.c12 = `
+ 
+  ░░░░░░░░░░░░░░░░░░░░░░░░▄░░
+  ░░░░░░░░░▐█░░░░░░░░░░░▄▀▒▌░
+  ░░░░░░░░▐▀▒█░░░░░░░░▄▀▒▒▒▐
+  ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
+  ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
+  ░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌
+  ░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒
+  ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
+  ░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄
+  ░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒
+  ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒
+  单身狗就这样默默地看着你，一句话也不说。
 `
 
 comments.c15 = `
@@ -705,48 +708,6 @@ comments.c38 = `
                  \`--'     hjw   /nn__\\             /nn__\\
 `
 
-comments.c39 = `
-                                  .,cccchhhhccc,?""?L
-                                ,cb$$$$$$$$$$$$$$$$$$$c,
-                             ,r="3$$$$$$$?$$?$$$$$$$$$$$$c           ,,cccc
-                            ,$,d$$$$$$$$$c ?c\`?$$$$$$$$$$$$$ ,,ccc$$P"',nn,"
-                           ,$$$$$$$$$$$$$$$,$h\`$$$$$$$$$$$$$$$$$$",nMMMMMMMn
-                           $$$??$$$$$$??$$$$$$$$$$$$$$$$$$$$$$$",nMMMMMMMMMM
-                           ?$'nn\`$$$F,nn ?$$$$$$$$$$$$$$$$$$$P'nMMMMMMMMMMM'
-                           \`F.MM,?$$ MMML\`$$$$$$$$$$$$$$$$$$$.MMMMMMMMMMMMM
-                            $:P  J$F{M"  ,$$$$$$$$$$$$$$$$$$$.".,nMMMMMMMP'
-                            $_\`_ ""F \`   J$$$$$$$$$$$$$$$$$$F.MndMMMMMMMP'
-                          ,'    \`\`"4,,,c$$$$$$$$$$$$$$$$$$$$$.TMMMMMMMMf'
-                         ;$,       ,$$$$$$$$$$$$$$$$$$$$$$F "?bc,,""""'
-                         ?$C\`3cccc$$$xc \`???$$$$$$$$$$$""
-                           ""\\,"?$$$P",d$$ccc$$$$$$$$$F
-                               "?ccccd$$$$$$$$$$$$$P""
-                                 \`?$$$$$$$$$c
-                                  \`$$$$$$$$$'
-                                   $$$$$$,cc,
-                                  J??$$$P$$$$
-                             ,r, ,",cc,"P'$$$$
-                            4$ F,F,$$$$bcc,"?$                          ,,ccc
-                           zF-  F $$L4,"?$$$$E                      _,d$$$$$$
-                          ,?d "JF d"F'$$c\`?$$"4c,.               _,d$$$$$$$$'
-                              4$$c...J$$$$$eed$$$$$c,      _,ccd$$$$$$$$$$F
-                              J$$$$$$$$$$$$$$$$$$$$$$$,\`?$$$$$$$$$$$$$$$P"
-                              $$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$P"
-                              \`$$$$$$$$$$$$$$$$$$$$$$$$$,)$$$$$$$$$$$"
-                               ?$$$$$$$$$$$$$$$$$$$$$$$$>)$$$$$$$$$F
-                                \`$$$$$ $$$$$$$$$$$$$$$$$ $$$$$$$P"
-    ,cc=                       ,$c,"?F,$$$$$$$$$$$$$$$$'J$$$$P"
-  ,$$",$$$$$$$bc.              $$$$$P $$$$$$$$$$$$$$$F',$PF"
- {$$"c$$$$$$",,zcchhc,         $$$$$ d$$$$$$$$$$$$$$  "'
-  ?b{$$$$$ ,$",ccccc,$$$bc,    \`$$$$ $$$$$$$$$$$$$P'
-     \`""?" ",J$$$$$$$$$$$$$$cc  ?$$$ ?$$$$$$$$$$$"
-            ?$$$$$$$$$$$$$$$$$$c,"$$b\`?$$$$$$$$P'
-              \`""????$$$$$$$$$$$$b,"?b\`?$$$$$$$'
-                       \`""??$$$$$$$$c\`?\`?$$$$"
-                              \`"?$$$$$ec.$$$$
-                                  \`"?$$$$$$$$L
-                                      \`"??$$$F
-`
 comments.c40 = `
                                                                   _
                                                               _( (~\\
@@ -1085,169 +1046,6 @@ comments.c59 = `
                    ~~         ~~     ~
 `
 
-comments.c60 = `
-hugs&kisses&hugskises&hugs&kisses&hugs&sses&hugs&kisses&w
-&            hug&ksses&hugs&kisses&hu       &hugs&kissese
-s&h        es&hus&isses&hugs&kiss               gs&kissew
-es&h      sses&hgskisses&hugs&k                   s&kissd
-ses&      isses&ug&kisses&hugs          &kiss      s&kisf
-sses      kisseshus&kisses&hu          gs&kiss      s&kig
-kiss      s&kisss&ugs&kisses&         ehugs&kis     ugs&y
-gs&k      hugs&ksss&hugs&kiss         sises&sf      s&hut
-hugs      s&hugskises&hugs& i          gs&kis       ses&c
-&hug      es&hug&ksses&hug  k          s&iuy        ssesd
-s&hu      ses&hus&isses&h   &          u&u         issegh
-es&h      sses&hgskisse     s&                     &kissd
-s                           gs&ki               hugs&kisg
-s                            ugs&kisse       sses&hugs&ki
-i             se&h                                     
-&kis      gs&kises&hug   ies&hugs     &hugs&kisse     ssf
-s&kis      gs&kises&h   &kses&hug     s&hugs&kisses   gsd
-gs&ki      ugs&ksses&   s&sses&hu     es&hugs&kisses  udf
-&hugs&k      hug&ki   s&hu&kisses     isses  ugs&kisses#f
-s&hugs&      &hus&k   es&hs&kisse            hugs&kissesd
-ses&hugs      s&ug   issesugs&kis     s&kiss s&hugs&kisgd
-isses&hug      e&   s&kiss&hugs&k     ugs&kisses&hug  kds
-kisses&hug         ugs&kiss&hugs&     hugs&kisses&h   &fd
-s&kisses&hu       s&hugs&kses                         gsd
-gs&kisses&h       es&hugs&sse                         uds
-ugs&kisses&hugs&isses&hugsisses&hugs&kses&hugs&kisses&hsd
-
-`
-
-comments.c61 = `
-                            .xm*f""??T?@hc.
-                          z@"\` '~((!!!!!!!?*m.
-                        z$$$K   ~~(/!!!!!!!!!Mh
-                      .f\` "#$k'\`~~\\!!!!!!!!!!!MMc
-                     :"     f*! ~:~(!!!!!!!!!!XHMk
-                     f      " %n:~(!!!!!!!!!!!HMMM.
-                    d          X~!~(!!!!!!!X!X!SMMR
-                    M :   x::  :~~!>!!!!!!MNWXMMM@R
- n                  E ' *  ueeeeiu(!!XUWWWWWXMRHMMM>                :.
- E%                 E  8 .$$$$$$$$K!!$$$$$$$$&M$RMM>               :"5
-z  %                3  $ 4$$$$$$$$!~!*$$$$$$$$!$MM$               :" \`
-K   ":              ?> # '#$$$$$#~!!!!TR$$$$$R?@MME              z   R
-?     %.             5     ^"""~~~:XW!!!!T?T!XSMMM~            :^    J
- ".    ^s             ?.       ~~d$X$NX!!!!!!M!MM             f     :~
-  '+.    #L            *c:.    .~"?!??!!!!!XX@M@~           z"    .*
-    '+     %L           #c\`"!+~~~!/!!!!!!@*TM8M           z"    .~
-      ":    '%.         'C*X  .!~!~!!!!!X!!!@RF         .#     +
-        ":    ^%.        9-MX!X!!X~H!!M!N!X$MM        .#\`    +"
-          #:    "n       'L'!~M~)H!M!XX!$!XMXF      .+\`   .z"
-            #:    ":      R *H$@@$H$*@$@$@$%M~     z\`    +"
-              %:   \`*L    'k' M!~M~X!!$!@H!tF    z"    z"
-                *:   ^*L   "k ~~~!~!!!!!M!X*   z*   .+"
-                  "s   ^*L  '%:.~~~:!!!!XH"  z#   .*"
-                    #s   ^%L  ^"#4@UU@##"  z#   .*"
-                      #s   ^%L           z#   .r"
-                        #s   ^%.       u#   .r"
-                          #i   '%.   u#   .@"
-                            #s   ^%u#   .@"
-                              #s x#   .*"
-                               x#\`  .@%.
-                             x#\`  .d"  "%.
-                           xf~  .r" #s   "%.
-                     u   x*\`  .r"     #s   "%.  x.
-                     %Mu*\`  x*"         #m.  "%zX"
-                     :R(h x*              "h..*dN.
-                   u@NM5e#>                 7?dMRMh.
-                 z$@M@$#"#"                 *""*@MM$hL
-               u@@MM8*                          "*$M@Mh.
-             z$RRM8F"                             "N8@M$bL
-            5\`RM$#                                  'R88f)R
-            'h.$"                                     #$x*
-
-`
-
-comments.c62 = `
-                    .ed"""" """$$$$be.
-                   -"           ^""**$$$e.
-                 ."                   '$$$c
-                /                      "4$$b
-               d  3                      $$$$
-               $  *                   .$$$$$$
-              .$  ^c           $$$$$e$$$$$$$$.
-              d$L  4.         4$$$$$$$$$$$$$$b
-              $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$
-  e$""=.      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$
- z$$b. ^c     3$$$F "$$$$b   $"$$$$$$$  $$$$*"      .=""$c
-4$$$$L        $$P"  "$$b   .$ $$$$$...e$$        .=  e$$$.
-^*$$$$$c  %..   *c    ..    $$ 3$$$$$$$$$$eF     zP  d$$$$$
-  "**$$$ec   "   %ce""    $$$  $$$$$$$$$$*    .r" =$$$$P""
-        "*$b.  "c  *$e.    *** d$$$$$"L$$    .d"  e$$***"
-          ^*$$c ^$c $$$      4J$$$$$% $$$ .e*".eeP"
-             "$$$$$$"'$=e....$*$$**$cz$$" "..d$*"
-               "*$$$  *=%4.$ L L$ P3$$$F $$$P"
-                  "$   "%*ebJLzb$e$$$$$b $P"
-                    %..      4$$$$$$$$$$ "
-                     $$$e   z$$$$$$$$$$%
-                      "*$c  "$$$$$$$P"
-                       ."""*$$$$$$$$bc
-                    .-"    .$***$$$"""*e.
-                 .-"    .e$"     "*$c  ^*b.
-          .=*""""    .e$*"          "*bc  "*$e..
-        .$"        .z*"               ^*$e.   "*****e.
-        $$ee$c   .d"                     "*$.        3.
-        ^*$E")$..$"                         *   .ee==d%
-           $.d$$$*                           *  J$$$e*
-            """""                              "$$$"
-
-`
-
-comments.c63 = `
-                                ...----....
-                         ..-:"''         ''"-..
-                      .-'                      '-.
-                    .'              .     .       '.
-                  .'   .          .    .      .    .''.
-                .'  .    .       .   .   .     .   . ..:.
-              .' .   . .  .       .   .   ..  .   . ....::.
-             ..   .   .      .  .    .     .  ..  . ....:IA.
-            .:  .   .    .    .  .  .    .. .  .. .. ....:IA.
-           .: .   .   ..   .    .     . . .. . ... ....:.:VHA.
-           '..  .  .. .   .       .  . .. . .. . .....:.::IHHB.
-          .:. .  . .  . .   .  .  . . . ...:.:... .......:HIHMM.
-         .:.... .   . ."::"'.. .   .  . .:.:.:II;,. .. ..:IHIMMA
-         ':.:..  ..::IHHHHHI::. . .  ...:.::::.,,,. . ....VIMMHM
-        .:::I. .AHHHHHHHHHHAI::. .:...,:IIHHHHHHMMMHHL:. . VMMMM
-       .:.:V.:IVHHHHHHHMHMHHH::..:" .:HIHHHHHHHHHHHHHMHHA. .VMMM.
-       :..V.:IVHHHHHMMHHHHHHHB... . .:VPHHMHHHMMHHHHHHHHHAI.:VMMI
-       ::V..:VIHHHHHHMMMHHHHHH. .   .I":IIMHHMMHHHHHHHHHHHAPI:WMM
-       ::". .:.HHHHHHHHMMHHHHHI.  . .:..I:MHMMHHHHHHHHHMHV:':H:WM
-       :: . :.::IIHHHHHHMMHHHHV  .ABA.:.:IMHMHMMMHMHHHHV:'. .IHWW
-       '.  ..:..:.:IHHHHHMMHV" .AVMHMA.:.'VHMMMMHHHHHV:' .  :IHWV
-        :.  .:...:".:.:TPP"   .AVMMHMMA.:. "VMMHHHP.:... .. :IVAI
-       .:.   '... .:"'   .   ..HMMMHMMMA::. ."VHHI:::....  .:IHW'
-       ...  .  . ..:IIPPIH: ..HMMMI.MMMV:I:.  .:ILLH:.. ...:I:IM
-     : .   .'"' .:.V". .. .  :HMMM:IMMMI::I. ..:HHIIPPHI::'.P:HM.
-     :.  .  .  .. ..:.. .    :AMMM IMMMM..:...:IV":T::I::.".:IHIMA
-     'V:.. .. . .. .  .  .   'VMMV..VMMV :....:V:.:..:....::IHHHMH
-       "IHH:.II:.. .:. .  . . . " :HB"" . . ..PI:.::.:::..:IHHMMV"
-        :IP""HHII:.  .  .    . . .'V:. . . ..:IH:.:.::IHIHHMMMMM"
-        :V:. VIMA:I..  .     .  . .. . .  .:.I:I:..:IHHHHMMHHMMM
-        :"VI:.VWMA::. .:      .   .. .:. ..:.I::.:IVHHHMMMHMMMMI
-        :."VIIHHMMA:.  .   .   .:  .:.. . .:.II:I:AMMMMMMHMMMMMI
-        :..VIHIHMMMI...::.,:.,:!"I:!"I!"I!"V:AI:VAMMMMMMHMMMMMM'
-        ':.:HIHIMHHA:"!!"I.:AXXXVVXXXXXXXA:."HPHIMMMMHHMHMMMMMV
-          V:H:I:MA:W'I :AXXXIXII:IIIISSSSSSXXA.I.VMMMHMHMMMMMM
-            'I::IVA ASSSSXSSSSBBSBMBSSSSSSBBMMMBS.VVMMHIMM'"'
-             I:: VPAIMSSSSSSSSSBSSSMMBSSSBBMMMMXXI:MMHIMMI
-            .I::. "H:XIIXBBMMMMMMMMMMMMMMMMMBXIXXMMPHIIMM'
-            :::I.  ':XSSXXIIIIXSSBMBSSXXXIIIXXSMMAMI:.IMM
-            :::I:.  .VSSSSSISISISSSBII:ISSSSBMMB:MI:..:MM
-            ::.I:.  ':"SSSSSSSISISSXIIXSSSSBMMB:AHI:..MMM.
-            ::.I:. . ..:"BBSSSSSSSSSSSSBBBMMMB:AHHI::.HMMI
-            :..::.  . ..::":BBBBBSSBBBMMMB:MMMMHHII::IHHMI
-            ':.I:... ....:IHHHHHMMMMMMMMMMMMMMMHHIIIIHMMV"
-              "V:. ..:...:.IHHHMMMMMMMMMMMMMMMMHHHMHHMHP'
-               ':. .:::.:.::III::IHHHHMMMMMHMHMMHHHHM"
-                 "::....::.:::..:..::IIIIIHHHHMMMHHMV"
-                   "::.::.. .. .  ...:::IIHHMMMMHMV"
-                     "V::... . .I::IHHMMV"'
-                       '"VHVHHHAHHHHMMV:"'
-`
-
 comments.c64 = `
                   _________-----_____
        _____------           __      ----_
@@ -1469,6 +1267,103 @@ comments.c73 =
 jgs {____/ \\____}
 `
 
+comments.c79 = `
+ ___/     \\___
+\`-._)     (_,-\`
+    \\O _ O/
+     \\ - /
+      \`-(
+       ||
+      _||_
+     |-..-|
+     |/. \\|
+     |\\__/|
+   ._|//\\\\|_,
+   \`-((  ))-'
+    __\\\\//__ gnv
+    >_ /\\ _<,
+      ''
+`
+comments.c80 = `
+                            _     _
+   ,,,,,,,,,,,,,,,,,,,,,,,  \\   /
+ / (  (  (  (  (  (  (  (  \\( = =)
+<  (  (  (  (  (  (  (  (  / ( ^ )
+ \\ (__(__(__(__(__(__(__(__)   ~
+   ^  ^  ^  ^  ^  ^  ^  ^  ^
+`
+
+comments.c81 = `
+              _________
+             /_/___|__/\\
+            /_/       \\/|
+            !_!       / |
+            !_!       |_/
+            !_!        \\|
+           !___!        )
+          !_____!
+ ======  !_______!  ======
+//    \\\\!_________!//    \\\\
+\\ =====\\!_________!/===== /
+ //   \\\\!_/#####\\_!//   \\\\
+ \\     \\\\|###)###|//     /
+   ======!#######!======
+  //      |Q(^)Q|      \\\\
+  ||  ====       ====  ||
+   \\ //             \\\\ /
+    /_|             |_\\
+   |  \\__/       \\__/  |
+   |    / /     \\ \\    |
+    \\__/=/       \\=\\__/
+`
+
+comments.c82 = `
+                        .-'''-..' \\                         Who the...??
+               _______ .'       -   \\                           yikes!
+             <<<<<<<< );__   ,,,_)   \\                      __ /
+                <<<<<<<<< ) ;C  /     \\                /ZZZ'  )
+                  <<<<<< (.-'-.  )====_)_=======>      .-'\`\`'>>>>>>>>>>
+                    <<<<< \\    '''''''   )           .'    >>>>>>>>>
+                    ;  <<<     .......__/       __\\_;    ,>>>>>>>
+               .-'''         (         )          / / ('"\\__
+            .-'              ;.       /            (;/;) /\\
+           /  .-'     .     =  .     /
+       _-''\\_/         '. .'    .   /
+    .-'  )  ;\\          '''.     . /
+   ;   .''''  \`.       '    ;     (
+   O -'        .'''       .'                      (__)))
+             .'   .-'''''\`                    (  )mikey(__)))
+             'o-'                         ( _))(_ _)( _))_))
+`
+
+comments.c83 = `
+                                  )
+                                /  )
+                               /  / )
+                          -   /  / / 
+                             '  / / -
+                            / _/ / /
+                      _    / _/_, /          ,
+                    + $$$ / _/_/_/          \\       |
+                  /- + $$/ _/_/_/      / 
+                  \\\`_ $$/'_/_/    .    ______   _
+                     \\ (  / ___,_____ _ _____,
+                     |  \`(|/_,_,__ ________/
+                     |.   |''_,_______)
+                      \\   (_
+                       \\  / |-._
+                        \\.' /|/ \\_._
+                        /_/   _/    /-'__
+                          \\     \\'       \\.___
+                           '.   /,     |_/_   |._
+                             \\ / )   '.     '_/, )
+                              (_(     -\\_   /  \\ \\
+                                 \\__      |-'   |/
+                                   \\._  /_/_
+                                      \\_/\\' )
+                                          \\ |
+                                          |/   b'ger
+`
 comments.c74 = `
 
                         ;;;;;;iiiii;;                          
@@ -1642,101 +1537,210 @@ comments.c78 = `
               \`' /v"""' \`""""""vVV\\
 `
 
-comments.c79 = `
- ___/     \\___
-\`-._)     (_,-\`
-    \\O _ O/
-     \\ - /
-      \`-(
-       ||
-      _||_
-     |-..-|
-     |/. \\|
-     |\\__/|
-   ._|//\\\\|_,
-   \`-((  ))-'
-    __\\\\//__ gnv
-    >_ /\\ _<,
-      ''
-`
-comments.c80 = `
-                            _     _
-   ,,,,,,,,,,,,,,,,,,,,,,,  \\   /
- / (  (  (  (  (  (  (  (  \\( = =)
-<  (  (  (  (  (  (  (  (  / ( ^ )
- \\ (__(__(__(__(__(__(__(__)   ~
-   ^  ^  ^  ^  ^  ^  ^  ^  ^
+comments.c60 = `
+hugs&kisses&hugskises&hugs&kisses&hugs&sses&hugs&kisses&w
+&            hug&ksses&hugs&kisses&hu       &hugs&kissese
+s&h        es&hus&isses&hugs&kiss               gs&kissew
+es&h      sses&hgskisses&hugs&k                   s&kissd
+ses&      isses&ug&kisses&hugs          &kiss      s&kisf
+sses      kisseshus&kisses&hu          gs&kiss      s&kig
+kiss      s&kisss&ugs&kisses&         ehugs&kis     ugs&y
+gs&k      hugs&ksss&hugs&kiss         sises&sf      s&hut
+hugs      s&hugskises&hugs& i          gs&kis       ses&c
+&hug      es&hug&ksses&hug  k          s&iuy        ssesd
+s&hu      ses&hus&isses&h   &          u&u         issegh
+es&h      sses&hgskisse     s&                     &kissd
+s                           gs&ki               hugs&kisg
+s                            ugs&kisse       sses&hugs&ki
+i             se&h                                     
+&kis      gs&kises&hug   ies&hugs     &hugs&kisse     ssf
+s&kis      gs&kises&h   &kses&hug     s&hugs&kisses   gsd
+gs&ki      ugs&ksses&   s&sses&hu     es&hugs&kisses  udf
+&hugs&k      hug&ki   s&hu&kisses     isses  ugs&kisses#f
+s&hugs&      &hus&k   es&hs&kisse            hugs&kissesd
+ses&hugs      s&ug   issesugs&kis     s&kiss s&hugs&kisgd
+isses&hug      e&   s&kiss&hugs&k     ugs&kisses&hug  kds
+kisses&hug         ugs&kiss&hugs&     hugs&kisses&h   &fd
+s&kisses&hu       s&hugs&kses                         gsd
+gs&kisses&h       es&hugs&sse                         uds
+ugs&kisses&hugs&isses&hugsisses&hugs&kses&hugs&kisses&hsd
+
 `
 
-comments.c81 = `
-              _________
-             /_/___|__/\\
-            /_/       \\/|
-            !_!       / |
-            !_!       |_/
-            !_!        \\|
-           !___!        )
-          !_____!
- ======  !_______!  ======
-//    \\\\!_________!//    \\\\
-\\ =====\\!_________!/===== /
- //   \\\\!_/#####\\_!//   \\\\
- \\     \\\\|###)###|//     /
-   ======!#######!======
-  //      |Q(^)Q|      \\\\
-  ||  ====       ====  ||
-   \\ //             \\\\ /
-    /_|             |_\\
-   |  \\__/       \\__/  |
-   |    / /     \\ \\    |
-    \\__/=/       \\=\\__/
+comments.c61 = `
+                            .xm*f""??T?@hc.
+                          z@"\` '~((!!!!!!!?*m.
+                        z$$$K   ~~(/!!!!!!!!!Mh
+                      .f\` "#$k'\`~~\\!!!!!!!!!!!MMc
+                     :"     f*! ~:~(!!!!!!!!!!XHMk
+                     f      " %n:~(!!!!!!!!!!!HMMM.
+                    d          X~!~(!!!!!!!X!X!SMMR
+                    M :   x::  :~~!>!!!!!!MNWXMMM@R
+ n                  E ' *  ueeeeiu(!!XUWWWWWXMRHMMM>                :.
+ E%                 E  8 .$$$$$$$$K!!$$$$$$$$&M$RMM>               :"5
+z  %                3  $ 4$$$$$$$$!~!*$$$$$$$$!$MM$               :" \`
+K   ":              ?> # '#$$$$$#~!!!!TR$$$$$R?@MME              z   R
+?     %.             5     ^"""~~~:XW!!!!T?T!XSMMM~            :^    J
+ ".    ^s             ?.       ~~d$X$NX!!!!!!M!MM             f     :~
+  '+.    #L            *c:.    .~"?!??!!!!!XX@M@~           z"    .*
+    '+     %L           #c\`"!+~~~!/!!!!!!@*TM8M           z"    .~
+      ":    '%.         'C*X  .!~!~!!!!!X!!!@RF         .#     +
+        ":    ^%.        9-MX!X!!X~H!!M!N!X$MM        .#\`    +"
+          #:    "n       'L'!~M~)H!M!XX!$!XMXF      .+\`   .z"
+            #:    ":      R *H$@@$H$*@$@$@$%M~     z\`    +"
+              %:   \`*L    'k' M!~M~X!!$!@H!tF    z"    z"
+                *:   ^*L   "k ~~~!~!!!!!M!X*   z*   .+"
+                  "s   ^*L  '%:.~~~:!!!!XH"  z#   .*"
+                    #s   ^%L  ^"#4@UU@##"  z#   .*"
+                      #s   ^%L           z#   .r"
+                        #s   ^%.       u#   .r"
+                          #i   '%.   u#   .@"
+                            #s   ^%u#   .@"
+                              #s x#   .*"
+                               x#\`  .@%.
+                             x#\`  .d"  "%.
+                           xf~  .r" #s   "%.
+                     u   x*\`  .r"     #s   "%.  x.
+                     %Mu*\`  x*"         #m.  "%zX"
+                     :R(h x*              "h..*dN.
+                   u@NM5e#>                 7?dMRMh.
+                 z$@M@$#"#"                 *""*@MM$hL
+               u@@MM8*                          "*$M@Mh.
+             z$RRM8F"                             "N8@M$bL
+            5\`RM$#                                  'R88f)R
+            'h.$"                                     #$x*
+
 `
 
-comments.c82 = `
-                        .-'''-..' \\                         Who the...??
-               _______ .'       -   \\                           yikes!
-             <<<<<<<< );__   ,,,_)   \\                      __ /
-                <<<<<<<<< ) ;C  /     \\                /ZZZ'  )
-                  <<<<<< (.-'-.  )====_)_=======>      .-'\`\`'>>>>>>>>>>
-                    <<<<< \\    '''''''   )           .'    >>>>>>>>>
-                    ;  <<<     .......__/       __\\_;    ,>>>>>>>
-               .-'''         (         )          / / ('"\\__
-            .-'              ;.       /            (;/;) /\\
-           /  .-'     .     =  .     /
-       _-''\\_/         '. .'    .   /
-    .-'  )  ;\\          '''.     . /
-   ;   .''''  \`.       '    ;     (
-   O -'        .'''       .'                      (__)))
-             .'   .-'''''\`                    (  )mikey(__)))
-             'o-'                         ( _))(_ _)( _))_))
+comments.c62 = `
+                    .ed"""" """$$$$be.
+                   -"           ^""**$$$e.
+                 ."                   '$$$c
+                /                      "4$$b
+               d  3                      $$$$
+               $  *                   .$$$$$$
+              .$  ^c           $$$$$e$$$$$$$$.
+              d$L  4.         4$$$$$$$$$$$$$$b
+              $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$
+  e$""=.      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$
+ z$$b. ^c     3$$$F "$$$$b   $"$$$$$$$  $$$$*"      .=""$c
+4$$$$L        $$P"  "$$b   .$ $$$$$...e$$        .=  e$$$.
+^*$$$$$c  %..   *c    ..    $$ 3$$$$$$$$$$eF     zP  d$$$$$
+  "**$$$ec   "   %ce""    $$$  $$$$$$$$$$*    .r" =$$$$P""
+        "*$b.  "c  *$e.    *** d$$$$$"L$$    .d"  e$$***"
+          ^*$$c ^$c $$$      4J$$$$$% $$$ .e*".eeP"
+             "$$$$$$"'$=e....$*$$**$cz$$" "..d$*"
+               "*$$$  *=%4.$ L L$ P3$$$F $$$P"
+                  "$   "%*ebJLzb$e$$$$$b $P"
+                    %..      4$$$$$$$$$$ "
+                     $$$e   z$$$$$$$$$$%
+                      "*$c  "$$$$$$$P"
+                       ."""*$$$$$$$$bc
+                    .-"    .$***$$$"""*e.
+                 .-"    .e$"     "*$c  ^*b.
+          .=*""""    .e$*"          "*bc  "*$e..
+        .$"        .z*"               ^*$e.   "*****e.
+        $$ee$c   .d"                     "*$.        3.
+        ^*$E")$..$"                         *   .ee==d%
+           $.d$$$*                           *  J$$$e*
+            """""                              "$$$"
+
 `
 
-comments.c83 = `
-                                  )
-                                /  )
-                               /  / )
-                          -   /  / / 
-                             '  / / -
-                            / _/ / /
-                      _    / _/_, /          ,
-                    + $$$ / _/_/_/          \\       |
-                  /- + $$/ _/_/_/      / 
-                  \\\`_ $$/'_/_/    .    ______   _
-                     \\ (  / ___,_____ _ _____,
-                     |  \`(|/_,_,__ ________/
-                     |.   |''_,_______)
-                      \\   (_
-                       \\  / |-._
-                        \\.' /|/ \\_._
-                        /_/   _/    /-'__
-                          \\     \\'       \\.___
-                           '.   /,     |_/_   |._
-                             \\ / )   '.     '_/, )
-                              (_(     -\\_   /  \\ \\
-                                 \\__      |-'   |/
-                                   \\._  /_/_
-                                      \\_/\\' )
-                                          \\ |
-                                          |/   b'ger
+comments.c63 = `
+                                ...----....
+                         ..-:"''         ''"-..
+                      .-'                      '-.
+                    .'              .     .       '.
+                  .'   .          .    .      .    .''.
+                .'  .    .       .   .   .     .   . ..:.
+              .' .   . .  .       .   .   ..  .   . ....::.
+             ..   .   .      .  .    .     .  ..  . ....:IA.
+            .:  .   .    .    .  .  .    .. .  .. .. ....:IA.
+           .: .   .   ..   .    .     . . .. . ... ....:.:VHA.
+           '..  .  .. .   .       .  . .. . .. . .....:.::IHHB.
+          .:. .  . .  . .   .  .  . . . ...:.:... .......:HIHMM.
+         .:.... .   . ."::"'.. .   .  . .:.:.:II;,. .. ..:IHIMMA
+         ':.:..  ..::IHHHHHI::. . .  ...:.::::.,,,. . ....VIMMHM
+        .:::I. .AHHHHHHHHHHAI::. .:...,:IIHHHHHHMMMHHL:. . VMMMM
+       .:.:V.:IVHHHHHHHMHMHHH::..:" .:HIHHHHHHHHHHHHHMHHA. .VMMM.
+       :..V.:IVHHHHHMMHHHHHHHB... . .:VPHHMHHHMMHHHHHHHHHAI.:VMMI
+       ::V..:VIHHHHHHMMMHHHHHH. .   .I":IIMHHMMHHHHHHHHHHHAPI:WMM
+       ::". .:.HHHHHHHHMMHHHHHI.  . .:..I:MHMMHHHHHHHHHMHV:':H:WM
+       :: . :.::IIHHHHHHMMHHHHV  .ABA.:.:IMHMHMMMHMHHHHV:'. .IHWW
+       '.  ..:..:.:IHHHHHMMHV" .AVMHMA.:.'VHMMMMHHHHHV:' .  :IHWV
+        :.  .:...:".:.:TPP"   .AVMMHMMA.:. "VMMHHHP.:... .. :IVAI
+       .:.   '... .:"'   .   ..HMMMHMMMA::. ."VHHI:::....  .:IHW'
+       ...  .  . ..:IIPPIH: ..HMMMI.MMMV:I:.  .:ILLH:.. ...:I:IM
+     : .   .'"' .:.V". .. .  :HMMM:IMMMI::I. ..:HHIIPPHI::'.P:HM.
+     :.  .  .  .. ..:.. .    :AMMM IMMMM..:...:IV":T::I::.".:IHIMA
+     'V:.. .. . .. .  .  .   'VMMV..VMMV :....:V:.:..:....::IHHHMH
+       "IHH:.II:.. .:. .  . . . " :HB"" . . ..PI:.::.:::..:IHHMMV"
+        :IP""HHII:.  .  .    . . .'V:. . . ..:IH:.:.::IHIHHMMMMM"
+        :V:. VIMA:I..  .     .  . .. . .  .:.I:I:..:IHHHHMMHHMMM
+        :"VI:.VWMA::. .:      .   .. .:. ..:.I::.:IVHHHMMMHMMMMI
+        :."VIIHHMMA:.  .   .   .:  .:.. . .:.II:I:AMMMMMMHMMMMMI
+        :..VIHIHMMMI...::.,:.,:!"I:!"I!"I!"V:AI:VAMMMMMMHMMMMMM'
+        ':.:HIHIMHHA:"!!"I.:AXXXVVXXXXXXXA:."HPHIMMMMHHMHMMMMMV
+          V:H:I:MA:W'I :AXXXIXII:IIIISSSSSSXXA.I.VMMMHMHMMMMMM
+            'I::IVA ASSSSXSSSSBBSBMBSSSSSSBBMMMBS.VVMMHIMM'"'
+             I:: VPAIMSSSSSSSSSBSSSMMBSSSBBMMMMXXI:MMHIMMI
+            .I::. "H:XIIXBBMMMMMMMMMMMMMMMMMBXIXXMMPHIIMM'
+            :::I.  ':XSSXXIIIIXSSBMBSSXXXIIIXXSMMAMI:.IMM
+            :::I:.  .VSSSSSISISISSSBII:ISSSSBMMB:MI:..:MM
+            ::.I:.  ':"SSSSSSSISISSXIIXSSSSBMMB:AHI:..MMM.
+            ::.I:. . ..:"BBSSSSSSSSSSSSBBBMMMB:AHHI::.HMMI
+            :..::.  . ..::":BBBBBSSBBBMMMB:MMMMHHII::IHHMI
+            ':.I:... ....:IHHHHHMMMMMMMMMMMMMMMHHIIIIHMMV"
+              "V:. ..:...:.IHHHMMMMMMMMMMMMMMMMHHHMHHMHP'
+               ':. .:::.:.::III::IHHHHMMMMMHMHMMHHHHM"
+                 "::....::.:::..:..::IIIIIHHHHMMMHHMV"
+                   "::.::.. .. .  ...:::IIHHMMMMHMV"
+                     "V::... . .I::IHHMMV"'
+                       '"VHVHHHAHHHHMMV:"'
 `
+
+comments.c39 = `
+                                  .,cccchhhhccc,?""?L
+                                ,cb$$$$$$$$$$$$$$$$$$$c,
+                             ,r="3$$$$$$$?$$?$$$$$$$$$$$$c           ,,cccc
+                            ,$,d$$$$$$$$$c ?c\`?$$$$$$$$$$$$$ ,,ccc$$P"',nn,"
+                           ,$$$$$$$$$$$$$$$,$h\`$$$$$$$$$$$$$$$$$$",nMMMMMMMn
+                           $$$??$$$$$$??$$$$$$$$$$$$$$$$$$$$$$$",nMMMMMMMMMM
+                           ?$'nn\`$$$F,nn ?$$$$$$$$$$$$$$$$$$$P'nMMMMMMMMMMM'
+                           \`F.MM,?$$ MMML\`$$$$$$$$$$$$$$$$$$$.MMMMMMMMMMMMM
+                            $:P  J$F{M"  ,$$$$$$$$$$$$$$$$$$$.".,nMMMMMMMP'
+                            $_\`_ ""F \`   J$$$$$$$$$$$$$$$$$$F.MndMMMMMMMP'
+                          ,'    \`\`"4,,,c$$$$$$$$$$$$$$$$$$$$$.TMMMMMMMMf'
+                         ;$,       ,$$$$$$$$$$$$$$$$$$$$$$F "?bc,,""""'
+                         ?$C\`3cccc$$$xc \`???$$$$$$$$$$$""
+                           ""\\,"?$$$P",d$$ccc$$$$$$$$$F
+                               "?ccccd$$$$$$$$$$$$$P""
+                                 \`?$$$$$$$$$c
+                                  \`$$$$$$$$$'
+                                   $$$$$$,cc,
+                                  J??$$$P$$$$
+                             ,r, ,",cc,"P'$$$$
+                            4$ F,F,$$$$bcc,"?$                          ,,ccc
+                           zF-  F $$L4,"?$$$$E                      _,d$$$$$$
+                          ,?d "JF d"F'$$c\`?$$"4c,.               _,d$$$$$$$$'
+                              4$$c...J$$$$$eed$$$$$c,      _,ccd$$$$$$$$$$F
+                              J$$$$$$$$$$$$$$$$$$$$$$$,\`?$$$$$$$$$$$$$$$P"
+                              $$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$P"
+                              \`$$$$$$$$$$$$$$$$$$$$$$$$$,)$$$$$$$$$$$"
+                               ?$$$$$$$$$$$$$$$$$$$$$$$$>)$$$$$$$$$F
+                                \`$$$$$ $$$$$$$$$$$$$$$$$ $$$$$$$P"
+    ,cc=                       ,$c,"?F,$$$$$$$$$$$$$$$$'J$$$$P"
+  ,$$",$$$$$$$bc.              $$$$$P $$$$$$$$$$$$$$$F',$PF"
+ {$$"c$$$$$$",,zcchhc,         $$$$$ d$$$$$$$$$$$$$$  "'
+  ?b{$$$$$ ,$",ccccc,$$$bc,    \`$$$$ $$$$$$$$$$$$$P'
+     \`""?" ",J$$$$$$$$$$$$$$cc  ?$$$ ?$$$$$$$$$$$"
+            ?$$$$$$$$$$$$$$$$$$c,"$$b\`?$$$$$$$$P'
+              \`""????$$$$$$$$$$$$b,"?b\`?$$$$$$$'
+                       \`""??$$$$$$$$c\`?\`?$$$$"
+                              \`"?$$$$$ec.$$$$
+                                  \`"?$$$$$$$$L
+                                      \`"??$$$F
+`
+
 export default comments
