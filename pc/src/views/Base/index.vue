@@ -47,10 +47,10 @@
 
 <script lang="ts">
 import Bus from '@assets/utils/bus'
-import TypePane from '@components/TypePane'
+import TypePane from '@components/TypePane/index.vue'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
-import { genCommByCmd, getRandomColor } from '@assets/utils'
+import { genCommByCmd, copyData } from '@assets/utils'
 // import { State, Mutation } from 'vuex-class'
 declare interface Point {
   x: number;
@@ -99,55 +99,11 @@ export default class Home extends Vue {
     }
 
     /**
- * 监听复制按钮点击事件，执行复制注释文本
- * @param {MouseEvent} ev - 鼠标事件对象
+ * 复制文本到剪贴板
  */
-    copyData (ev: MouseEvent): void {
-      const textarea = document.createElement('textarea')
-      textarea.value = this.comment
-      document.body.appendChild(textarea)
-      textarea.select()
-      document.execCommand('Copy')
-      document.body.removeChild(textarea)
-      this.showMouseMsg(this.getMousePoint(ev), '已复制')
-    }
-
-    /**
- * 响应用户操作，再鼠标旁显示消息
- * @param {Point} point - 鼠标坐标
- * @example {x: 0, y: 0}
- * @param {String} text - 消息文本
- */
-    showMouseMsg (point: Point, text: string): void {
-      const div = document.createElement('div')
-      div.innerHTML = text
-      div.style.position = 'fixed'
-      div.style.left = point.x + 'px'
-      div.style.top = (point.y - 12) + 'px'
-      div.style.transition = 'top .6s'
-      div.style.color = getRandomColor()
-      div.style.fontSize = '12px'
-      document.body.appendChild(div)
-      setTimeout(() => {
-        div.style.top = (point.y - 32) + 'px'
-      }, 0)
-      setTimeout(() => {
-        document.body.removeChild(div)
-      }, 600)
-    }
-
-    /**
- * 根据MouseEvent获取相对文档的鼠标坐标
- * @param {MouseEvent} event - 鼠标事件对象
- * @returns {Point} 相对于文档的坐标
- */
-    getMousePoint (event: MouseEvent): Point {
-      const ev = event || window.event
-      const scrollX = document.documentElement.scrollLeft || document.body.scrollLeft
-      const scrollY = document.documentElement.scrollTop || document.body.scrollTop
-      const x = ev.pageX || ev.clientX + scrollX
-      const y = ev.pageY || ev.clientY + scrollY
-      return { x, y }
+    copyData () {
+      copyData(this.comment)
+      this.$message.success('您的注释已经复制到剪贴板啦！')
     }
 
     /**

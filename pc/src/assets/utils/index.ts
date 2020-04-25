@@ -12,6 +12,20 @@ export function debounce (func: Function, gap: number): Function {
     }, gap)
   }
 }
+
+    /**
+ * 监听复制按钮点击事件，执行复制注释文本
+ * @param {String} comment - 需要复制的文本
+ */
+export function copyData (comment: string): void {
+  const textarea = document.createElement('textarea')
+  textarea.value = comment
+  document.body.appendChild(textarea)
+  textarea.select()
+  document.execCommand('Copy')
+  document.body.removeChild(textarea)
+}
+
 /**
  * 随机获取16进制颜色值
  * @returns {String}
