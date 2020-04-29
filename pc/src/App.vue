@@ -13,7 +13,7 @@
       <a-menu
         theme="dark"
         mode="inline"
-        :defaultSelectedKeys="['base']" >
+        :selectedKeys="selectedKeys" >
         <a-menu-item v-for="(item) in navConfig" :key="item.key">
           <router-link :to="'/' + item.key">
             <a-icon :type="item.icon" />
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 // import { State, Mutation } from 'vuex-class'
 declare interface Point {
@@ -43,7 +43,25 @@ declare interface Point {
 export default class Home extends Vue {
     readonly navConfig: NavItemIF[] = navConfig
     // 控制侧边栏折叠
-    isCollapsed = true;
+    isCollapsed = true
+    selectedKeys = ['base']
+
+    mounted (): void {
+      this.$nextTick(() => {
+        this.selectedKeys = [this.$route.path.split('/')[1]]
+      })
+    }
+
+    /**
+ * 解决刷新页面后 无法准确定位菜单问题
+ */
+    @Watch('$route.path')
+    onPathChange (path) {
+      const getType = () => path.split('/')[1]
+      if (getType() !== this.selectedKeys[0]) {
+        this.selectedKeys = [getType()]
+      }
+    }
 }
 </script>
 <style lang="scss" scoped>
