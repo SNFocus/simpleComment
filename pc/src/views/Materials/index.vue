@@ -1,6 +1,7 @@
 
 <template>
   <div class="materials-wrapper">
+    <a href="http://www.asciiworld.com/" target="_blank" class="link">大部分采集自AsciiWorld</a>
     <canvas class="canvas" :style="{background: config.bgColor}"></canvas>
     <div class="tool-pane">
       <div class="form-item">
@@ -173,6 +174,17 @@ export default class Materials extends Vue {
   width: 100%;
   overflow: auto;
   position: relative;
+
+  .link{
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    padding: 1rem;
+
+    &:hover{
+      text-shadow: 0 0 6px rgba($color: #fff, $alpha: .7);
+    }
+  }
 }
 .materials{
   height: 100%;
