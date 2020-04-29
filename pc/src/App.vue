@@ -84,5 +84,13 @@ export default class Home extends Vue {
     text-align: center;
     background: rgba(255, 255, 255, 0.2);
   }
+  ::v-deep .ant-layout-sider-trigger{
+    background: $bg-dark;
+  }
+
+  .ant-layout-sider,
+  .ant-menu-dark {
+    background: $bg-dark;
+  }
 }
 </style>

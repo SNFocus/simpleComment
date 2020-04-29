@@ -47,7 +47,7 @@ export default class Materials extends Vue {
     fontSize: 5,
     lineHeight: 12,
     fontColor: 'white',
-    bgColor: 'rgba(0, 0, 0, .5)'
+    bgColor: 'rgba(0, 0, 0, 0.85)'
   }
 
   ctx !: CanvasRenderingContext2D
@@ -89,6 +89,8 @@ export default class Materials extends Vue {
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     this.ctx.font = `${this.config.fontSize}px Georgia`
     this.ctx.fillStyle = this.config.fontColor
+    this.ctx.shadowColor = this.config.fontColor
+    this.ctx.shadowBlur = 5
     this.startDraw()
     this.initCanvasEvent(canvas)
   }
