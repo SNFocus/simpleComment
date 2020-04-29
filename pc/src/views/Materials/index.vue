@@ -1,7 +1,7 @@
 
 <template>
   <div class="materials-wrapper">
-    <canvas class="canvas"></canvas>
+    <canvas class="canvas" :style="{background: config.bgColor}"></canvas>
     <div class="tool-pane">
       <div class="form-item">
         <span class="label">前景色</span>
@@ -47,7 +47,7 @@ export default class Materials extends Vue {
     fontSize: 5,
     lineHeight: 12,
     fontColor: 'white',
-    bgColor: 'rgba(0, 0, 0, .7)'
+    bgColor: 'rgba(0, 0, 0, .5)'
   }
 
   ctx !: CanvasRenderingContext2D
@@ -83,7 +83,7 @@ export default class Materials extends Vue {
   initCanvas () {
     const wrapper = document.querySelector('.materials-wrapper') as HTMLCanvasElement
     const canvas = document.querySelector('.canvas') as HTMLCanvasElement
-    canvas.height = 7000 || wrapper.clientHeight
+    canvas.height = 10000 || wrapper.clientHeight
     canvas.width = this.maxWidth = wrapper.clientWidth
 
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
@@ -194,10 +194,6 @@ export default class Materials extends Vue {
       margin: 1rem;
     }
   }
-}
-
-.canvas{
-  background: rgba($color: #000000, $alpha: 0.7);
 }
 
 .tool-pane{
