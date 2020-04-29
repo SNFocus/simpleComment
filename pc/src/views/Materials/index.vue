@@ -5,11 +5,9 @@
     <div class="tool-pane">
       <div class="form-item">
         <span class="label">前景色</span>
-        <colorPicker v-model="config.fontColor" />
       </div>
       <div class="form-item">
         <span class="label">背景色</span>
-        <colorPicker v-model="config.bgColor" />
       </div>
     </div>
     <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
@@ -215,13 +213,6 @@ export default class Materials extends Vue {
       margin-right: 1rem;
       vertical-align: middle;
       line-height: 32px;
-    }
-  }
-
-  ::v-deep .m-colorPicker{
-    vertical-align: middle;
-     .box{
-      right: 0;
     }
   }
 }

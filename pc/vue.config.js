@@ -2,6 +2,9 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 module.exports = {
+  devServer: {
+    port: 8089
+  },
   css: {
     loaderOptions: {
       sass: {
