@@ -3,14 +3,14 @@
   <div class="materials-wrapper">
     <a href="http://www.asciiworld.com/" target="_blank" class="link">大部分采集自AsciiWorld</a>
     <canvas class="canvas" :style="{background: config.bgColor}"></canvas>
-    <div class="tool-pane">
+    <!-- <div class="tool-pane">
       <div class="form-item">
         <span class="label">前景色</span>
       </div>
       <div class="form-item">
         <span class="label">背景色</span>
       </div>
-    </div>
+    </div> -->
     <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
       <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
     </a-modal>
