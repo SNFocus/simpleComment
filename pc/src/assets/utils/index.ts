@@ -5,6 +5,7 @@ export const getLongerChars = () => window.longerChars || localStorage.longerCha
 
 export function debounce (func: Function, gap: number): Function {
   let timer: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (...args: any) {
     timer && clearTimeout(timer)
     timer = setTimeout(() => {
@@ -13,7 +14,7 @@ export function debounce (func: Function, gap: number): Function {
   }
 }
 
-    /**
+/**
  * 监听复制按钮点击事件，执行复制注释文本
  * @param {String} comment - 需要复制的文本
  */

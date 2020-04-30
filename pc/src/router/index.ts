@@ -17,11 +17,11 @@ const routes = [
       // which is lazy-loaded when the route is visited.
       {
         path: '',
-        redirect: 'singleline'
+        redirect: 'wrapper'
       },
       {
-        path: 'singleline',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue')
+        path: 'wrapper',
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/WrapperForm/index.vue')
       },
       {
         path: 'table',

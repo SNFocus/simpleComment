@@ -22,15 +22,18 @@ export default class ScFormItem extends Vue {
 </script>
 
 <style lang="scss">
-.showLine > .input-wrapper > input:focus {
-     ~ .sideline {
-         height: 100%;
-         box-shadow: $shadow;
+.showLine > .input-wrapper > {
+  input:focus,
+  textarea:focus {
+    ~ .sideline {
+        height: 100%;
+        box-shadow: $shadow;
+    }
 
-     }
-     + .underline {
+    + .underline {
         right: 100% !important;
-     }
+    }
+  }
 }
 
 .sc-input-box:hover {
