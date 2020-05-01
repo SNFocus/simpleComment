@@ -21,7 +21,7 @@ export const navConfig: NavItemIF[] = [
       {
         key: 'wrapper',
         icon: 'line',
-        label: '单行'
+        label: '自定义边框'
       },
       {
         key: 'table',

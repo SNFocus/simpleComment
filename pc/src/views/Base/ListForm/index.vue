@@ -2,7 +2,7 @@
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
 import { List2Comm, List2CommUtil, ListItem } from '@assets/utils/List2Comm'
-import ScTree from '@components/ScTree'
+import ScTree from '@components/ScTree/index.vue'
 import Bus from '@assets/utils/bus'
 
 @Component
@@ -20,16 +20,19 @@ export default class ListForm extends Vue {
       this.rowDivider = this.listUtil.rowDivider
       this.isOrdered = this.listUtil.isOrdered
       this.treeData = [{
-        content: '1最是人间留不住',
+        content: '最是人待把相思灯下诉',
         childs: [{
-          content: '2朱颜辞镜花辞树2'
+          content: '一缕新欢'
         }]
       },
       {
-        content: '3朱颜辞镜花辞树'
+        content: '旧恨千千缕'
       },
       {
-        content: '4最是人间留不住'
+        content: '最是人间留不住',
+        childs: [{
+          content: '朱颜辞镜花辞树间留不住'
+        }]
       }]
       this.dataChange()
     }

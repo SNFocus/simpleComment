@@ -53,7 +53,7 @@ $input-bg: #ECECEC;
 
     .label{
         @include ellipsis;
-        max-width: 5rem;
+        max-width: 6rem;
     }
 
     .input-wrapper{

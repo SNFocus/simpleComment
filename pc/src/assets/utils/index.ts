@@ -180,19 +180,21 @@ export function getCmdType (cmd: string): string {
  * @param {String} char - 边框字符
  * @returns {String} 包裹后的文本
  */
-export function wrapComment (comment: string, char = '/'): string {
-  console.log(comment)
+export function wrapComment (comment: string, char = '/', paddingLen = 2, paddingWithChar = true): string {
+  paddingLen < 0 && (paddingLen = 0)
   const charLen: number = getRealStrLenth(char)
   const arr: string[] = comment.split('\n').filter(t => t)
   const maxLen: number = arr.reduce((p: number, c: string) => {
     const realLen: number = getRealStrLenth(c)
     return p < realLen ? realLen : p
   }, 0)
+  const repeatNum = Math.floor((maxLen + charLen * 2 + paddingLen * 2) / charLen)
+  // 因为使用的floor 字符可能会缺失 char.slice(0, (maxLen + 4) % charLen) 截取缺失的部分
+  const border: string = char.repeat(repeatNum) + char.slice(0, (maxLen + 4) % charLen)
+  const paddingStr = paddingWithChar ? char.repeat(paddingLen / charLen) + char.slice(0, paddingLen % charLen) : genSpace(paddingLen)
   for (let i = 0; i < arr.length; i++) {
-    arr[i] = char + genSpace(2) + padEndByRealLen(arr[i], maxLen) + genSpace(2) + char
+    arr[i] = char + paddingStr + padEndByRealLen(arr[i], maxLen) + paddingStr + char
   }
-  const repeatNum = Math.ceil((maxLen + charLen * 2 + 4) / charLen)
-  const border: string = char.repeat(repeatNum)
   return border + '\n' + arr.join('\n') + '\n' + border
 }
 
