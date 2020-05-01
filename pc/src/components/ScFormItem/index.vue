@@ -62,8 +62,7 @@ $input-bg: #ECECEC;
         line-height: 26px;
         min-height: 30px;
         .dot{
-            width: 12px;
-            height: 12px;
+            padding: 6px;
             display: inline-block;
             background: #FF5722;
             transition: border-radius 1s;

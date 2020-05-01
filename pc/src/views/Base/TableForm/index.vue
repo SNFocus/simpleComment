@@ -32,20 +32,29 @@
             <a-button type="primary" icon="line" @click="addRow">增加行</a-button>
             <a-button type="primary" icon="info" style="margin-left: 1.5rem;" @click="addCol">增加列</a-button>
         </div>
-        <div  class="actions">
+        <a-row>
+          <a-col :span="12">
             <sc-form-item :label="'行分隔符'">
                 <input type="text" v-model="horiTemplate" @change="ev => onConfigChange(ev.currentTarget.value, 'horiTemplate')">
             </sc-form-item>
+          </a-col>
+          <a-col :span="12">
             <sc-form-item :label="'列分隔符'">
                 <input type="text" v-model="verticalTemplate" @change="ev => onConfigChange(ev.currentTarget.value, 'verticalTemplate')">
             </sc-form-item>
-        </div>
-        <!-- 单元格 设置 -->
-        <div  class="actions" style="width: 50%;">
+          </a-col>
+          <a-col :span="12">
+            <sc-form-item :label="'四角字符'">
+                <input type="text" v-model="quadrangleChar" @change="ev => onConfigChange(ev.currentTarget.value, 'quadrangleChar')">
+            </sc-form-item>
+          </a-col>
+          <a-col :span="12">
+          <!-- 单元格 设置 -->
             <sc-form-item :label="'最大宽度'">
                 <input type="text" v-model.number="maxCellWidth" @change="ev => onConfigChange(ev.currentTarget.value, 'maxCellWidth')">
             </sc-form-item>
-        </div>
+          </a-col>
+        </a-row>
     </div>
   </div>
 </template>
@@ -57,20 +66,22 @@ import Bus from '@assets/utils/bus'
 @Component
 export default class TableForm extends Vue {
   tableUtil: Table2CommUtil = new Table2Comm()
-  tableHeader: string[] = ['header1', 'header2', 'header3'];
+  tableHeader: string[] = ['header1', 'header2', 'header3']
   tableBody: string[][] =[
     ['comment1', 'comment2', 'comment3'],
-    ['comment1水水水水水水水水水水水水水水水发', 'comment3', 'comment3'],
+    ['comment1', 'comment3', 'comment3'],
     ['comment1', 'comment2', 'comment3'],
     ['comment1', 'comment2', 'comment3']
-  ];
+  ]
 
-  horiTemplate: string;
-  verticalTemplate: string;
-  maxCellWidth: number;
+  horiTemplate: string
+  verticalTemplate: string
+  quadrangleChar: string
+  maxCellWidth: number
 
   created (): void {
     this.horiTemplate = this.tableUtil.horiTemplate
+    this.quadrangleChar = this.tableUtil.quadrangleChar
     this.verticalTemplate = this.tableUtil.verticalTemplate
     this.maxCellWidth = this.tableUtil.maxCellWidth
     this.dataChange()

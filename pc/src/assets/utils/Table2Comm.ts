@@ -4,6 +4,7 @@ export declare interface Table2CommUtil {
   maxCellWidth: number;
   horiTemplate: string;
   verticalTemplate: string;
+  quadrangleChar: string;
   tableData: string[][];
   genComment: () => CommData;
   setData: (data: string[][]) => void;
@@ -14,12 +15,14 @@ export class Table2Comm implements Table2CommUtil {
   public maxCellWidth: number // 每个单元格最大宽度（字节数 汉字占两个字节）
   public horiTemplate: string // 用户自定义水平线的绘图符号
   public verticalTemplate: string
-  public tableData: string[][] ;
+  public quadrangleChar: string
+  public tableData: string[][]
 
-  constructor (maxCellWidth = 24, horiTemplate = '———', verticalTemplate = '·') {
+  constructor (maxCellWidth = 24, horiTemplate = '———', verticalTemplate = '|', quadrangleChar = '+') {
     this.maxCellWidth = maxCellWidth
     this.horiTemplate = horiTemplate
     this.verticalTemplate = verticalTemplate
+    this.quadrangleChar = quadrangleChar
   }
 
   setData (tableData: string[][]): void{
@@ -40,11 +43,11 @@ export class Table2Comm implements Table2CommUtil {
     for (let i = 0; i < TABLE_WIDTH; i++) {
       (i + 1) % templateLen === 0 && (horiDividerLine += this.horiTemplate)
     }
-    horiDividerLine += '\n' // 换行
+    horiDividerLine += this.quadrangleChar + '\n' // 换行
     // 绘制指定宽度的行的内容模板  在此模板上填充用户输入的内容
-    const contentLine = this.verticalTemplate + (Array(TABLE_WIDTH).join(' ')) + '\n'
+    const contentLine = this.verticalTemplate + (Array(TABLE_WIDTH).join(' ')) + this.verticalTemplate + '\n'
 
-    let res = horiDividerLine
+    let res = ''
     // 根据计算出的每个单元格的长宽  将内容填充进每个单元格
     for (let i = 0; i < rowHeights.length; i++) {
       // 填充文本时 索引和物理宽度有出入 以此记录已经写入的文本的模拟物理宽度 方便下一单元格的开始位置的计算
@@ -70,12 +73,18 @@ export class Table2Comm implements Table2CommUtil {
           const byteLen = getRealStrLenth(text) // 获取占用的物理宽度 字母为1 汉字为1.84
           // 获取所在单元格在这一行中的起始位置
           const startIndex = writedLenth - getNumberOfChines(contentArr[index]) * (getCharRatio() - 1)
+          console.log(byteLen)
           contentArr[index] = replaceStr(contentArr[index], text, startIndex, byteLen + startIndex) // 填充替换文本到模板中
+          if (i === 0) {
+            horiDividerLine = replaceStr(horiDividerLine, this.quadrangleChar, startIndex, (startIndex + getRealStrLenth(this.quadrangleChar)))
+          }
         })
         writedLenth = colWidths[j] + writedLenth // 记录已经写入的单元格的合计长度 方便计算下一次写入的起始位置
       }
       res += contentArr.join('') + horiDividerLine
     }
+    // header 上的水平分割线别忘了
+    res = horiDividerLine + res
     return {
       comment: res,
       payload: TABLE_WIDTH
@@ -102,7 +111,7 @@ export class Table2Comm implements Table2CommUtil {
     }
     // 给每个单元格进行padding填充 保证美观  最后一列单元格填充宽度更少
     for (let i = 0; i < colWidthArr.length; i++) {
-      colWidthArr[i] += i === colWidthArr.length - 1 ? 4 : 8
+      colWidthArr[i] += 4
     }
     return [colWidthArr, rowHeightArr]
   }
