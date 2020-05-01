@@ -52,7 +52,7 @@ export class List2Comm implements List2CommUtil {
     }
 
     listItem2Text (level: number, index: number, text: string): string {
-      const levelStyle = this.isOrdered ? `${level}.${index + 1}.` : '·'
+      const levelStyle = this.isOrdered ? `${level}.${index + 1}` : '·'
       const paddingText = level === 1 ? '' : genSpace(+this.tabSize * level)
       let lineContent = `${paddingText}${levelStyle}  ${text}` + '\n'
       if (this.showDivider) {

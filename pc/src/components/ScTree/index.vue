@@ -6,7 +6,7 @@
               <template slot="content">
                 <input v-model="item.content"  />
               </template>
-              <span class="node-title" @click="item.popVisible = !item.popVisible;updateId++">{{ item.content }}</span>
+              <span class="node-title" @click="openEditor($event, item)">{{ item.content }}</span>
             </a-popover>
 
             <a-tooltip title="新增同级节点">
@@ -28,15 +28,21 @@ import { ListItem } from '../../assets/utils/List2Comm'
 
 @Component
 export default class ScTree extends Vue {
-    @Prop({ default: () => [] }) data !: Array<ListItem>;
+    @Prop({ default: () => [] }) data !: Array<ListItem>
     options = { children: 'childs', title: 'content', key: 'key' }
-    treeData: Array<TreeItem> ;
-    baseId = 100;
-    updateId = 0;
+    treeData: Array<TreeItem> = JSON.parse(JSON.stringify(this.data))
+    baseId = 100
+    updateId = 0
 
     created (): void {
-      this.treeData = JSON.parse(JSON.stringify(this.data))
       this.appendSlot(this.treeData)
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    openEditor (ev: Event, item: any) {
+      item.popVisible = !item.popVisible
+      // this.updateId++
+      ev.stopPropagation()
     }
 
     appendSlot (data: TreeItem | TreeItem[]): void {
@@ -47,7 +53,7 @@ export default class ScTree extends Vue {
       }
       data.scopedSlots = { title: 'custom' }
       data.key = this.baseId++
-      data.popVisible = false
+      this.$set(data, 'popVisible', false)
       if (Array.isArray(data.childs)) {
         data.childs.forEach(t => this.appendSlot(t))
       }
