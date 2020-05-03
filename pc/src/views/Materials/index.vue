@@ -1,16 +1,21 @@
 
 <template>
   <div class="materials-wrapper">
-    <a href="http://www.asciiworld.com/" target="_blank" class="link">大部分采集自AsciiWorld</a>
-    <canvas class="canvas" :style="{background: config.bgColor}"></canvas>
-    <!-- <div class="tool-pane">
-      <div class="form-item">
-        <span class="label">前景色</span>
-      </div>
-      <div class="form-item">
-        <span class="label">背景色</span>
-      </div>
-    </div> -->
+    <div class="actions">
+      <sc-switch
+      v-model="useDarkTheme"
+      :useText="true"
+      label="主题"
+      trueText="dark"
+      falseText="light"
+      @click.stop="_ => {}"
+      @change="initCanvas"
+      style="margin-left: 1rem;"></sc-switch>
+      <a href="http://www.asciiworld.com/" target="_blank" class="link" :class="{light: !useDarkTheme}">
+      采集自AsciiWorld, 网络
+      </a>
+    </div>
+    <canvas class="canvas" :style="{background: getConfig().bgColor}"></canvas>
     <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
       <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
     </a-modal>
@@ -31,24 +36,39 @@ declare interface CommentItem {
 declare interface Comment {
   [key: string]: string;
 }
-declare interface ToolForm {
+declare interface Config {
   letterWidth: number;
   fontSize: number;
   lineHeight: number;
   fontColor: string;
   bgColor: string;
 }
+declare interface ToolForm {
+  dark: Config;
+  light: Config;
+}
 @Component
 export default class Materials extends Vue {
   commentList: any
   maxWidth !: number
   maxHeight !: number
+  theme = 'light'
+  useDarkTheme = true
   config: ToolForm = {
-    letterWidth: 5,
-    fontSize: 5,
-    lineHeight: 12,
-    fontColor: 'white',
-    bgColor: 'rgba(0, 0, 0, 0.85)'
+    dark: {
+      letterWidth: 5,
+      fontSize: 7,
+      lineHeight: 12,
+      fontColor: 'white',
+      bgColor: 'rgba(0, 0, 0, 0.85)'
+    },
+    light: {
+      letterWidth: 5,
+      fontSize: 8,
+      lineHeight: 12,
+      fontColor: 'dark',
+      bgColor: '#f5f5f5'
+    }
   }
 
   ctx !: CanvasRenderingContext2D
@@ -62,6 +82,10 @@ export default class Materials extends Vue {
       key: key,
       value: temp[key]
     }))
+  }
+
+  getConfig () {
+    return this.useDarkTheme ? this.config.dark : this.config.light
   }
 
   mounted (): void {
@@ -88,17 +112,17 @@ export default class Materials extends Vue {
     canvas.width = this.maxWidth = wrapper.clientWidth
 
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    this.ctx.font = `${this.config.fontSize}px Georgia`
-    this.ctx.fillStyle = this.config.fontColor
-    this.ctx.shadowColor = this.config.fontColor
-    this.ctx.shadowBlur = 5
+    this.ctx.font = `${this.getConfig().fontSize}px Georgia`
+    this.ctx.fillStyle = this.getConfig().fontColor
+    this.ctx.shadowColor = this.getConfig().fontColor
+    this.useDarkTheme && (this.ctx.shadowBlur = 5)
     this.startDraw()
     this.initCanvasEvent(canvas)
   }
 
   startDraw (): void {
-    let width = this.config.letterWidth
-    let height = this.config.lineHeight
+    let width = this.getConfig().letterWidth
+    let height = this.getConfig().lineHeight
     let lastRowMaxHeight = 0 // 记录上一行注释块的最大高度
     const startPoint = { x: 0, y: 0 }
     const endPoint = { x: 0, y: 0 }
@@ -109,8 +133,8 @@ export default class Materials extends Vue {
         currentRowMaxHeight = commHeight
       }
       if (width + commWidth > this.maxWidth) { // 换行
-        width = this.config.letterWidth
-        lastRowMaxHeight += this.config.lineHeight * 2 + currentRowMaxHeight
+        width = this.getConfig().letterWidth
+        lastRowMaxHeight += this.getConfig().lineHeight * 2 + currentRowMaxHeight
         height = lastRowMaxHeight
         currentRowMaxHeight = 0
       }
@@ -134,9 +158,9 @@ export default class Materials extends Vue {
     for (let i = 0, len = comment.length; i < len; i++) {
       const char = comment.charAt(i)
       this.ctx.fillText(char, width, height)
-      width += this.config.letterWidth
+      width += this.getConfig().letterWidth
       if (char === '\n') {
-        height += this.config.lineHeight
+        height += this.getConfig().lineHeight
         width = startWidth
       }
     }
@@ -156,7 +180,7 @@ export default class Materials extends Vue {
       lastIndex = from
       heightCounter++
     }
-    return [maxWidth * this.config.letterWidth, heightCounter * this.config.lineHeight]
+    return [maxWidth * this.getConfig().letterWidth, heightCounter * this.getConfig().lineHeight]
   }
 
   initCanvasEvent (canvas: HTMLCanvasElement) {
@@ -170,6 +194,18 @@ export default class Materials extends Vue {
 
 <style lang="scss" scoped>
 .materials-wrapper{
+  .actions {
+    position: absolute;
+    top: -1.5rem;
+    right: 3rem;
+    text-align: center;
+    z-index: 99;
+    transition: top .5s;
+
+    &:hover{
+      top: 0;
+    }
+  }
   height: 100%;
   width: 100%;
   overflow: auto;
@@ -178,8 +214,11 @@ export default class Materials extends Vue {
   .link{
     font-size: 10px;
     color: white;
-    position: absolute;
     padding: 1rem;
+
+    &.light{
+      color: #333;
+    }
 
     &:hover{
       text-shadow: 0 0 6px rgba($color: #fff, $alpha: .7);
