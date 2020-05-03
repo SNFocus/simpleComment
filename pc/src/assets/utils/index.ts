@@ -161,41 +161,59 @@ export function splitStringByLength (text: string, length: number): string[] {
  * @returns {String} 填充后的字符串
  */
 export function padEndByRealLen (text: string, length: number, char?: string): string {
-  if (text.length >= length) {
-    return text
-  }
   const paddingLen: number = length - getRealStrLenth(text)
-  console.log(length, getRealStrLenth(text), text)
-  return text + (char ? char.repeat(paddingLen) : genSpace(paddingLen))
+  if (paddingLen <= 0) return text
+  if (!char) return text + genSpace(paddingLen)
+  const charLen = getRealStrLenth(char)
+  const [repeatNum, sliceLen] = [Math.floor(paddingLen / charLen), paddingLen % charLen]
+  return text + char.repeat(repeatNum) + char.slice(0, sliceLen)
 }
 
 export function getCmdType (cmd: string): string {
   const res = cmd.match(/^\s*@\w*\b/g)
   return res ? res[0] : ''
 }
-
+export declare interface WrapParam {
+  content: string;
+  verticalChar: string;
+  horizontalChar: string;
+  quadrangleChar: string;
+  paddingLenth: number;
+  paddingWithChar: boolean;
+}
 /**
  * 给注释文本添加斜杠的边框
- * @param {String} comment - 被包裹的注释文本
- * @param {String} char - 边框字符
+ * @param {String} content - 被包裹的注释文本
+ * @param {String} verticalChar - 左右边框字符
+ * @param {String} horizontalChar - 上下边框字符
+ * @param {String} quadrangleChar - 四角边框字符
+ * @param {String} paddingLenth - 填充长度
+ * @param {String} paddingWithChar - 使用文本填充
  * @returns {String} 包裹后的文本
  */
-export function wrapComment (comment: string, char = '/', paddingLen = 2, paddingWithChar = true): string {
-  paddingLen < 0 && (paddingLen = 0)
-  const charLen: number = getRealStrLenth(char)
-  const arr: string[] = comment.split('\n').filter(t => t)
-  const maxLen: number = arr.reduce((p: number, c: string) => {
-    const realLen: number = getRealStrLenth(c)
-    return p < realLen ? realLen : p
-  }, 0)
-  const repeatNum = Math.floor((maxLen + charLen * 2 + paddingLen * 2) / charLen)
-  // 因为使用的floor 字符可能会缺失 char.slice(0, (maxLen + 4) % charLen) 截取缺失的部分
-  const border: string = char.repeat(repeatNum) + char.slice(0, (maxLen + 4) % charLen)
-  const paddingStr = paddingWithChar ? char.repeat(paddingLen / charLen) + char.slice(0, paddingLen % charLen) : genSpace(paddingLen)
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = char + paddingStr + padEndByRealLen(arr[i], maxLen) + paddingStr + char
+export function wrapComment ({
+  content = '这里书写注释',
+  verticalChar = '|',
+  horizontalChar = '——',
+  quadrangleChar = '+',
+  paddingLenth = 6,
+  paddingWithChar = true
+}: WrapParam): string {
+  const VER_LEN = getRealStrLenth(verticalChar)
+  const contentList: string[] = content.split('\n').filter(t => t)
+  const maxRowLen: number = contentList.reduce((p: number, row: string) => Math.max(getRealStrLenth(row), p), 0)
+  const borderLen = maxRowLen + paddingLenth * 2 - getRealStrLenth(quadrangleChar) * 2
+  const border: string =
+  quadrangleChar +
+  padEndByRealLen(horizontalChar, borderLen, horizontalChar) +
+  quadrangleChar
+  if (paddingLenth > 0) {
+    for (let i = 0; i < contentList.length; i++) {
+      const paddingStr = padEndByRealLen('', paddingLenth - VER_LEN, paddingWithChar ? verticalChar : undefined)
+      contentList[i] = verticalChar + paddingStr + contentList[i] + paddingStr + verticalChar
+    }
   }
-  return border + '\n' + arr.join('\n') + '\n' + border
+  return border + '\n' + contentList.join('\n') + '\n' + border
 }
 
 /**

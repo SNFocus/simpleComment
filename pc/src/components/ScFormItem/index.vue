@@ -74,6 +74,7 @@ $input-bg: #ECECEC;
             bottom: 0;
             left: 66%;
             right: 34%;
+            max-width: 180px;
             background: #4caf50;
             transition: left .3s, right .5s;
         }
