@@ -202,15 +202,16 @@ export function wrapComment ({
   const VER_LEN = getRealStrLenth(verticalChar)
   const contentList: string[] = content.split('\n').filter(t => t)
   const maxRowLen: number = contentList.reduce((p: number, row: string) => Math.max(getRealStrLenth(row), p), 0)
-  const borderLen = maxRowLen + paddingLenth * 2 - getRealStrLenth(quadrangleChar) * 2
+  const innerBorderLen = maxRowLen + paddingLenth * 2 - getRealStrLenth(quadrangleChar) * 2
   const border: string =
   quadrangleChar +
-  padEndByRealLen(horizontalChar, borderLen, horizontalChar) +
+  padEndByRealLen(horizontalChar, innerBorderLen, horizontalChar) +
   quadrangleChar
   if (paddingLenth > 0) {
     for (let i = 0; i < contentList.length; i++) {
       const paddingStr = padEndByRealLen('', paddingLenth - VER_LEN, paddingWithChar ? verticalChar : undefined)
-      contentList[i] = verticalChar + paddingStr + contentList[i] + paddingStr + verticalChar
+      // 有分行的情况下 使用genSpace(maxRowLen - getRealStrLenth(contentList[i])) 填充空格保证每行的文本字数相同
+      contentList[i] = verticalChar + paddingStr + contentList[i] + genSpace(maxRowLen - getRealStrLenth(contentList[i])) + paddingStr + verticalChar
     }
   }
   return border + '\n' + contentList.join('\n') + '\n' + border
