@@ -12,7 +12,7 @@
       @change="initCanvas"
       style="margin-left: 1rem;"></sc-switch>
       <a href="http://www.asciiworld.com/" target="_blank" class="link" :class="{light: !useDarkTheme}">
-      采集自AsciiWorld, 网络
+      采集自AsciiWorld等网络渠道网络
       </a>
     </div>
     <canvas class="canvas" :style="{background: getConfig().bgColor}"></canvas>
@@ -49,10 +49,10 @@ declare interface ToolForm {
 }
 @Component
 export default class Materials extends Vue {
+  theme = 'light'
   commentList: any
   maxWidth !: number
   maxHeight !: number
-  theme = 'light'
   useDarkTheme = true
   config: ToolForm = {
     dark: {
