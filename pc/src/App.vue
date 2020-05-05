@@ -52,11 +52,20 @@ export default class Home extends Vue {
       })
     }
 
+    @Watch('isCollapsed')
+    onCollapsed () {
+      setTimeout(() => {
+        window.siderWidth = (document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth || 0
+        console.log((document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth)
+      }, 500)
+    }
+
     /**
- * 解决刷新页面后 无法准确定位菜单问题
- */
+     * 解决刷新页面后 无法准确定位菜单问题
+     */
     @Watch('$route.path')
-    onPathChange (path) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onPathChange (path: any) {
       const getType = () => path.split('/')[1]
       if (getType() !== this.selectedKeys[0]) {
         this.selectedKeys = [getType()]

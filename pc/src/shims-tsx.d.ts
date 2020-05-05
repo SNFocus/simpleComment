@@ -14,6 +14,9 @@ declare global {
   interface Window {
     charRatio: number;
     longerChars: string[];
+    siderWidth: number;
+    ad_client: string;
+    astip_client: string;
   }
 
   interface Options {
