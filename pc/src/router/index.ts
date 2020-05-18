@@ -53,8 +53,8 @@ const routes = [
     path: '/materials',
     component: () => import('@views/Materials/index.vue')
   }, {
-    path: '/template',
-    component: () => import('@views/Template/index.vue')
+    path: '/asciiflow',
+    component: () => import('@views/AsciiFlow/index.vue')
   }
 ]
 

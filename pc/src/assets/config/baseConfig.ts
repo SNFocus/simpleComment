@@ -55,9 +55,9 @@ export const navConfig: NavItemIF[] = [
     label: '常用'
   },
   {
-    key: 'template',
+    key: 'asciiflow',
     icon: 'shop',
-    label: '模板库'
+    label: 'AsciiFlow'
   },
   {
     key: 'materials',

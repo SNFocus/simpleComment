@@ -56,7 +56,6 @@ export default class Home extends Vue {
     onCollapsed () {
       setTimeout(() => {
         window.siderWidth = (document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth || 0
-        console.log((document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth)
       }, 500)
     }
 

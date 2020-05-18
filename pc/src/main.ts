@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
-import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover, Modal, message } from 'ant-design-vue'
+import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover, Modal, message, Input, Select } from 'ant-design-vue'
 import ScFormItem from '@components/ScFormItem/index.vue'
 import ScSwitch from '@components/ScSwitch/index.vue'
 Vue.component(ScFormItem.name, ScFormItem)
@@ -19,6 +19,8 @@ Vue.use(Col)
 Vue.use(Tree)
 Vue.use(Popover)
 Vue.use(Modal)
+Vue.use(Input)
+Vue.use(Select)
 Vue.prototype.$message = message
 Vue.config.productionTip = false
 

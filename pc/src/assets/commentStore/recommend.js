@@ -50,7 +50,7 @@ comments.r2 = `
 `
 
 comments.c3 = `
-               _____
+      _____
      /     \\
      vvvvvvv  /|__/|
         I   /O,O   |
