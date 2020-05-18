@@ -17,6 +17,7 @@ declare global {
     siderWidth: number;
     ad_client: string;
     astip_client: string;
+    _customComments: any[];
   }
 
   interface Options {

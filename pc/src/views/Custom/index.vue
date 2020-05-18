@@ -5,9 +5,9 @@
         <section class="card">
           <div class="card__title">
             <div class="card__info">
-              快捷键 = {{item.shortCuts}}
+              快捷键 : {{item.shortCuts.join(' + ')}}
             </div>
-            <div class="actions" >
+            <div class="actions">
               <a-icon type="edit" class="action-item" @click="onEdit(item)" />
               <a-icon type="delete" class="action-item" @click="onDelete(item)"/>
               <a-icon type="zoom-in" class="action-item" @click="onPreview(item)" />
@@ -28,22 +28,21 @@
       v-model="modalVisible"
       @ok="setCustomConf"
       @cancel="onCancel" >
-      <a-input v-model="editComm.title" style="width: 60%;" placeholder="请输入注释名称" />
-      <a-input-group compact style="margin: 1rem 0;">
+      <a-input-group compact style="margin: .5rem  0 1rem ;">
         <a-select v-model="editComm.shortCuts[0]">
           <a-select-option value="Ctrl">
             Ctrl
           </a-select-option>
-          <a-select-option value="Shift">
+          <!-- <a-select-option value="Shift">
             Shift
           </a-select-option>
           <a-select-option value="Alt">
             Alt
-          </a-select-option>
+          </a-select-option> -->
         </a-select>
         <a-input v-model="editComm.shortCuts[1]" style="width: 50%;" placeholder="可输入快捷键" :maxLength="1" />
       </a-input-group>
-       <a-textarea v-model="editComm.comment" placeholder="Controlled autosize" :auto-size="{ minRows: 15, maxRows: 25 }" />
+       <a-textarea v-model="editComm.comment" placeholder="自定义注释" :auto-size="{ minRows: 30, maxRows: 45 }" />
     </a-modal>
 
     <a-modal v-model="previewVisible" okText="Copy" @ok="copyData">
@@ -55,7 +54,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { copyData } from '@assets/utils'
 declare interface CustomComm {
-  title: string;
+  id: number | null;
   comment: string;
   shortCuts: string[];
 }
@@ -67,7 +66,6 @@ export default class Custom extends Vue {
   previewVisible = false
   editComm: CustomComm = {
     id: null,
-    title: '',
     comment: '',
     shortCuts: ['Ctrl', '']
   }
@@ -88,6 +86,7 @@ export default class Custom extends Vue {
       const index = this.customComments.findIndex(t => t.id === this.editComm.id)
       this.customComments[index] = Object.assign({}, this.editComm)
     }
+    window._customComments = this.customComments
     localStorage.setItem('customComments', JSON.stringify(this.customComments))
     this.modalVisible = false
     this.onCancel()
@@ -132,7 +131,7 @@ export default class Custom extends Vue {
 }
 .card{
   width: 100%;
-  height: 30vh;
+  height: 45vh;
   background: white;
   box-shadow: $shadow;
   position: relative;
