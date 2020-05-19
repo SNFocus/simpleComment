@@ -16,7 +16,7 @@
       </a>
     </div>
     <canvas class="canvas" :style="{background: getConfig().bgColor}"></canvas>
-    <a-modal title="Basic Modal" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
+    <a-modal title="预览" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
       <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
     </a-modal>
   </div>
@@ -49,7 +49,7 @@ declare interface ToolForm {
 }
 @Component
 export default class Materials extends Vue {
-  theme = 'light'
+  theme = 'dark'
   commentList: any
   maxWidth !: number
   maxHeight !: number
@@ -70,6 +70,9 @@ export default class Materials extends Vue {
       bgColor: '#f5f5f5'
     }
   }
+
+  drawStep = 16
+  currentIndex = 16
 
   ctx !: CanvasRenderingContext2D
   commBoxs: CommentBox[] = []
@@ -108,19 +111,14 @@ export default class Materials extends Vue {
   initCanvas () {
     const wrapper = document.querySelector('.materials-wrapper') as HTMLCanvasElement
     const canvas = document.querySelector('.canvas') as HTMLCanvasElement
-    canvas.height = 10000 || wrapper.clientHeight
+    canvas.height = 30000
     canvas.width = this.maxWidth = wrapper.clientWidth
-
-    this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    this.ctx.font = `${this.getConfig().fontSize}px Georgia`
-    this.ctx.fillStyle = this.getConfig().fontColor
-    this.ctx.shadowColor = this.getConfig().fontColor
-    this.useDarkTheme && (this.ctx.shadowBlur = 5)
-    this.startDraw()
+    this.startDraw(canvas)
     this.initCanvasEvent(canvas)
   }
 
-  startDraw (): void {
+  startDraw (canvas: HTMLCanvasElement): void {
+    console.time()
     let width = this.getConfig().letterWidth
     let height = this.getConfig().lineHeight
     let lastRowMaxHeight = 0 // 记录上一行注释块的最大高度
@@ -138,18 +136,37 @@ export default class Materials extends Vue {
         height = lastRowMaxHeight
         currentRowMaxHeight = 0
       }
-      this.drawComment(t.value, width, height)
+      // this.drawComment(t.value, width, height)
       startPoint.x = width
       startPoint.y = height
       endPoint.x = width + commWidth
       endPoint.y = height + commHeight
       width = endPoint.x + 30
       this.commBoxs.push(new CommentBox(t.key, startPoint, endPoint, t.value))
+      // const imgData = this.ctx.getImageData(0, 0, this.maxWidth, lastRowMaxHeight + currentRowMaxHeight)
+      // canvas = document.querySelector('.canvas') as HTMLCanvasElement
+      // canvas.height = lastRowMaxHeight + currentRowMaxHeight
+      // this.ctx.putImageData(imgData, 0, 0)
     })
-    const imgData = this.ctx.getImageData(0, 0, this.maxWidth, lastRowMaxHeight + currentRowMaxHeight)
-    const canvas = document.querySelector('.canvas') as HTMLCanvasElement
-    canvas.height = lastRowMaxHeight + currentRowMaxHeight
-    this.ctx.putImageData(imgData, 0, 0)
+    canvas.height = this.commBoxs[this.commBoxs.length - 1].endPoint.y + 30
+    console.timeEnd()
+    console.time()
+    this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    this.ctx.font = `${this.getConfig().fontSize}px Georgia`
+    this.ctx.fillStyle = this.getConfig().fontColor
+    this.ctx.shadowColor = this.getConfig().fontColor
+    this.useDarkTheme && (this.ctx.shadowBlur = 5)
+
+    this.commBoxs.forEach((t: CommentBox, idx: number) => {
+      const delay = idx > 20 ? (idx * 1000 / 20) : 0
+      console.log(delay, t.startPoint.y)
+      setTimeout(() => {
+        this.drawComment(t.value, t.startPoint.x, t.startPoint.y)
+        if (idx === this.commBoxs.length - 1) {
+          console.timeEnd()
+        }
+      }, delay)
+    })
   }
 
   drawComment (comment: string, startWidth: number, startHeight: number) {

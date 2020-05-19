@@ -17,11 +17,9 @@
           <pre class="card__comment">{{item.comment}}</pre>
         </section>
       </a-col>
-      <a-col :span="8">
-        <section class="card card--add" @click="modalVisible = true">
-          <a-icon type="plus" class="icon"  />
-        </section>
-      </a-col>
+      <section class="add-btn" @click="modalVisible = true">
+        <a-icon type="plus" class="icon"  />
+      </section>
     </a-row>
     <a-modal
       title="添加"
@@ -180,14 +178,20 @@ export default class Custom extends Vue {
     }
   }
 }
-.card--add{
+.add-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  background: #4caf50;
+  color: white;
+  box-shadow: $shadow;
+  border-radius: 50%;
+  cursor: pointer;
   @include flex-center;
   .icon{
-    font-size: 32px;
-    cursor: pointer;
-    &:hover{
-      color: $color-info;
-    }
+    font-size: 22px;
   }
 }
 </style>

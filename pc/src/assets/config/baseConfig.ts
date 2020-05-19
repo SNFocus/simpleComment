@@ -51,17 +51,17 @@ export const navConfig: NavItemIF[] = [
   },
   {
     key: 'custom',
-    icon: 'heart',
+    icon: 'tag',
     label: '常用'
   },
   {
     key: 'asciiflow',
-    icon: 'shop',
+    icon: 'scissor',
     label: 'AsciiFlow'
   },
   {
     key: 'materials',
-    icon: 'smile',
-    label: '素材商店'
+    icon: 'compass',
+    label: '素材'
   }
 ]
