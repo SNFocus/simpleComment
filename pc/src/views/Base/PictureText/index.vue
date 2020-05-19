@@ -13,7 +13,7 @@
       </a-col>
       <a-col :span="12">
         <sc-form-item label="压缩比例">
-          <input type="text" v-model="scale" style="width: 220px;" @change="onConfigChange">
+          <input type="text" v-model="targetWidth" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>
       <a-col :span="12">
@@ -21,9 +21,8 @@
           <input type="text" v-model="customTransferText" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>
-
     </a-row>
-    <canvas id="pictureCanvas" style="display:none;"></canvas>
+    <canvas id="pictureCanvas" width="1000" height="1000" style="display:none;"></canvas>
   </div>
 </template>
 <script lang="ts">
@@ -38,7 +37,7 @@ export default class PictureText extends Vue {
   imgSource = ''
   fileName = '未上传'
   // 照片缩放程度
-  scale = 0.2
+  targetWidth = 200
   // 自定义转换文字
   customTransferText = '@#&$%863!i1uazvno~;*^+-. '
 
@@ -63,8 +62,10 @@ export default class PictureText extends Vue {
   onConfigChange (): void {
     // scaleWidth 是原来的两倍 是因为 字符的宽度和字符的高度物理距离不一致 导致转化后的文字有被竖向拉伸的错觉
     // 为了弥补字符宽度和高度（行间距）的不对等，将宽度转换为原始宽度的两倍
-    const scaleWidth = Math.ceil(this.imageObj.width * this.scale) * 2
-    const scaleHeight = Math.ceil(this.imageObj.height * this.scale)
+    const scaleWidth = this.targetWidth
+    const scale = +((this.targetWidth / this.imageObj.width).toFixed(2))
+    const scaleHeight = Math.ceil(this.imageObj.height * scale)
+    console.log(scaleWidth, scaleHeight)
     ctx.drawImage(this.imageObj, 0, 0, scaleWidth, scaleHeight)
     const imgData: Uint8ClampedArray = ctx.getImageData(0, 0, scaleWidth, scaleHeight).data
     let text = ''
