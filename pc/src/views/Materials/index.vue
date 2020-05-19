@@ -16,7 +16,7 @@
       </a>
     </div>
     <canvas class="canvas" :style="{background: getConfig().bgColor}"></canvas>
-    <a-modal title="预览" v-model="visible" @ok="handleOk" width="700px" okText="Copy">
+    <a-modal title="预览" v-model="visible" @ok="copyComm" width="700px" okText="Copy">
       <pre v-if="activeData">{{ activeData && activeData.value }}</pre>
     </a-modal>
   </div>
@@ -24,9 +24,9 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Vue, Component } from 'vue-property-decorator'
-import comments from '@assets/commentStore/recommend.js'
 import { CommentBox } from './CommentBox'
 import { copyData } from '@assets/utils/index'
+import comments from '@assets/commentStore/recommend.js'
 
 declare interface CommentItem {
   key: string;
@@ -71,9 +71,6 @@ export default class Materials extends Vue {
     }
   }
 
-  drawStep = 16
-  currentIndex = 16
-
   ctx !: CanvasRenderingContext2D
   commBoxs: CommentBox[] = []
   activeData: CommentBox | null = null
@@ -95,7 +92,7 @@ export default class Materials extends Vue {
     this.initCanvas()
   }
 
-  handleOk () {
+  copyComm () {
     if (this.activeData) {
       copyData(this.activeData.value)
       this.$message.success('复制到你的剪贴板了！')
@@ -103,7 +100,7 @@ export default class Materials extends Vue {
     }
   }
 
-  showToolBar (data: CommentBox): void {
+  showDialog (data: CommentBox): void {
     this.activeData = data
     this.visible = true
   }
@@ -111,14 +108,14 @@ export default class Materials extends Vue {
   initCanvas () {
     const wrapper = document.querySelector('.materials-wrapper') as HTMLCanvasElement
     const canvas = document.querySelector('.canvas') as HTMLCanvasElement
-    canvas.height = 30000
+    canvas.height = 20000
     canvas.width = this.maxWidth = wrapper.clientWidth
+    this.initCommBoxs()
     this.startDraw(canvas)
     this.initCanvasEvent(canvas)
   }
 
-  startDraw (canvas: HTMLCanvasElement): void {
-    console.time()
+  initCommBoxs (): void {
     let width = this.getConfig().letterWidth
     let height = this.getConfig().lineHeight
     let lastRowMaxHeight = 0 // 记录上一行注释块的最大高度
@@ -127,44 +124,33 @@ export default class Materials extends Vue {
     let currentRowMaxHeight = 0
     this.commentList.forEach((t: CommentItem) => {
       const [commWidth, commHeight] = this.getCommentProp(t.value)
-      if (commHeight > currentRowMaxHeight) {
-        currentRowMaxHeight = commHeight
-      }
+      commHeight > currentRowMaxHeight && (currentRowMaxHeight = commHeight) // 记录该行最大高度
       if (width + commWidth > this.maxWidth) { // 换行
         width = this.getConfig().letterWidth
         lastRowMaxHeight += this.getConfig().lineHeight * 2 + currentRowMaxHeight
         height = lastRowMaxHeight
         currentRowMaxHeight = 0
       }
-      // this.drawComment(t.value, width, height)
       startPoint.x = width
       startPoint.y = height
       endPoint.x = width + commWidth
       endPoint.y = height + commHeight
-      width = endPoint.x + 30
+      width = endPoint.x + 30 // 下一次起始坐标
       this.commBoxs.push(new CommentBox(t.key, startPoint, endPoint, t.value))
-      // const imgData = this.ctx.getImageData(0, 0, this.maxWidth, lastRowMaxHeight + currentRowMaxHeight)
-      // canvas = document.querySelector('.canvas') as HTMLCanvasElement
-      // canvas.height = lastRowMaxHeight + currentRowMaxHeight
-      // this.ctx.putImageData(imgData, 0, 0)
     })
+  }
+
+  startDraw (canvas: HTMLCanvasElement): void {
     canvas.height = this.commBoxs[this.commBoxs.length - 1].endPoint.y + 30
-    console.timeEnd()
-    console.time()
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     this.ctx.font = `${this.getConfig().fontSize}px Georgia`
     this.ctx.fillStyle = this.getConfig().fontColor
     this.ctx.shadowColor = this.getConfig().fontColor
     this.useDarkTheme && (this.ctx.shadowBlur = 5)
-
     this.commBoxs.forEach((t: CommentBox, idx: number) => {
       const delay = idx > 20 ? (idx * 1000 / 20) : 0
-      console.log(delay, t.startPoint.y)
       setTimeout(() => {
         this.drawComment(t.value, t.startPoint.x, t.startPoint.y)
-        if (idx === this.commBoxs.length - 1) {
-          console.timeEnd()
-        }
       }, delay)
     })
   }
@@ -200,10 +186,10 @@ export default class Materials extends Vue {
     return [maxWidth * this.getConfig().letterWidth, heightCounter * this.getConfig().lineHeight]
   }
 
-  initCanvasEvent (canvas: HTMLCanvasElement) {
+  initCanvasEvent (canvas: HTMLCanvasElement): void {
     canvas.addEventListener('click', (event: MouseEvent) => {
       const target = this.commBoxs.find(t => t.inBox({ x: event.offsetX, y: event.offsetY }))
-      target && this.showToolBar(target)
+      target && this.showDialog(target)
     })
   }
 }
