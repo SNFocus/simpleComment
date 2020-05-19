@@ -83,9 +83,13 @@ function ga(a, b) {
   ia(this);
 }
 function ia(a) {
-  a.canvas.width = document.querySelector('#ascii-container').clientWidth;
-  a.canvas.height = document.querySelector('#ascii-container').clientHeight;
-  a.f = !0;
+  try{
+    a.canvas.width = document.querySelector('#ascii-container').clientWidth;
+    a.canvas.height = document.querySelector('#ascii-container').clientHeight;
+    a.f = !0;
+  }catch(e){
+    // console.warn(e)
+  }
 }
 ha.prototype.animate = function() {
   if (this.f || this.state.f) {

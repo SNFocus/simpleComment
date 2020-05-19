@@ -12,9 +12,7 @@ const routes = [
   {
     path: '/base',
     component: Base,
-    meta: {
-      keepAlive: true
-    },
+
     children: [
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -24,27 +22,45 @@ const routes = [
       },
       {
         path: 'wrapper',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/WrapperForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/WrapperForm/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'table',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/TableForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/TableForm/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'cmd',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/CmdForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/CmdForm/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'list',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'pictureText',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/PictureText/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/PictureText/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       },
       {
         path: 'setting',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/SettingForm/index.vue')
+        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/SettingForm/index.vue'),
+        meta: {
+          keepAlive: true
+        }
       }
     ]
   },
@@ -63,12 +79,15 @@ const routes = [
     }
   }, {
     path: '/asciiflow',
-    component: () => import('@views/AsciiFlow/index.vue')
+    component: () => import('@views/AsciiFlow/index.vue'),
+    meta: {
+      keepAlive: true
+    }
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes
 })
 
