@@ -12,6 +12,9 @@ const routes = [
   {
     path: '/base',
     component: Base,
+    meta: {
+      keepAlive: true
+    },
     children: [
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -47,11 +50,17 @@ const routes = [
   },
   {
     path: '/custom',
-    component: () => import('@views/Custom/index.vue')
+    component: () => import('@views/Custom/index.vue'),
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: '/materials',
-    component: () => import('@views/Materials/index.vue')
+    component: () => import('@views/Materials/index.vue'),
+    meta: {
+      keepAlive: true
+    }
   }, {
     path: '/asciiflow',
     component: () => import('@views/AsciiFlow/index.vue')

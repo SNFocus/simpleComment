@@ -12,7 +12,7 @@
         </sc-form-item>
       </a-col>
       <a-col :span="12">
-        <sc-form-item label="压缩图片">
+        <sc-form-item label="压缩比例">
           <input type="text" v-model="scale" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>

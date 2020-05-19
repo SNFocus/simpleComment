@@ -25,7 +25,10 @@
     <a-layout>
       <!-- <a-layout-header :style="{ background: '#fff', padding: 0 }" /> -->
       <a-layout-content style="overflow: hidden; display: flex;">
-        <router-view />
+        <keep-alive>
+            <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -55,6 +58,7 @@ export default class Home extends Vue {
     @Watch('isCollapsed')
     onCollapsed () {
       setTimeout(() => {
+        console.log(document.querySelector('.ant-layout-sider'))
         window.siderWidth = (document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth || 0
       }, 500)
     }

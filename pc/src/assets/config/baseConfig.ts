@@ -19,14 +19,14 @@ export const navConfig: NavItemIF[] = [
     label: '基础类型',
     typeList: [
       {
-        key: 'wrapper',
-        icon: 'line',
-        label: '自定义边框'
-      },
-      {
         key: 'table',
         icon: 'table',
         label: '表格'
+      },
+      {
+        key: 'wrapper',
+        icon: 'line',
+        label: '自定义边框'
       },
       {
         key: 'list',
@@ -41,7 +41,7 @@ export const navConfig: NavItemIF[] = [
       {
         key: 'pictureText',
         icon: 'picture',
-        label: '自制图文'
+        label: '图文转换'
       },
       {
         key: 'setting',
