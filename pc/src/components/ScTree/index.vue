@@ -23,7 +23,7 @@
     </a-tree>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ListItem } from '../../assets/utils/List2Comm'
 
 @Component
@@ -170,9 +170,14 @@ export default class ScTree extends Vue {
       loop(this.treeData, key, func)
     }
 
+    @Emit('change')
+    emitChange () {
+      return this.delScopeProp()
+    }
+
     updateData () {
       this.updateId++
-      this.$emit('change', this.delScopeProp())
+      this.emitChange()
     }
 }
 </script>

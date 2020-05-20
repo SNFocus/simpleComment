@@ -18,18 +18,24 @@
 <script lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Vue, Watch, PropSync } from 'vue-property-decorator'
-import { navConfig, TypeItemIF, NavItemIF } from '@assets/config/baseConfig'
+import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 
 @Component
 export default class TypePane extends Vue {
     typeKey !: string;
-    myBaseTypes: NavItemIF[] = navConfig.find((t: TypeItemIF) => t.key === 'base').typeList
+    myBaseTypes: NavItemIF[] | undefined;
+
+    created (): void {
+      if (typeof navConfig !== 'undefined') {
+        this.myBaseTypes = (navConfig as NavItemIF[]).find((t: NavItemIF) => t.key === 'base').typeList
+      }
+    }
 
     /**
  * 改变全局注释类型
- * @param {TypeItemIF} type - 注释类型
+ * @param {NavItemIF} type - 注释类型
  */
-    changeType (type: TypeItemIF): void {
+    changeType (type: NavItemIF): void {
       this.$router.push(`/base/${type.key}`)
     }
 

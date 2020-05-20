@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-irregular-whitespace */
 // 目前有83个文本
-// 2020-04-25
-const comments = {}
+// 2020-04-25W
+const comments: any = {}
 comments.c1 = `
 
 

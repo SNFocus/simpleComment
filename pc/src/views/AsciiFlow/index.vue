@@ -117,9 +117,7 @@ window.astip_client = 'ca-tipjar-pub-0451873530201272'
 export default class Template extends Vue {
   mounted () {
     const s2 = () => import('./js-compiled.js')
-    console.log(s2().then(res => {
-      res.default()
-    }))
+    s2().then(res => res.default())
   }
 }
 </script>

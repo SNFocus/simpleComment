@@ -9,7 +9,7 @@ export declare interface NavItemIF {
     key: string;
     icon: string;
     label: string;
-    typeList?: TypeItemIF[];
+    typeList?: NavItemIF[];
 }
 
 export const navConfig: NavItemIF[] = [

@@ -26,7 +26,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { CommentBox } from './CommentBox'
 import { copyData } from '@assets/utils/index'
-import comments from '@assets/commentStore/recommend.js'
+import comments from '@assets/commentStore/recommend.ts'
 
 declare interface CommentItem {
   key: string;

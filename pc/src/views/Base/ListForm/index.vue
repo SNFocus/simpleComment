@@ -2,7 +2,6 @@
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
 import { List2Comm, List2CommUtil, ListItem } from '@assets/utils/List2Comm'
-import ScTree from '@components/ScTree/index.vue'
 import Bus from '@assets/utils/bus'
 
 @Component
@@ -80,14 +79,6 @@ export default class ListForm extends Vue {
       )
     }
 
-    genListTreeLayout (): JSX.Element {
-      return (
-        <div class="list-form-wrapper">
-          <ScTree data={this.treeData} onChange={this.onTreeDataChange} />
-        </div>
-      )
-    }
-
     onTreeDataChange (data: TreeItem[]): void {
       this.treeData = data
       this.dataChange()
@@ -96,7 +87,9 @@ export default class ListForm extends Vue {
     getRenderContent (): JSX.Element {
       return (
         <div>
-          {this.genListTreeLayout()}
+          <div class="list-form-wrapper">
+            <sc-tree data={this.treeData} onChange={this.onTreeDataChange} />
+          </div>
           {this.genConfigLayout()}
         </div>
       )

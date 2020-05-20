@@ -5,9 +5,11 @@ import store from './store/store'
 import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover, Modal, message, Input, Select } from 'ant-design-vue'
 import ScFormItem from '@components/ScFormItem/index.vue'
 import ScSwitch from '@components/ScSwitch/index.vue'
+import ScTree from '@components/ScTree/index.vue'
 import { copyData } from '@assets/utils'
 Vue.component(ScFormItem.name, ScFormItem)
 Vue.component(ScSwitch.name, ScSwitch)
+Vue.component(ScTree.name, ScTree)
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)

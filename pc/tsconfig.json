@@ -10,6 +10,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
@@ -41,8 +43,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/assets/commentStore/picture.js"
+    "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules"

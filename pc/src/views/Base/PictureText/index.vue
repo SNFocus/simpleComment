@@ -48,7 +48,7 @@ export default class PictureText extends Vue {
    */
   onImageUpload (event: Event): void {
     const files = (event.currentTarget as HTMLInputElement).files
-    if (files.length) {
+    if (files && files[0]) {
       this.fileName = files[0].name
       this.imgSource = URL.createObjectURL(files[0])
     }
@@ -65,7 +65,7 @@ export default class PictureText extends Vue {
     const transWidth = this.targetWidth
     const scale = +((this.targetWidth / this.imageObj.width).toFixed(2))
     const transHeight = Math.ceil(this.imageObj.height * scale / 2)
-    const canvas = this.$refs.canvas
+    const canvas = this.$refs.canvas as HTMLCanvasElement
     canvas.width = transWidth
     canvas.height = transHeight
     try {

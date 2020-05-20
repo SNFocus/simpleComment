@@ -78,8 +78,10 @@ export default class Custom extends Vue {
   setCustomConf () {
     if (!this.editComm.id) {
       const lastComm = this.customComments[this.customComments.length - 1]
-      this.editComm.id = lastComm ? lastComm.id + 1 : 1
-      this.customComments.push(Object.assign({}, this.editComm))
+      if (lastComm && lastComm.id) {
+        this.editComm.id = lastComm.id + 1
+        this.customComments.push(Object.assign({}, this.editComm))
+      }
     } else {
       const index = this.customComments.findIndex(t => t.id === this.editComm.id)
       this.customComments[index] = Object.assign({}, this.editComm)
@@ -102,20 +104,21 @@ export default class Custom extends Vue {
     localStorage.setItem('customComments', JSON.stringify(this.customComments))
   }
 
-  onPreview (item) {
+  onPreview (item: CustomComm) {
     this.editComm = Object.assign({}, item)
     this.previewVisible = true
   }
 
-  copyData (comment) {
+  copyData (comment: string) {
     copyData(comment || this.editComm.comment)
     this.$message.success('您的注释已经复制到剪贴板啦！')
   }
 
   onCancel () {
-    for (const key in this.editComm) {
-      if (key === 'shortCuts') this.editComm[key] = ['Ctrl', '']
-      else this.editComm[key] = null
+    this.editComm = {
+      id: null,
+      comment: '',
+      shortCuts: ['Ctrl', '']
     }
   }
 }
