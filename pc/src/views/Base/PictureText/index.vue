@@ -12,7 +12,7 @@
         </sc-form-item>
       </a-col>
       <a-col :span="12">
-        <sc-form-item label="压缩比例">
+        <sc-form-item label="转换宽度">
           <input type="text" v-model="targetWidth" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>
@@ -22,7 +22,7 @@
         </sc-form-item>
       </a-col>
     </a-row>
-    <canvas id="pictureCanvas" width="1000" height="1000" style="display:none;"></canvas>
+    <canvas width="1000" height="1000" ref="canvas" style="display: none;"></canvas>
   </div>
 </template>
 <script lang="ts">
@@ -37,7 +37,7 @@ export default class PictureText extends Vue {
   imgSource = ''
   fileName = '未上传'
   // 照片缩放程度
-  targetWidth = 200
+  targetWidth = 50
   // 自定义转换文字
   customTransferText = '@#&$%863!i1uazvno~;*^+-. '
 
@@ -60,22 +60,25 @@ export default class PictureText extends Vue {
   }
 
   onConfigChange (): void {
-    // scaleWidth 是原来的两倍 是因为 字符的宽度和字符的高度物理距离不一致 导致转化后的文字有被竖向拉伸的错觉
+    // transHeight 是原来的一半 是因为 字符的宽度和字符的高度物理距离不一致 导致转化后的文字有被竖向拉伸的错觉
     // 为了弥补字符宽度和高度（行间距）的不对等，将宽度转换为原始宽度的两倍
-    const scaleWidth = this.targetWidth
+    const transWidth = this.targetWidth
     const scale = +((this.targetWidth / this.imageObj.width).toFixed(2))
-    const scaleHeight = Math.ceil(this.imageObj.height * scale)
-    console.log(scaleWidth, scaleHeight)
-    ctx.drawImage(this.imageObj, 0, 0, scaleWidth, scaleHeight)
-    const imgData: Uint8ClampedArray = ctx.getImageData(0, 0, scaleWidth, scaleHeight).data
-    let text = ''
-    this.getGrayscaleData(imgData, (grayscale: number, index: number) => {
-      text += this.customTransferText.charAt(Math.floor(Math.abs(grayscale - 1) * this.customTransferText.length / 255))
-      if (index % scaleWidth === 0) {
-        text += '\n'
-      }
-    })
-    Bus.$emit('genComment', { comment: text })
+    const transHeight = Math.ceil(this.imageObj.height * scale / 2)
+    const canvas = this.$refs.canvas
+    canvas.width = transWidth
+    canvas.height = transHeight
+    try {
+      ctx.drawImage(this.imageObj, 0, 0, transWidth, transHeight)
+      const imgData: Uint8ClampedArray = ctx.getImageData(0, 0, transWidth, transHeight).data
+      let text = ''
+      this.getGrayscaleData(imgData, (grayscale: number, index: number) => {
+        const rangeIdx = Math.floor(Math.abs(grayscale - 1) * this.customTransferText.length / 255)
+        text += this.customTransferText.charAt(rangeIdx)
+        index % transWidth === 0 && (text += '\n')
+      })
+      Bus.$emit('genComment', { comment: text })
+    } catch (error) { }
   }
 
   /**
@@ -86,15 +89,13 @@ export default class PictureText extends Vue {
   getGrayscaleData (data: Uint8ClampedArray, callback: Function): void {
     for (let i = 0, pxIndex = 0, len = data.length; i < len; i += 4) {
       const g = data[i] * 0.3 + data[i + 1] * 0.59 + data[i + 2] * 0.11
-      // data[i] = g
-      // data[i + 1] = g
-      // data[i + 2] = g
+      // data[i] = data[i + 1] = data[i + 2] = g
       callback && callback(g, pxIndex++)
     }
   }
 
   mounted (): void {
-    ctx = (document.querySelector('#pictureCanvas') as HTMLCanvasElement).getContext('2d') as CanvasRenderingContext2D
+    ctx = (this.$refs.canvas as HTMLCanvasElement).getContext('2d') as CanvasRenderingContext2D
   }
 }
 </script>
@@ -102,6 +103,7 @@ export default class PictureText extends Vue {
 .upload-btn{
   opacity: 0;
   z-index: 99;
+  width: 100%;
   position: absolute;
 }
 </style>
