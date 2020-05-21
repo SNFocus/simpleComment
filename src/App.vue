@@ -76,6 +76,11 @@ export default class Home extends Vue {
     }
 }
 </script>
+<style lang="scss">
+.ant-modal {
+    top: 40px;
+}
+</style>
 <style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

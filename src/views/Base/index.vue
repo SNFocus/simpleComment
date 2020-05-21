@@ -37,17 +37,27 @@
           </textarea>
         </div>
       </div>
-      <type-pane />
+      <div class="type-pane">
+        <div
+          v-for="type in myBaseTypes"
+          :key="type.icon"
+          class="type-card"
+          :class="{active: typeKey==type.key}"
+          @click="changeType(type)"
+        >
+          <a-icon :type="type.icon" class="icon" />
+          <span class="text">{{ type.label }}</span>
+        </div>
+      </div>
     </div>
     <div class="template-pane normal-padding ">
         <router-view />
     </div>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import Bus from '@assets/utils/bus'
-import TypePane from '@components/TypePane/index.vue'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { navConfig, NavItemIF } from '@assets/config/baseConfig'
 import { genCommByCmd, copyData } from '@assets/utils'
@@ -56,12 +66,12 @@ declare interface Point {
   x: number;
   y: number;
 }
-@Component({
-  components: {
-    [TypePane.name]: TypePane
-  }
-})
+
+@Component
 export default class Home extends Vue {
+    typeKey !: string;
+    myBaseTypes: NavItemIF[] | undefined;
+
     readonly navConfig: NavItemIF[] = navConfig
     // 控制侧边栏折叠
     isCollapsed = true;
@@ -79,7 +89,20 @@ export default class Home extends Vue {
       document.addEventListener('keydown', (event: KeyboardEvent) => {
         vm.detailMode && event.keyCode === 27 && (vm.detailMode = false)
       })
+
+      if (typeof navConfig !== 'undefined') {
+        this.myBaseTypes = (navConfig as NavItemIF[]).find((t: NavItemIF) => t.key === 'base').typeList
+      }
+
       Bus.$on('genComment', this.getComment)
+    }
+
+    /**
+   * 改变全局注释类型
+   * @param {NavItemIF} type - 注释类型
+   */
+    changeType (type: NavItemIF): void {
+      this.$router.push(`/base/${type.key}`)
     }
 
     /**
@@ -131,7 +154,10 @@ export default class Home extends Vue {
     @Watch('$route.path', { immediate: true })
     onPathChange (path: string): void{
       const paths = path.split('/').slice(1)
-      this.getBaseType() && this.refreshPropPane(paths[1])
+      if (this.getBaseType()) {
+        this.refreshPropPane(paths[1])
+        this.typeKey = paths[1]
+      }
     }
 }
 </script>
@@ -232,5 +258,38 @@ export default class Home extends Vue {
 @keyframes blink {
   from{ opacity: 0; }
   to{ opacity: 1; }
+}
+
+.type-pane {
+  height: 38%;
+  padding: 24px;
+  border-radius: $radius;
+  background: $bg-light;
+  border-top-right-radius: 0;
+}
+
+.type-card {
+  width: 25%;
+  max-width: 140px;
+  padding: 10px;
+  height: 50%;
+  float: left;
+  border: 4px solid $bg-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .icon {
+    font-size: $icon-size;
+  }
+
+  &.active {
+    @extend .icon-card__hover;
+  }
+
+  &:hover {
+    @extend .icon-card__hover;
+  }
 }
 </style>

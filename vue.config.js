@@ -2,7 +2,6 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 module.exports = {
-  productionSourceMap: false,
   publicPath: './',
   devServer: {
     port: 8089

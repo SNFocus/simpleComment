@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Base from '@views/Base/index.vue'
+import Wrapper from '@views/Base/WrapperForm/index.vue'
+import Table from '@views/Base/TableForm/index.vue'
+import List from '@views/Base/ListForm/index.vue'
+import PicText from '@views/Base/PictureText/index.vue'
+import Setting from '@views/Base/SettingForm/index.vue'
 
 Vue.use(VueRouter)
 
@@ -22,42 +27,42 @@ const routes = [
       },
       {
         path: 'wrapper',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/WrapperForm/index.vue'),
+        component: Wrapper,
         meta: {
           keepAlive: true
         }
       },
       {
         path: 'table',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/TableForm/index.vue'),
+        component: Table,
         meta: {
           keepAlive: true
         }
       },
-      {
-        path: 'cmd',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/CmdForm/index.vue'),
-        meta: {
-          keepAlive: true
-        }
-      },
+      // {
+      //   path: 'cmd',
+      //   component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/CmdForm/index.vue'),
+      //   meta: {
+      //     keepAlive: true
+      //   }
+      // },
       {
         path: 'list',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/ListForm/index.vue'),
+        component: List,
         meta: {
           keepAlive: true
         }
       },
       {
         path: 'pictureText',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/PictureText/index.vue'),
+        component: PicText,
         meta: {
           keepAlive: true
         }
       },
       {
         path: 'setting',
-        component: () => import(/* webpackChunkName: "uipane" */ '@views/Base/SettingForm/index.vue'),
+        component: Setting,
         meta: {
           keepAlive: true
         }

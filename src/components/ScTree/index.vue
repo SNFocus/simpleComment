@@ -20,7 +20,9 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ListItem } from '../../assets/utils/List2Comm'
 
-@Component
+@Component({
+  name: 'sc-tree'
+})
 export default class ScTree extends Vue {
     @Prop({ default: () => [] }) data !: Array<ListItem>
     options = { children: 'childs', title: 'content', key: 'key' }

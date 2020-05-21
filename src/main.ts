@@ -9,9 +9,9 @@ import ScTree from '@components/ScTree/index.vue'
 // class-component-hooks.js
 import Component from 'vue-class-component'
 import { copyData } from '@assets/utils'
-Vue.component(ScFormItem.name, ScFormItem)
-Vue.component(ScSwitch.name, ScSwitch)
-Vue.component(ScTree.name, ScTree)
+Vue.component('sc-form-item', ScFormItem)
+Vue.component('sc-switch', ScSwitch)
+Vue.component('sc-tree', ScTree)
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)
@@ -30,7 +30,26 @@ Vue.use(Slider)
 Vue.prototype.$message = message
 Vue.config.productionTip = false
 
-window._customComments = JSON.parse(localStorage.getItem('customComments') || '[]')
+const comment = `
+
+
+█████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
+▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
+▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
+░▓█▒  ░▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄        ██╔══██╗██║   ██║██║   ██║
+░▒█░   ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄       ██████╔╝╚██████╔╝╚██████╔╝
+▒ ░   ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒       ╚═════╝  ╚═════╝  ╚═════╝
+░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
+░ ░    ░░░ ░ ░ ░        ░ ░░ ░
+        ░     ░ ░      ░  ░
+
+`
+const data = {
+  id: 1,
+  shortCuts: ['Ctrl', 'g'],
+  comment: comment
+}
+window._customComments = JSON.parse(localStorage.getItem('customComments') || JSON.stringify([data]))
 document.addEventListener('keydown', function (e) {
   if (!e.ctrlKey) return
   const target = window._customComments.find(t => t.shortCuts[1] === e.key)

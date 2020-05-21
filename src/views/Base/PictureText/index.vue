@@ -36,7 +36,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import Bus from '@assets/utils/bus.ts'
 import { debounce } from '@assets/utils/index.ts'
 const changeScale = debounce((num: number) => {
-  const pre = document.getElementById('#preview-pane')
+  const pre = document.getElementById('preview-pane')
   if (pre) {
     pre.style.transform = `scale(${num / 100})`
   }

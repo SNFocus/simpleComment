@@ -9,7 +9,9 @@
 <script lang="ts">
 import { Vue, Component, Model, Prop } from 'vue-property-decorator'
 
-@Component
+@Component({
+  name: 'sc-switch'
+})
 export default class ScSwitch extends Vue {
     @Prop({ default: 'Yes' }) readonly trueText !: string;
     @Prop({ default: 'No' }) readonly falseText !: string;

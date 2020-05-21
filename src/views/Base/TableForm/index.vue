@@ -63,7 +63,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { Table2Comm, Table2CommUtil } from '@assets/utils/Table2Comm.ts'
 import Bus from '@assets/utils/bus'
 
-@Component
+@Component({ })
 export default class TableForm extends Vue {
   tableUtil: Table2CommUtil = new Table2Comm()
   tableHeader: string[] = ['header1', 'header2', 'header3']

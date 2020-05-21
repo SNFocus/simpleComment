@@ -22,9 +22,11 @@
       </section>
     </a-row>
     <a-modal
-      title="添加"
+      title="添加/修改"
+      style="top: 40px;"
       v-model="modalVisible"
       @ok="setCustomConf"
+      width="700px"
       @cancel="onCancel" >
       <a-input-group compact style="margin: .5rem  0 1rem ;">
         <a-select v-model="editComm.shortCuts[0]">
@@ -40,7 +42,7 @@
         </a-select>
         <a-input v-model="editComm.shortCuts[1]" style="width: 50%;" placeholder="可输入快捷键" :maxLength="1" />
       </a-input-group>
-       <a-textarea v-model="editComm.comment" placeholder="自定义注释" :auto-size="{ minRows: 30, maxRows: 45 }" />
+       <a-textarea v-model="editComm.comment" placeholder="自定义注释" :auto-size="{ minRows: 15, maxRows: 25 }" />
     </a-modal>
 
     <a-modal v-model="previewVisible" okText="Copy" @ok="copyData">
@@ -57,7 +59,7 @@ declare interface CustomComm {
   shortCuts: string[];
 }
 
-@Component
+@Component({})
 export default class Custom extends Vue {
   customComments: CustomComm[]
   modalVisible = false
@@ -69,7 +71,7 @@ export default class Custom extends Vue {
   }
 
   created () {
-    this.customComments = JSON.parse(localStorage.getItem('customComments') || '[]')
+    this.customComments = window._customComments || JSON.parse(localStorage.getItem('customComments') || '[]')
   }
 
   /**
@@ -80,8 +82,10 @@ export default class Custom extends Vue {
       const lastComm = this.customComments[this.customComments.length - 1]
       if (lastComm && lastComm.id) {
         this.editComm.id = lastComm.id + 1
-        this.customComments.push(Object.assign({}, this.editComm))
+      } else {
+        this.editComm.id = 1
       }
+      this.customComments.push(Object.assign({}, this.editComm))
     } else {
       const index = this.customComments.findIndex(t => t.id === this.editComm.id)
       this.customComments[index] = Object.assign({}, this.editComm)
@@ -89,7 +93,6 @@ export default class Custom extends Vue {
     window._customComments = this.customComments
     localStorage.setItem('customComments', JSON.stringify(this.customComments))
     this.modalVisible = false
-    this.onCancel()
   }
 
   onEdit (item: CustomComm) {
@@ -112,6 +115,7 @@ export default class Custom extends Vue {
   copyData (comment: string) {
     copyData(comment || this.editComm.comment)
     this.$message.success('您的注释已经复制到剪贴板啦！')
+    this.modalVisible = false
   }
 
   onCancel () {

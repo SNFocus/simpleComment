@@ -14,14 +14,16 @@
 </template>
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator'
-@Component
+@Component({
+  name: 'sc-form-item'
+})
 export default class ScFormItem extends Vue {
     @Prop(String) readonly label !: string ;
     @Prop({ default: true }) readonly showUnderLine !: string ;
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 .showLine > .input-wrapper > {
   input:focus,
   textarea:focus {
