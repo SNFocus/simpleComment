@@ -1,14 +1,8 @@
 <template>
-    <a-tree draggable :showLine="true" :treeData="treeData" @drop="onDrop" :replaceFields="options" :key="updateId">
+    <a-tree :defaultExpandAll="true" draggable :showLine="true" :treeData="treeData" @drop="onDrop" :replaceFields="options" :key="updateId">
       <template slot="custom" slot-scope="item">
         <div class="node-item">
-            <a-popover title="编辑" trigger="click" v-model="item.popVisible">
-              <template slot="content">
-                <input v-model="item.content"  />
-              </template>
-              <span class="node-title" @click="openEditor($event, item)">{{ item.content }}</span>
-            </a-popover>
-
+            <a-input class="node-title" v-model="item.content" />
             <a-tooltip title="新增同级节点">
                 <a-icon type="plus" class="node-action" @click="addData(item, false)" />
             </a-tooltip>
@@ -127,6 +121,10 @@ export default class ScTree extends Vue {
       ))
     }
 
+    editData (item: TreeItem) {
+      console.log(item)
+    }
+
     addData (item: TreeItem, addChild: boolean): void{
       const node: TreeItem = {
         key: this.baseId++,
@@ -135,14 +133,15 @@ export default class ScTree extends Vue {
         content: '注释列表内容'
       }
       if (addChild) {
-        if (!item.childs) {
-          item.childs = []
+        if (!Array.isArray(item.childs)) {
+          this.$set(item.dataRef, 'childs', [])
         }
-        item.childs.push(node)
+        item.dataRef.childs.push(node)
       } else {
-        this.findNodeByKey(item.key, (item: TreeItem, index: number, arr: TreeItem[]) => {
+        const appendNode = (item: TreeItem, index: number, arr: TreeItem[]) => {
           arr.splice(index + 1, 0, node)
-        })
+        }
+        this.findNodeByKey(item.key, appendNode)
       }
       this.updateData()
     }
@@ -186,6 +185,13 @@ export default class ScTree extends Vue {
 .node-item {
     .node-title {
         margin-right: 1rem;
+        border: none;
+        padding: 0;
+        height: auto;
+        width: auto;
+        background: transparent !important;
+        outline: none !important;
+        box-shadow: none;
     }
 
     .node-action {

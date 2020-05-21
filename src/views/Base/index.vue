@@ -141,7 +141,6 @@ export default class Home extends Vue {
   margin: 0;
   overflow: unset;
   transform-origin: left top;
-  transform: scale(.5)
 }
 
 .content-pane {
