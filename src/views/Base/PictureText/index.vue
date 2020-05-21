@@ -1,24 +1,30 @@
 <template>
   <div style="height: 100%;">
-    <div style="height: 60%;display: flex;overflow: auto;">
-      <img :src="imgSource" style="margin: auto;width:100%;" @load="onImageLoad" />
+    <div style="height: 60%;display: flex;overflow: auto;cursor:pointer;" @click="$refs.upload.click()">
+      <img v-if="imgSource" :src="imgSource" style="margin: auto;max-width:100%;" @load="onImageLoad" />
+      <span v-else style="margin: auto;">点击选择图片JPG/PNG</span>
     </div>
     <a-divider orientation="left"><a-icon  type="setting" /> &nbsp;设置</a-divider>
     <a-row>
-      <a-col :span="12">
+      <a-col :span="0" >
         <sc-form-item label="上传图片">
           <span>{{fileName}}</span>
-          <input class="upload-btn" type="file" accept="image/png, image/jpeg" @change="onImageUpload" />
+          <input ref="upload" type="file" accept="image/png, image/jpeg" @change="onImageUpload" />
         </sc-form-item>
       </a-col>
       <a-col :span="12">
-        <sc-form-item label="转换宽度">
+        <sc-form-item label="压缩宽度">
           <input type="text" v-model="targetWidth" style="width: 220px;" @change="onConfigChange">
         </sc-form-item>
       </a-col>
       <a-col :span="12">
         <sc-form-item label="转换文字">
           <input type="text" v-model="customTransferText" style="width: 220px;" @change="onConfigChange">
+        </sc-form-item>
+      </a-col>
+      <a-col :span="12">
+        <sc-form-item label="预览缩放(CSS)">
+         <a-slider v-model="previeScale"  style="width: 100%;" @change="onScaleChange"/>
         </sc-form-item>
       </a-col>
     </a-row>
@@ -28,6 +34,13 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import Bus from '@assets/utils/bus.ts'
+import { debounce } from '@assets/utils/index.ts'
+const changeScale = debounce((num: number) => {
+  const pre = document.querySelector('#preview-pane')
+  if (pre) {
+    pre.style.transform = `scale(${num / 100})`
+  }
+}, 200)
 let ctx!: CanvasRenderingContext2D
 @Component
 export default class PictureText extends Vue {
@@ -37,9 +50,11 @@ export default class PictureText extends Vue {
   imgSource = ''
   fileName = '未上传'
   // 照片缩放程度
-  targetWidth = 50
+  targetWidth = 200
   // 自定义转换文字
   customTransferText = '@#&$%863!i1uazvno~;*^+-. '
+  // 控制预览界面transform scale 缩放比例
+  previeScale = 60
 
   /**
    * 监听文件上传
@@ -81,6 +96,10 @@ export default class PictureText extends Vue {
     } catch (error) { }
   }
 
+  onScaleChange () {
+    changeScale(this.previeScale)
+  }
+
   /**
    * 获取图片像素替换为对应的灰度值
    * @param { Uint8ClampedArray } data 图片数据  一般存在于ImageData.data中
@@ -92,6 +111,14 @@ export default class PictureText extends Vue {
       // data[i] = data[i + 1] = data[i + 2] = g
       callback && callback(g, pxIndex++)
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  beforeRouteLeave (to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    changeScale(100)
+    next()
   }
 
   mounted (): void {

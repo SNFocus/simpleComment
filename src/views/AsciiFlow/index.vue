@@ -105,14 +105,13 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import './jquery.min.js'
 import './addtohomescreen.min.js'
 
 import { Vue, Component } from 'vue-property-decorator'
 // eslint-disable-next-line @typescript-eslint/camelcase
-window.ad_client = 'ca-pub-0451873530201272'
+window.ad_client = 'ca-pub-0451873530201272' // asciiflow used
 // eslint-disable-next-line @typescript-eslint/camelcase
-window.astip_client = 'ca-tipjar-pub-0451873530201272'
+window.astip_client = 'ca-tipjar-pub-0451873530201272' // asciiflow used
 @Component
 export default class Template extends Vue {
   mounted () {

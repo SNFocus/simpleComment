@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="comment-box" :style="{height: getBaseType() === 'cmd' ? 'calc(100% - 50px)' : '100%'}">
-          <pre style="margin: 0;overflow: unset;">{{comment}}</pre>
+          <pre id="preview-pane">{{comment}}</pre>
         </div>
         <div class="cmd-box" :class="{show: getBaseType() === 'cmd'}">
           <a-icon type="right" style="margin-right:16px;" />
@@ -137,6 +137,13 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
+#preview-pane{
+  margin: 0;
+  overflow: unset;
+  transform-origin: left top;
+  transform: scale(.5)
+}
+
 .content-pane {
   color: $color-light;
   width: 98%;
@@ -166,6 +173,7 @@ export default class Home extends Vue {
     overflow: auto;
     height: 100%;
     width: calc(100% + 12px);
+
   }
 
   .actions{
