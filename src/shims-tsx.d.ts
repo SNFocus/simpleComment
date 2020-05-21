@@ -36,5 +36,6 @@ declare global {
     popVisible: boolean;
     content: string;
     childs?: TreeItem[];
+    dataRef?: TreeItem;
   }
 }

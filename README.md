@@ -15,15 +15,9 @@
 
 ## 透露着贫穷的界面
 ![编辑预览](https://s1.ax1x.com/2020/05/20/YocvDg.gif)
-
-
-![图文转换](https://s1.ax1x.com/2020/05/20/YTpqJA.png)
-
-
-![AsciiFlow](https://s1.ax1x.com/2020/05/20/YTpbid.png)
-
-
-![文本收集](https://s1.ax1x.com/2020/05/20/YTpLRI.png)
+![YHzw2n.png](https://s1.ax1x.com/2020/05/21/YHzw2n.png)
+![YHzd8s.png](https://s1.ax1x.com/2020/05/21/YHzd8s.png)
+![YHz0vq.png](https://s1.ax1x.com/2020/05/21/YHz0vq.png)
 
 欢迎收藏——[GitHub地址](https://github.com/SNFocus/simpleComment/)
 [Gitee地址](https://gitee.com/soning/simpleComment/)

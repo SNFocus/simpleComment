@@ -121,10 +121,6 @@ export default class ScTree extends Vue {
       ))
     }
 
-    editData (item: TreeItem) {
-      console.log(item)
-    }
-
     addData (item: TreeItem, addChild: boolean): void{
       const node: TreeItem = {
         key: this.baseId++,
