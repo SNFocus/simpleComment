@@ -30,13 +30,13 @@
       @cancel="onCancel" >
       <a-input-group compact style="margin: .5rem  0 1rem ;">
         <a-select v-model="editComm.shortCuts[0]">
-          <a-select-option value="Ctrl">
-            Ctrl
-          </a-select-option>
-          <!-- <a-select-option value="Shift">
+          <a-select-option value="Shift">
             Shift
           </a-select-option>
-          <a-select-option value="Alt">
+          <!-- <a-select-option value="Ctrl">
+            Ctrl
+          </a-select-option> -->
+          <!-- <a-select-option value="Alt">
             Alt
           </a-select-option> -->
         </a-select>
@@ -45,7 +45,7 @@
        <a-textarea v-model="editComm.comment" placeholder="自定义注释" :auto-size="{ minRows: 15, maxRows: 25 }" />
     </a-modal>
 
-    <a-modal v-model="previewVisible" okText="Copy" @ok="copyData">
+    <a-modal v-model="previewVisible" okText="Copy" @ok="copyData(editComm.comment)">
       <pre>{{editComm.comment}}</pre>
     </a-modal>
   </div>
@@ -67,7 +67,7 @@ export default class Custom extends Vue {
   editComm: CustomComm = {
     id: null,
     comment: '',
-    shortCuts: ['Ctrl', '']
+    shortCuts: ['Shift', '']
   }
 
   created () {

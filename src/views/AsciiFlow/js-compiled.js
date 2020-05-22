@@ -794,20 +794,22 @@ function xa(a) {
   za(a);
 }
 function za(a) {
-  X(window.gapi.client.request({path:"/drive/v2/files", params:{q:"mimeType = 'text/plain' and trashed = false"}, method:"GET"}), function(a) {
-    $("#drive-file-list").children().remove();
-    a = a.items;
-    for (var c in a) {
-      var d = document.createElement("li"), e = document.createElement("a");
-      d.appendChild(e);
-      e.href = "#" + a[c].id;
-      $(e).click(function() {
-        $("#drive-dialog").removeClass("visible");
-      });
-      e.innerHTML = a[c].title;
-      $("#drive-file-list").append(d);
-    }
-  }.bind(a));
+  try{
+    X(window.gapi.client.request({path:"/drive/v2/files", params:{q:"mimeType = 'text/plain' and trashed = false"}, method:"GET"}), function(a) {
+      $("#drive-file-list").children().remove();
+      a = a.items;
+      for (var c in a) {
+        var d = document.createElement("li"), e = document.createElement("a");
+        d.appendChild(e);
+        e.href = "#" + a[c].id;
+        $(e).click(function() {
+          $("#drive-dialog").removeClass("visible");
+        });
+        e.innerHTML = a[c].title;
+        $("#drive-file-list").append(d);
+      }
+    }.bind(a));
+  }catch(err){}
 }
 function X(a, b) {
   try {
@@ -833,10 +835,12 @@ va.prototype.save = function() {
   }.bind(this));
 };
 function Ba(a) {
-  1 < window.location.hash.length && ($("#drive-save-state").text("Loading..."), X(window.gapi.client.request({path:"/drive/v2/files/" + window.location.hash.substr(1, window.location.hash.length - 1), method:"GET"}), function(a) {
-    Ca(this, a);
-    Ea(this);
-  }.bind(a)));
+  try {
+    1 < window.location.hash.length && ($("#drive-save-state").text("Loading..."), X(window.gapi.client.request({path:"/drive/v2/files/" + window.location.hash.substr(1, window.location.hash.length - 1), method:"GET"}), function(a) {
+      Ca(this, a);
+      Ea(this);
+    }.bind(a)));
+  } catch (error) { console.warn(error)}
 }
 function Ea(a) {
   Fa(a.file.downloadUrl, function(a) {

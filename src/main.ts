@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/store'
+// import store from './store/store'
 import { Button, Layout, Menu, Icon, Tooltip, Divider, Dropdown, Row, Col, Tree, Popover, Modal, message, Input, Select, Slider } from 'ant-design-vue'
 import ScFormItem from '@components/ScFormItem/index.vue'
 import ScSwitch from '@components/ScSwitch/index.vue'
@@ -33,7 +33,7 @@ Vue.config.productionTip = false
 const comment = `
 
 
-█████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
+█████▒█    ██  ▄████▄   ██ ▄█▀         ██████╗ ██╗   ██╗ ██████╗
 ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
 ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
 ░▓█▒  ░▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄        ██╔══██╗██║   ██║██║   ██║
@@ -51,8 +51,8 @@ const data = {
 }
 window._customComments = JSON.parse(localStorage.getItem('customComments') || JSON.stringify([data]))
 document.addEventListener('keydown', function (e) {
-  if (!e.ctrlKey) return
-  const target = window._customComments.find(t => t.shortCuts[1] === e.key)
+  if (!e.shiftKey) return
+  const target = window._customComments.find(t => t.shortCuts[1] === e.key.toLowerCase())
   if (target && target.comment) {
     copyData(target.comment)
     message.success('您的注释已经复制到剪贴板啦！')
@@ -68,6 +68,6 @@ Component.registerHooks([
 
 new Vue({
   router,
-  store,
+  // store,
   render: h => h(App)
 }).$mount('#app')

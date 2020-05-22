@@ -73,7 +73,6 @@ export class Table2Comm implements Table2CommUtil {
           const byteLen = getRealStrLenth(text) // 获取占用的物理宽度 字母为1 汉字为1.84
           // 获取所在单元格在这一行中的起始位置
           const startIndex = writedLenth - getNumberOfChines(contentArr[index]) * (getCharRatio() - 1)
-          console.log(byteLen)
           contentArr[index] = replaceStr(contentArr[index], text, startIndex, byteLen + startIndex) // 填充替换文本到模板中
           if (i === 0) {
             horiDividerLine = replaceStr(horiDividerLine, this.quadrangleChar, startIndex, (startIndex + getRealStrLenth(this.quadrangleChar)))

@@ -13,12 +13,12 @@
     </a-col>
 
     <a-col :span="12">
-      <sc-form-item label="上下边框">
+      <sc-form-item label="左右边框">
         <input type="text" v-model="verticalChar"  @change="onConfigChange">
       </sc-form-item>
     </a-col>
     <a-col :span="12">
-      <sc-form-item label="左右边框">
+      <sc-form-item label="上下边框">
         <input type="text" v-model="horizontalChar"  @change="onConfigChange">
       </sc-form-item>
     </a-col>

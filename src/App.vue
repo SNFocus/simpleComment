@@ -8,7 +8,7 @@
       <div
         class="logo"
         @click="isCollapsed = !isCollapsed" >
-        {{ isCollapsed ? "SC" : "SComment" }}
+       简注
       </div>
       <a-menu
         theme="dark"
@@ -58,7 +58,6 @@ export default class Home extends Vue {
     @Watch('isCollapsed')
     onCollapsed () {
       setTimeout(() => {
-        console.log(document.querySelector('.ant-layout-sider'))
         window.siderWidth = (document.querySelector('.ant-layout-sider') as HTMLDivElement).clientWidth || 0
       }, 500)
     }
