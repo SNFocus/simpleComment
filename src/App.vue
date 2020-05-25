@@ -20,6 +20,12 @@
             <span class="nav-text">{{ item.label }}</span>
           </router-link>
         </a-menu-item>
+        <a-menu-item >
+          <a href="https://github.com/SNFocus/simpleComment" target="_blank">
+            <a-icon type="github" />
+            <span class="nav-text">GitHub</span>
+          </a>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
